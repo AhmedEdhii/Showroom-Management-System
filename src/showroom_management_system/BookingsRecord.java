@@ -26,7 +26,7 @@ public class BookingsRecord extends javax.swing.JFrame {
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
     PreparedStatement ps,ps1,ps2;
-    ResultSet rs;
+    ResultSet rs,rs1,rs2;
 
     public BookingsRecord() {
         initComponents();
@@ -43,6 +43,7 @@ public class BookingsRecord extends javax.swing.JFrame {
         }
     }
     public void updateCarSold(int employeeID){
+        int a;
         try {
             String query = "update employees set CarSold = ? where employee_id = ?";
             ps1 = conn.prepareStatement(query);
@@ -50,12 +51,14 @@ public class BookingsRecord extends javax.swing.JFrame {
             ps2 = conn.prepareStatement(query1);
             ps1.setInt(2, employeeID);
             ps2.setInt(1, employeeID);
-            
-            
-            
-            
-            
-            
+            rs2 = ps2.executeQuery();
+            if (rs2.next()){
+                String s = rs2.getString(1);
+                a = Integer.parseInt(s);
+                
+            }
+            rs1 = ps1.executeQuery();
+            ps1.setInt(1, rs1.getInt(1));
         } catch (SQLException ex) {
             Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -412,6 +415,7 @@ public class BookingsRecord extends javax.swing.JFrame {
             ps.close();
             if (i == 1) {
                 updatetable();
+                updateCarSold(Integer.parseInt(txtemployeeid.getText()));
                 JOptionPane.showMessageDialog(this, "Record Added!");
                 txtchassisno.setText("");
                 txtpaymentreceived.setText("");

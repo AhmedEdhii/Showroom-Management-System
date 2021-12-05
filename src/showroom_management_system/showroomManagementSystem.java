@@ -25,8 +25,8 @@ public class showroomManagementSystem {
 
         String url = "jdbc:mysql://localhost:3306/DbProject";
         String username = "root";
-        //String password = "IBA@2244";
-        String password ="";
+        String password = "IBA@2244";
+       //String password ="";
 
         try {
             conn = DriverManager.getConnection(url, username, password);

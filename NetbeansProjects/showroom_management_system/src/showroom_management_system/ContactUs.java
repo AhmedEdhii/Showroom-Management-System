@@ -9,8 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -55,12 +53,10 @@ public class ContactUs extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Contact Us");
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabel2.setText("Name");
 
@@ -192,16 +188,20 @@ public class ContactUs extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             //Logger.getLogger(ContactUs.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Error! Email must contain @");
+            if (ex.getErrorCode() == 1062) {
+                JOptionPane.showMessageDialog(this, "Error! Email address already used");
+            }
+            if (ex.getErrorCode() == 4025) {
+                JOptionPane.showMessageDialog(this, "Error! Email must contain @");
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int response = JOptionPane.showConfirmDialog(this, "Do you want to close?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-
         if (response == JOptionPane.YES_OPTION) {
             this.setVisible(false);
-
+            new mainPage().setVisible(true);
         }    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNameActionPerformed

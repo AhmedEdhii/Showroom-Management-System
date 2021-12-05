@@ -54,7 +54,6 @@ public class cust_service extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -178,7 +177,7 @@ public class cust_service extends javax.swing.JFrame {
         int response = JOptionPane.showConfirmDialog(this, "Do you want to close?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
             this.setVisible(false);
-
+            new mainPage().setVisible(true);
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed

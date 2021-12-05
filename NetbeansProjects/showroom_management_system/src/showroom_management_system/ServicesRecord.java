@@ -25,6 +25,7 @@ public class ServicesRecord extends javax.swing.JFrame {
     
     public ServicesRecord() {
         initComponents();
+        System.err.println("");
     }
 
     /**

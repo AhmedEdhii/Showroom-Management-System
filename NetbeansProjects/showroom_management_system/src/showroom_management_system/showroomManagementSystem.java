@@ -19,31 +19,10 @@ public class showroomManagementSystem {
 
     Connection conn;
 
-    /**
-     * @return
-     */
     static int i = 0;
 
     public Connection getConnection() {
 
-//        try {
-//            Class.forName("oracle.jdbc.driver.OracleDriver");
-//            conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/orclpdb", "hr", "hr");
-//            if (conn == null) {
-//                System.out.println("Unable to connect with database");
-//                return null;
-//            } else {
-//                if (i == 0) {
-//                    //System.out.println(i);
-//                    System.out.println("Connected to database");
-//                    i++;
-//                    //System.out.println(i);
-//                }
-//            }
-//
-//        } catch (ClassNotFoundException | SQLException ex) {
-//            Logger.getLogger(showroomManagementSystem.class.getName()).log(Level.SEVERE, null, ex);
-//        }
         String url = "jdbc:mysql://localhost:3306/DbProject";
         String username = "root";
         //String password = "IBA@2244";
@@ -63,7 +42,6 @@ public class showroomManagementSystem {
     public static void main(String[] args) throws SQLException {
         showroomManagementSystem con = new showroomManagementSystem();
         con.getConnection();
-        new mainPage().setVisible(true);
     }
 
 }

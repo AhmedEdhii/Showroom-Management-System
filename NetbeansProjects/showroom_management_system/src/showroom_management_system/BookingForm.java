@@ -56,29 +56,63 @@ public class BookingForm extends javax.swing.JFrame {
         selectcolorComboBox = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+
+        jPanel1.setBackground(new java.awt.Color(255, 251, 252));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/db project/walls/1/edits/car-gift-wrapped.jpg"))); // NOI18N
         jLabel1.setText("Booking");
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
+        jLabel2.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(40, 40, 48));
         jLabel2.setText("Name");
 
+        txtname.setBackground(new java.awt.Color(222, 226, 230));
+        txtname.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        txtname.setForeground(new java.awt.Color(40, 40, 48));
         txtname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtnameActionPerformed(evt);
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(40, 40, 48));
         jLabel3.setText("Phone Number");
 
+        txtphonenumber.setBackground(new java.awt.Color(222, 226, 230));
+        txtphonenumber.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        txtphonenumber.setForeground(new java.awt.Color(40, 40, 48));
+
+        txtemail.setBackground(new java.awt.Color(222, 226, 230));
+        txtemail.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        txtemail.setForeground(new java.awt.Color(40, 40, 48));
+
+        jLabel4.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(40, 40, 48));
         jLabel4.setText("Email");
 
+        jLabel5.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(40, 40, 48));
         jLabel5.setText("Address");
 
+        txtaddress.setBackground(new java.awt.Color(222, 226, 230));
+        txtaddress.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        txtaddress.setForeground(new java.awt.Color(40, 40, 48));
+
+        jLabel6.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(40, 40, 48));
         jLabel6.setText("Model");
 
+        selectModelComboBox.setBackground(new java.awt.Color(222, 226, 230));
+        selectModelComboBox.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        selectModelComboBox.setForeground(new java.awt.Color(40, 40, 48));
         selectModelComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Model", "1.3 GLI MT (YARIS) 2,583,000", "1.3 GLI A/T CVT (YARIS) 2,783,000", "1.3 ATIV MT (YARIS) 2,713,000", "1.3 ATIV A/T CVT (YARIS) 2,883,000", "1.5 ATIV X M/T (YARIS) 2,933,000", "1.5 ATIV X CVT (YARIS) 3,133,000", "ALTIS 1.6 M/T 3,333,000", "ALTIS 1.6 A/T 3,483,000", "ALTIS 1.6 A/T Special Edition 3,833,000", "ALTIS 1.8 A/T CVT 3,813,000", "ALTIS 1.8 A/T Grande (Beige Interior) 4,113,000", "ALTIS 1.8 A/T Grande (Black Interior) 4,133,000", "FORTUNER 4x2 A/T (2TR Petrol ) LOW VARIANT 8,189,000", "FORTUNER 4x4 A/T V (4X4 2TR Hi Petrol) 9,439,000", "FORTUNER 4x4 A/T SIGMA 4 (1GD Diesel ) 9,889,000", "HILUX S/C Deckless 4x2 3,803,000", "HILUX S/C STD 4x2 4,053,000", "HILUX S/C UP SPEC 4x2 4,083,000", "HILUX S/C STD 4x4 5,463,000", "HILUX E-STD D/C 4X4 6,184,000", "REVO-G D/C M/T 4X4 6,794,000", "REVO-G D/C A/T 4X4 7,144,000", "REVO-V UPSPEC D/C A/T 4X4 7,814,000" }));
         selectModelComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,10 +120,19 @@ public class BookingForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(40, 40, 48));
         jLabel7.setText("Color");
 
+        selectcolorComboBox.setBackground(new java.awt.Color(222, 226, 230));
+        selectcolorComboBox.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        selectcolorComboBox.setForeground(new java.awt.Color(40, 40, 48));
         selectcolorComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Color", "Super White", "Attitude Black", "Silver Metallic", "Grey Graphite", "Phantom Brown", "Strong Blue", "Dorado gold" }));
 
+        jButton1.setBackground(new java.awt.Color(226, 51, 53));
+        jButton1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(240, 240, 240));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/db project/walls/1/edits/white tick.svg.png"))); // NOI18N
         jButton1.setText("Submit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +140,10 @@ public class BookingForm extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(226, 51, 53));
+        jButton2.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(240, 240, 240));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/db project/walls/1/edits/80-806189_red-x-circle-icon-hd-png-download (Custom).jpeg"))); // NOI18N
         jButton2.setText("Close");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,13 +151,14 @@ public class BookingForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/db project/walls/1/edits/toyota-logo.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(135, 135, 135)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -130,21 +178,33 @@ public class BookingForm extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtaddress, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(selectcolorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(selectModelComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(153, Short.MAX_VALUE))
+                                .addComponent(txtaddress)
+                                .addGap(132, 132, 132)))))
+                .addGap(110, 110, 110))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(273, 273, 273)
+                        .addComponent(jButton1)
+                        .addGap(39, 39, 39)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)))
+                .addGap(242, 242, 242))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -168,10 +228,10 @@ public class BookingForm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(selectcolorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addGap(55, 55, 55))
         );
 
@@ -209,29 +269,28 @@ public class BookingForm extends javax.swing.JFrame {
             ps.setString(2, txtphonenumber.getText());
             ps.setString(3, txtemail.getText());
             ps.setString(4, txtaddress.getText());
-            /*if (selectModelComboBox.getSelectedItem() == "Select Model") {
-                ps.setString(5, null);
-            
+            if (selectModelComboBox.getSelectedItem() == "Select Model") {
+                JOptionPane.showMessageDialog(this, "Please select a model");
+
             } else {
                 ps.setString(5, (String) selectModelComboBox.getSelectedItem());
             }
             if (selectcolorComboBox.getSelectedItem() == "Select Color") {
                 ps.setString(6, null);
+                JOptionPane.showMessageDialog(this, "Please select a color");
             } else {
                 ps.setString(6, (String) selectcolorComboBox.getSelectedItem());
-            }*/
-            boolean loop_end = false;
-            while (!loop_end) {
+            }
+            //boolean loop_end = false;
 
-                if (selectModelComboBox.getSelectedItem() != "Select Model" && selectcolorComboBox.getSelectedItem() != "Select Color") {
+
+            /*   if (selectModelComboBox.getSelectedItem() != "Select Model" && selectcolorComboBox.getSelectedItem() != "Select Color") {
                     ps.setString(5, (String) selectModelComboBox.getSelectedItem());
                     ps.setString(6, (String) selectcolorComboBox.getSelectedItem());
                     loop_end = true;
                 } else {
                     JOptionPane.showConfirmDialog(this, "Please select the model and color?", "Confirm", JOptionPane.ERROR_MESSAGE, JOptionPane.WARNING_MESSAGE);
-                }
-            }
-
+                }*/
             int i = ps.executeUpdate();
             ps.close();
             if (i == 1) {
@@ -254,21 +313,19 @@ public class BookingForm extends javax.swing.JFrame {
                 txtname.requestFocus();
             }
         } catch (SQLException ex) {
-            //Logger.getLogger(ClientRecord.class.getName()).log(Level.SEVERE, null, ex);
-            if (ex.getErrorCode() == 1062) {
-                JOptionPane.showMessageDialog(this, "Error! Email address already used");
-            }
-            if (ex.getErrorCode() == 4025) {
-                JOptionPane.showMessageDialog(this, "Error! Email must contain @");
-            }
+            //Logger.getLogger(ContactUs.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error! Email must contain @");
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new mainPage().setVisible(true);
-        this.setVisible(false);
+        int response = JOptionPane.showConfirmDialog(this, "Do you want to close?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            this.setVisible(false);
+
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -317,6 +374,7 @@ public class BookingForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox<String> selectModelComboBox;
     private javax.swing.JComboBox<String> selectcolorComboBox;

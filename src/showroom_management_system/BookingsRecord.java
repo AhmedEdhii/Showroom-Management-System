@@ -25,8 +25,8 @@ public class BookingsRecord extends javax.swing.JFrame {
      */
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
-    PreparedStatement ps,ps1,ps2;
-    ResultSet rs,rs1,rs2;
+    PreparedStatement ps, ps1, ps2;
+    ResultSet rs, rs1, rs2;
 
     public BookingsRecord() {
         initComponents();
@@ -42,27 +42,53 @@ public class BookingsRecord extends javax.swing.JFrame {
             Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void updateCarSold(int employeeID){
-        int a;
+
+    public void updateCarSold(int employeeID) {
+        int carsold = 0;
         try {
-            String query = "update employees set CarSold = ? where employee_id = ?";
+            String query = "update employees set CarsSold = ? where employee_id = ?";
             ps1 = conn.prepareStatement(query);
             String query1 = "select count(*) from bookings where employee_id = ?";
             ps2 = conn.prepareStatement(query1);
-            ps1.setInt(2, employeeID);
             ps2.setInt(1, employeeID);
+            System.out.println(ps1);
             rs2 = ps2.executeQuery();
-            if (rs2.next()){
-                String s = rs2.getString(1);
-                a = Integer.parseInt(s);
-                
+            if (rs2.next()) {
+                String count = rs2.getString(1);
+                System.out.println(count);
+                carsold = Integer.parseInt(count);
+                System.out.println(carsold);
+                ps1.setInt(1, carsold);
+                ps1.setInt(2, employeeID);
+                ps1.executeUpdate();
             }
-            rs1 = ps1.executeQuery();
-            ps1.setInt(1, rs1.getInt(1));
         } catch (SQLException ex) {
             Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+    }
+
+    public void updateCommission(int employeeID) {
+        int carsold = 0;
+        try {
+            String query = "update employees set Commission = ? where employee_id = ?";
+            ps1 = conn.prepareStatement(query);
+            String query1 = "select CarsSold from employees where employee_id = ?";
+            ps2 = conn.prepareStatement(query1);
+            ps2.setInt(1, employeeID);
+            System.out.println(ps1);
+            rs2 = ps2.executeQuery();
+            if (rs2.next()) {
+                String s = rs2.getString(1);
+                System.out.println(s);
+                carsold = Integer.parseInt(s);
+                System.out.println(carsold);
+                ps1.setInt(1, carsold * 10000);
+                ps1.setInt(2, employeeID);
+                ps1.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -416,6 +442,7 @@ public class BookingsRecord extends javax.swing.JFrame {
             if (i == 1) {
                 updatetable();
                 updateCarSold(Integer.parseInt(txtemployeeid.getText()));
+                updateCommission(Integer.parseInt(txtemployeeid.getText()));
                 JOptionPane.showMessageDialog(this, "Record Added!");
                 txtchassisno.setText("");
                 txtpaymentreceived.setText("");
@@ -425,7 +452,7 @@ public class BookingsRecord extends javax.swing.JFrame {
                 txtclientid.setText("");
                 txtemployeeid.setText("");
                 txtchassisno.requestFocus();
-                
+
             } else {
                 JOptionPane.showMessageDialog(this, "Record not Added!");
                 txtchassisno.setText("");

@@ -250,7 +250,7 @@ public class ClientRecord extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             ps = null;
-            String query = "insert into clients (name, phone_number, address) values (?,?,?,?)";
+            String query = "insert into clients (name, phone_number, address) values (?,?,?)";
             ps = conn.prepareStatement(query);
             ps.setString(1, txtname.getText());
             ps.setString(2, txtphonenumber.getText());

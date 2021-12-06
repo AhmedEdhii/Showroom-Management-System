@@ -25,7 +25,7 @@ public class showroomManagementSystem {
 
         String url = "jdbc:mysql://localhost:3306/DbProject";
         String username = "root";
-       // String password = "IBA@2244";
+        //String password = "IBA@2244";
         String password ="";
 
         try {

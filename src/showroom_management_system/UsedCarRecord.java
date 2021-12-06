@@ -25,8 +25,8 @@ public class UsedCarRecord extends javax.swing.JFrame {
      */
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
-    PreparedStatement ps, ps1, ps2, ps3;
-    ResultSet rs, rs1, rs2, rs3;
+    PreparedStatement ps;
+    ResultSet rs;
 
     public UsedCarRecord() {
         initComponents();
@@ -38,68 +38,6 @@ public class UsedCarRecord extends javax.swing.JFrame {
             ps = conn.prepareStatement("select * from used_cars");
             rs = ps.executeQuery();
             usedCarsTable.setModel(DbUtils.resultSetToTableModel(rs));
-        } catch (SQLException ex) {
-            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void updateCarSold(int employeeID, String status) {
-        int oldcarsold = 0;
-        int carsold;
-        String status1 = "Sold";
-        try {
-            String query = "update employees set CarsSold = ? where employee_id = ?";
-            ps1 = conn.prepareStatement(query);
-            String query1 = "select count(*) from used_cars where employee_id = ? and statusOfCar = ?";
-            ps2 = conn.prepareStatement(query1);
-            String query2 = "select CarsSold from employees where employee_id = ?";
-            ps3 = conn.prepareStatement(query2);
-            ps2.setInt(1, employeeID);
-            ps2.setString(2, status1);
-            ps3.setInt(1, employeeID);
-            rs3 = ps3.executeQuery();
-            if (rs3.next()) {
-                oldcarsold = rs3.getInt(1);
-            }
-            //System.out.println(ps1);
-            rs2 = ps2.executeQuery();
-
-            if (rs2.next()) {
-                //carsold = rs2.getInt(1);
-                //System.out.println(carsold);
-                if (status.equals(status1)) {
-                    carsold = oldcarsold + 1;
-                } else {
-                    carsold = oldcarsold;
-                }
-                ps1.setInt(1, carsold);
-                ps1.setInt(2, employeeID);
-                ps1.executeUpdate();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void updateCommission(int employeeID) {
-        int carsold;
-        try {
-            String query = "update employees set Commission = ? where employee_id = ?";
-            ps1 = conn.prepareStatement(query);
-            String query1 = "select CarsSold from employees where employee_id = ?";
-            ps2 = conn.prepareStatement(query1);
-            ps2.setInt(1, employeeID);
-            //System.out.println(ps1);
-            rs2 = ps2.executeQuery();
-            if (rs2.next()) {
-                String s = rs2.getString(1);
-                System.out.println(s);
-                carsold = Integer.parseInt(s);
-                System.out.println(carsold);
-                ps1.setInt(1, carsold * 10000);
-                ps1.setInt(2, employeeID);
-                ps1.executeUpdate();
-            }
         } catch (SQLException ex) {
             Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -138,6 +76,7 @@ public class UsedCarRecord extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        txtstatus = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         txtchassisno1 = new javax.swing.JTextField();
@@ -145,7 +84,6 @@ public class UsedCarRecord extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        statusComboBox = new javax.swing.JComboBox<>();
 
         jToolBar1.setRollover(true);
 
@@ -193,7 +131,7 @@ public class UsedCarRecord extends javax.swing.JFrame {
         jLabel5.setText("Cost Price");
 
         jLabel6.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
-        jLabel6.setText("Sell Price");
+        jLabel6.setText("Sale Price");
 
         jLabel7.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
         jLabel7.setText("Employee ID");
@@ -293,6 +231,14 @@ public class UsedCarRecord extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
         jLabel10.setText("Status");
 
+        txtstatus.setBackground(new java.awt.Color(222, 226, 230));
+        txtstatus.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        txtstatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtstatusActionPerformed(evt);
+            }
+        });
+
         jPanel2.setBackground(new java.awt.Color(255, 204, 204));
 
         jLabel11.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
@@ -350,8 +296,11 @@ public class UsedCarRecord extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back (Custom).jpg"))); // NOI18N
         jButton1.setText("Return");
-
-        statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UnSold", "Sold" }));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -383,7 +332,7 @@ public class UsedCarRecord extends javax.swing.JFrame {
                                     .addComponent(txtsaleprice, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtemployeeid, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtbuyerclientid, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(61, 61, 61))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -421,19 +370,19 @@ public class UsedCarRecord extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel1)
                                     .addComponent(txtchassisno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(20, 20, 20)
+                                .addGap(23, 23, 23)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel2)
                                     .addComponent(txtmodel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                .addGap(21, 21, 21)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel3)
                                     .addComponent(txtengineno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                .addGap(21, 21, 21)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4)
                                     .addComponent(txtyear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                .addGap(20, 20, 20)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtcostprice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5))
@@ -441,7 +390,7 @@ public class UsedCarRecord extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtsaleprice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6))
-                                .addGap(18, 18, 18)
+                                .addGap(12, 12, 12)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel7)
                                     .addComponent(txtemployeeid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -452,7 +401,7 @@ public class UsedCarRecord extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel10)
-                                    .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -464,7 +413,7 @@ public class UsedCarRecord extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addGap(47, 47, 47))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -522,25 +471,13 @@ public class UsedCarRecord extends javax.swing.JFrame {
             ps.setInt(4, Integer.parseInt(txtyear.getText()));
             ps.setInt(5, Integer.parseInt(txtcostprice.getText()));
             ps.setInt(6, Integer.parseInt(txtsaleprice.getText()));
-            if ((txtemployeeid.getText().equals(""))) {
-                ps.setString(7, null);
-            } else {
-                ps.setInt(7, Integer.parseInt(txtemployeeid.getText()));
-            }
-            if ((txtbuyerclientid.getText().equals(""))) {
-                ps.setString(8, null);
-            } else {
-                ps.setInt(8, Integer.parseInt(txtbuyerclientid.getText()));
-            }
-            ps.setString(9, statusComboBox.getSelectedItem().toString());
-            System.out.println(statusComboBox.getSelectedItem().toString());
+            ps.setInt(7, Integer.parseInt(txtemployeeid.getText()));
+
+            ps.setInt(8, Integer.parseInt(txtbuyerclientid.getText()));
+            ps.setString(9, txtstatus.getText());
             int i = ps.executeUpdate();
             ps.close();
             if (i == 1) {
-                if (!(txtemployeeid.getText().equals(""))) {
-                    updateCarSold(Integer.parseInt(txtemployeeid.getText()), statusComboBox.getSelectedItem().toString());
-                    updateCommission(Integer.parseInt(txtemployeeid.getText()));
-                }
                 updatetable();
                 JOptionPane.showMessageDialog(this, "Record Added!");
                 txtchassisno.setText("");
@@ -550,8 +487,9 @@ public class UsedCarRecord extends javax.swing.JFrame {
                 txtcostprice.setText("");
                 txtsaleprice.setText("");
                 txtemployeeid.setText("");
+
                 txtbuyerclientid.setText("");
-                statusComboBox.setSelectedIndex(0);
+                txtstatus.setText("");
                 txtchassisno.requestFocus();
             } else {
                 JOptionPane.showMessageDialog(this, "Record not Added!");
@@ -563,13 +501,15 @@ public class UsedCarRecord extends javax.swing.JFrame {
                 txtsaleprice.setText("");
                 txtemployeeid.setText("");
                 txtbuyerclientid.setText("");
-                statusComboBox.setSelectedIndex(0);
+                txtstatus.setText("");
                 txtchassisno.requestFocus();
             }
             //System.out.println("Inserted");
+
         } catch (SQLException ex) {
             Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -585,8 +525,6 @@ public class UsedCarRecord extends javax.swing.JFrame {
             //System.out.println("record deleted");
             if (i == 1) {
                 updatetable();
-                //updateCarSold(Integer.parseInt(txtemployeeid.getText()), statusComboBox.getSelectedItem().toString());
-                //updateCommission(Integer.parseInt(txtemployeeid.getText()));
                 JOptionPane.showMessageDialog(this, "Record Deleted!");
                 txtchassisno.setText("");
                 txtmodel.setText("");
@@ -596,7 +534,7 @@ public class UsedCarRecord extends javax.swing.JFrame {
                 txtsaleprice.setText("");
                 txtemployeeid.setText("");
                 txtbuyerclientid.setText("");
-                statusComboBox.setSelectedIndex(0);
+                txtstatus.setText("");
                 txtchassisno.requestFocus();
             } else {
                 txtchassisno.setText("");
@@ -607,7 +545,7 @@ public class UsedCarRecord extends javax.swing.JFrame {
                 txtsaleprice.setText("");
                 txtemployeeid.setText("");
                 txtbuyerclientid.setText("");
-                statusComboBox.setSelectedIndex(0);
+                txtstatus.setText("");
                 txtchassisno.requestFocus();
             }
 
@@ -616,6 +554,10 @@ public class UsedCarRecord extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void txtstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtstatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtstatusActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
@@ -629,16 +571,15 @@ public class UsedCarRecord extends javax.swing.JFrame {
             ps.setInt(4, Integer.parseInt(txtcostprice.getText()));
             ps.setInt(5, Integer.parseInt(txtsaleprice.getText()));
             ps.setInt(6, Integer.parseInt(txtemployeeid.getText()));
+
             ps.setInt(7, Integer.parseInt(txtbuyerclientid.getText()));
-            ps.setString(8, statusComboBox.getSelectedItem().toString());
+            ps.setString(8, txtstatus.getText());
             int chassis_no = Integer.parseInt(txtchassisno.getText());
             ps.setInt(9, chassis_no);
             int i = ps.executeUpdate();
             ps.close();
             //System.out.println("record updated");
             if (i == 1) {
-                //updateCarSold(Integer.parseInt(txtemployeeid.getText()), statusComboBox.getSelectedItem().toString());
-                //updateCommission(Integer.parseInt(txtemployeeid.getText()));
                 updatetable();
                 JOptionPane.showMessageDialog(this, "Record Update!");
                 txtchassisno.setText("");
@@ -648,8 +589,9 @@ public class UsedCarRecord extends javax.swing.JFrame {
                 txtcostprice.setText("");
                 txtsaleprice.setText("");
                 txtemployeeid.setText("");
+
                 txtbuyerclientid.setText("");
-                statusComboBox.setSelectedIndex(0);
+                txtstatus.setText("");
                 txtchassisno.requestFocus();
             } else {
                 JOptionPane.showMessageDialog(this, "Record not Updated!");
@@ -660,8 +602,9 @@ public class UsedCarRecord extends javax.swing.JFrame {
                 txtcostprice.setText("");
                 txtsaleprice.setText("");
                 txtemployeeid.setText("");
+
                 txtbuyerclientid.setText("");
-                statusComboBox.setSelectedIndex(0);
+                txtstatus.setText("");
                 txtchassisno.requestFocus();
             }
 
@@ -678,15 +621,15 @@ public class UsedCarRecord extends javax.swing.JFrame {
             ps.setString(1, chassis_no);
             rs = ps.executeQuery();
             if (rs.next() == true) {
-                txtchassisno.setText(rs.getString(2));
-                txtmodel.setText(rs.getString(3));
-                txtengineno.setText(rs.getString(4));
-                txtyear.setText(Integer.toString(rs.getInt(5)));
-                txtcostprice.setText(Integer.toString(rs.getInt(6)));
-                txtsaleprice.setText(Integer.toString(rs.getInt(7)));
-                txtemployeeid.setText(Integer.toString(rs.getInt(8)));
-                txtbuyerclientid.setText(Integer.toString(rs.getInt(9)));
-                statusComboBox.setSelectedItem(rs.getString(10));
+                txtchassisno.setText(rs.getString(1));
+                txtmodel.setText(rs.getString(2));
+                txtengineno.setText(rs.getString(3));
+                txtyear.setText(Integer.toString(rs.getInt(4)));
+                txtcostprice.setText(Integer.toString(rs.getInt(5)));
+                txtsaleprice.setText(Integer.toString(rs.getInt(6)));
+                txtemployeeid.setText(Integer.toString(rs.getInt(7)));
+                txtbuyerclientid.setText(Integer.toString(rs.getInt(8)));
+                txtstatus.setText(rs.getString(9));
                 txtchassisno.requestFocus();
             } else {
                 JOptionPane.showMessageDialog(this, "Not Avalaible");
@@ -697,6 +640,12 @@ public class UsedCarRecord extends javax.swing.JFrame {
             Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new adminDashboardUsedCars().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -756,7 +705,6 @@ public class UsedCarRecord extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JComboBox<String> statusComboBox;
     private javax.swing.JTextField txtbuyerclientid;
     private javax.swing.JTextField txtchassisno;
     private javax.swing.JTextField txtchassisno1;
@@ -765,6 +713,7 @@ public class UsedCarRecord extends javax.swing.JFrame {
     private javax.swing.JTextField txtengineno;
     private javax.swing.JTextField txtmodel;
     private javax.swing.JTextField txtsaleprice;
+    private javax.swing.JTextField txtstatus;
     private javax.swing.JTextField txtyear;
     private javax.swing.JTable usedCarsTable;
     // End of variables declaration//GEN-END:variables

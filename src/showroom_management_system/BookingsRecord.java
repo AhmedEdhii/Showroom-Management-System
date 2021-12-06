@@ -25,8 +25,8 @@ public class BookingsRecord extends javax.swing.JFrame {
      */
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
-    PreparedStatement ps, ps1, ps2, ps3;
-    ResultSet rs, rs1, rs2, rs3;
+    PreparedStatement ps, ps1, ps2;
+    ResultSet rs, rs1, rs2;
 
     public BookingsRecord() {
         initComponents();
@@ -44,28 +44,19 @@ public class BookingsRecord extends javax.swing.JFrame {
     }
 
     public void updateCarSold(int employeeID) {
-        int oldcarsold = 0;
-        int carsold;
+        int carsold = 0;
         try {
             String query = "update employees set CarsSold = ? where employee_id = ?";
             ps1 = conn.prepareStatement(query);
             String query1 = "select count(*) from bookings where employee_id = ?";
             ps2 = conn.prepareStatement(query1);
-            String query2 = "select CarsSold from employees where employee_id = ?";
-            ps3 = conn.prepareStatement(query2);
-            ps3.setInt(1, employeeID);
             ps2.setInt(1, employeeID);
-            rs3 = ps3.executeQuery();
-            if (rs3.next()) {
-                oldcarsold = rs3.getInt(1);
-            }
+            System.out.println(ps1);
             rs2 = ps2.executeQuery();
             if (rs2.next()) {
-                System.out.println(oldcarsold);
-                //System.out.println(rs2.getInt(1));
-                //carsold = oldcarsold + rs2.getInt(1);
-                System.out.println(rs2.getInt(1));
-                carsold = oldcarsold + 1;
+                String count = rs2.getString(1);
+                System.out.println(count);
+                carsold = Integer.parseInt(count);
                 System.out.println(carsold);
                 ps1.setInt(1, carsold);
                 ps1.setInt(2, employeeID);
@@ -77,18 +68,20 @@ public class BookingsRecord extends javax.swing.JFrame {
     }
 
     public void updateCommission(int employeeID) {
-        int carsold;
+        int carsold = 0;
         try {
             String query = "update employees set Commission = ? where employee_id = ?";
             ps1 = conn.prepareStatement(query);
             String query1 = "select CarsSold from employees where employee_id = ?";
             ps2 = conn.prepareStatement(query1);
             ps2.setInt(1, employeeID);
-            //System.out.println(ps1);
+            System.out.println(ps1);
             rs2 = ps2.executeQuery();
             if (rs2.next()) {
-                carsold = rs2.getInt(1);
-                //System.out.println(carsold);
+                String s = rs2.getString(1);
+                System.out.println(s);
+                carsold = Integer.parseInt(s);
+                System.out.println(carsold);
                 ps1.setInt(1, carsold * 10000);
                 ps1.setInt(2, employeeID);
                 ps1.executeUpdate();
@@ -181,7 +174,7 @@ public class BookingsRecord extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel3.setText("Payment Left");
+        jLabel3.setText("Paymen tLeft");
 
         jLabel4.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -305,6 +298,11 @@ public class BookingsRecord extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back (Custom).jpg"))); // NOI18N
         jButton1.setText("Return");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -447,9 +445,9 @@ public class BookingsRecord extends javax.swing.JFrame {
             int i = ps.executeUpdate();
             ps.close();
             if (i == 1) {
+                updatetable();
                 updateCarSold(Integer.parseInt(txtemployeeid.getText()));
                 updateCommission(Integer.parseInt(txtemployeeid.getText()));
-                updatetable();
                 JOptionPane.showMessageDialog(this, "Record Added!");
                 txtchassisno.setText("");
                 txtpaymentreceived.setText("");
@@ -491,8 +489,6 @@ public class BookingsRecord extends javax.swing.JFrame {
             ps.close();
             //System.out.println("record deleted");
             if (i == 1) {
-                //updateCarSold(Integer.parseInt(txtemployeeid.getText()));
-                //updateCommission(Integer.parseInt(txtemployeeid.getText()));
                 updatetable();
                 JOptionPane.showMessageDialog(this, "Record Deleted!");
                 txtchassisno.setText("");
@@ -538,8 +534,6 @@ public class BookingsRecord extends javax.swing.JFrame {
             ps.close();
             //System.out.println("record updated");
             if (i == 1) {
-                //updateCarSold(Integer.parseInt(txtemployeeid.getText()));
-                //updateCommission(Integer.parseInt(txtemployeeid.getText()));
                 updatetable();
                 JOptionPane.showMessageDialog(this, "Record Update!");
                 txtchassisno.setText("");
@@ -592,6 +586,12 @@ public class BookingsRecord extends javax.swing.JFrame {
             Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new adminDashboardBookings().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

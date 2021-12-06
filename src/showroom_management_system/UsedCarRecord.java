@@ -585,8 +585,8 @@ public class UsedCarRecord extends javax.swing.JFrame {
             //System.out.println("record deleted");
             if (i == 1) {
                 updatetable();
-                updateCarSold(Integer.parseInt(txtemployeeid.getText()), statusComboBox.getSelectedItem().toString());
-                updateCommission(Integer.parseInt(txtemployeeid.getText()));
+                //updateCarSold(Integer.parseInt(txtemployeeid.getText()), statusComboBox.getSelectedItem().toString());
+                //updateCommission(Integer.parseInt(txtemployeeid.getText()));
                 JOptionPane.showMessageDialog(this, "Record Deleted!");
                 txtchassisno.setText("");
                 txtmodel.setText("");
@@ -637,8 +637,8 @@ public class UsedCarRecord extends javax.swing.JFrame {
             ps.close();
             //System.out.println("record updated");
             if (i == 1) {
-                updateCarSold(Integer.parseInt(txtemployeeid.getText()), statusComboBox.getSelectedItem().toString());
-                updateCommission(Integer.parseInt(txtemployeeid.getText()));
+                //updateCarSold(Integer.parseInt(txtemployeeid.getText()), statusComboBox.getSelectedItem().toString());
+                //updateCommission(Integer.parseInt(txtemployeeid.getText()));
                 updatetable();
                 JOptionPane.showMessageDialog(this, "Record Update!");
                 txtchassisno.setText("");

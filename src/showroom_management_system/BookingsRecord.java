@@ -27,10 +27,17 @@ public class BookingsRecord extends javax.swing.JFrame {
     Connection conn = app.getConnection();
     PreparedStatement ps, ps1, ps2, ps3;
     ResultSet rs, rs1, rs2, rs3;
+    private int emp_id;
 
     public BookingsRecord() {
         initComponents();
         updatetable();
+    }
+    
+    public BookingsRecord(int emp_id) {
+        initComponents();
+        updatetable();
+        this.emp_id=emp_id;
     }
 
     private void updatetable() {
@@ -305,6 +312,11 @@ public class BookingsRecord extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back (Custom).jpg"))); // NOI18N
         jButton1.setText("Return");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -592,6 +604,10 @@ public class BookingsRecord extends javax.swing.JFrame {
             Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

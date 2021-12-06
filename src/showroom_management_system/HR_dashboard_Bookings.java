@@ -6,6 +6,13 @@
 package showroom_management_system;
 
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -17,16 +24,37 @@ public class HR_dashboard_Bookings extends javax.swing.JFrame {
      * Creates new form adminDashboard
      */
     private int emp_id;
-
+    showroomManagementSystem app = new showroomManagementSystem();
+    Connection conn = app.getConnection();
+    PreparedStatement ps;
+    ResultSet rs;
     public HR_dashboard_Bookings() {
         initComponents();
+        updatetable();
     }
 
     public HR_dashboard_Bookings(int emp_id) {
         initComponents();
+        updatetable();
         this.emp_id = emp_id;
 
     }
+    
+    
+    private void updatetable() {
+        try {
+            ps = conn.prepareStatement("select * from  bookingForm");
+            rs = ps.executeQuery();
+            bookingsTable.setModel(DbUtils.resultSetToTableModel(rs));
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(employeeRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -323,6 +351,9 @@ public class HR_dashboard_Bookings extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        new HR_booking_records(emp_id).setVisible(true);
+        this.setVisible(false);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -18,7 +18,7 @@ import net.proteanit.sql.DbUtils;
  *
  * @author usamaasif
  */
-public class HR_service_records extends javax.swing.JFrame {
+public class HR_booking_records extends javax.swing.JFrame {
 
     /**
      * Creates new form ServicesRecord
@@ -28,12 +28,12 @@ public class HR_service_records extends javax.swing.JFrame {
     PreparedStatement ps;
     ResultSet rs;
     private int emp_id;
-    public HR_service_records() {
+    public HR_booking_records() {
         initComponents();
         updatetable();
     }
 
-    public HR_service_records(int emp_id) {
+    public HR_booking_records(int emp_id) {
         initComponents();
         updatetable();
         this.emp_id=emp_id;
@@ -304,22 +304,14 @@ public class HR_service_records extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HR_service_records.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HR_booking_records.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HR_service_records.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HR_booking_records.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HR_service_records.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HR_booking_records.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HR_service_records.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HR_booking_records.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -332,7 +324,7 @@ public class HR_service_records extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HR_service_records().setVisible(true);
+                new HR_booking_records().setVisible(true);
             }
         });
     }

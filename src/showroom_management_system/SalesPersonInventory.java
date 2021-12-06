@@ -25,8 +25,8 @@ public class SalesPersonInventory extends javax.swing.JFrame {
      */
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
-    PreparedStatement ps;
-    ResultSet rs;
+    PreparedStatement ps,ps1,ps2,ps3;
+    ResultSet rs,rs1,rs2,rs3;
     private int emp_id;
 
     public SalesPersonInventory() {
@@ -48,6 +48,69 @@ public class SalesPersonInventory extends javax.swing.JFrame {
             usedCarsTable.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (SQLException ex) {
             Logger.getLogger(SalesPersonInventory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    public void updateCarSold(int employeeID, String status) {
+        int oldcarsold = 0;
+        int carsold;
+        String status1 = "Sold";
+        try {
+            String query = "update employees set CarsSold = ? where employee_id = ?";
+            ps1 = conn.prepareStatement(query);
+            String query1 = "select count(*) from used_cars where employee_id = ? and statusOfCar = ?";
+            ps2 = conn.prepareStatement(query1);
+            String query2 = "select CarsSold from employees where employee_id = ?";
+            ps3 = conn.prepareStatement(query2);
+            ps2.setInt(1, employeeID);
+            ps2.setString(2, status1);
+            ps3.setInt(1, employeeID);
+            rs3 = ps3.executeQuery();
+            if (rs3.next()) {
+                oldcarsold = rs3.getInt(1);
+            }
+            //System.out.println(ps1);
+            rs2 = ps2.executeQuery();
+
+            if (rs2.next()) {
+                //carsold = rs2.getInt(1);
+                //System.out.println(carsold);
+                if (status.equals(status1)) {
+                    carsold = oldcarsold + 1;
+                } else {
+                    carsold = oldcarsold;
+                }
+                ps1.setInt(1, carsold);
+                ps1.setInt(2, employeeID);
+                ps1.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateCommission(int employeeID) {
+        int carsold;
+        try {
+            String query = "update employees set Commission = ? where employee_id = ?";
+            ps1 = conn.prepareStatement(query);
+            String query1 = "select CarsSold from employees where employee_id = ?";
+            ps2 = conn.prepareStatement(query1);
+            ps2.setInt(1, employeeID);
+            //System.out.println(ps1);
+            rs2 = ps2.executeQuery();
+            if (rs2.next()) {
+                String s = rs2.getString(1);
+                System.out.println(s);
+                carsold = Integer.parseInt(s);
+                System.out.println(carsold);
+                ps1.setInt(1, carsold * 10000);
+                ps1.setInt(2, employeeID);
+                ps1.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -384,7 +447,10 @@ public class SalesPersonInventory extends javax.swing.JFrame {
             int i = ps.executeUpdate();
             ps.close();
             if (i == 1) {
+                updateCarSold(emp_id,txtstatus.getText() );
+                updateCommission(emp_id);
                 updatetable();
+                
                 JOptionPane.showMessageDialog(this, "Record Added!");
                 txtchassisno.setText("");
                 txtmodel.setText("");

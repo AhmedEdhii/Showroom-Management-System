@@ -38,6 +38,7 @@ public class adminDashboard extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         employeesPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -55,26 +56,35 @@ public class adminDashboard extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(12, 75, 96));
+        jPanel1.setBackground(new java.awt.Color(52, 59, 64));
 
-        jPanel4.setBackground(new java.awt.Color(67, 104, 145));
+        jPanel4.setBackground(new java.awt.Color(52, 59, 64));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Toyota-Logo (Custom) (5).png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel5.setBackground(new java.awt.Color(12, 75, 96));
+        jPanel5.setBackground(new java.awt.Color(52, 59, 64));
 
-        employeesPanel.setBackground(new java.awt.Color(0, 128, 145));
+        employeesPanel.setBackground(new java.awt.Color(192, 0, 0));
         employeesPanel.setPreferredSize(new java.awt.Dimension(300, 40));
 
+        jLabel1.setBackground(new java.awt.Color(192, 0, 0));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("EMPLOYEES");
@@ -106,9 +116,10 @@ public class adminDashboard extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        bookingsPanel.setBackground(new java.awt.Color(0, 128, 145));
+        bookingsPanel.setBackground(new java.awt.Color(192, 0, 0));
         bookingsPanel.setPreferredSize(new java.awt.Dimension(300, 40));
 
+        jLabel2.setBackground(new java.awt.Color(192, 0, 0));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("BOOKINGS");
@@ -137,9 +148,10 @@ public class adminDashboard extends javax.swing.JFrame {
             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        usedCarsPanel.setBackground(new java.awt.Color(0, 128, 145));
+        usedCarsPanel.setBackground(new java.awt.Color(192, 0, 0));
         usedCarsPanel.setPreferredSize(new java.awt.Dimension(300, 40));
 
+        jLabel3.setBackground(new java.awt.Color(192, 0, 0));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("USED CARS");
@@ -168,9 +180,10 @@ public class adminDashboard extends javax.swing.JFrame {
             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        servicesPanel.setBackground(new java.awt.Color(0, 128, 145));
+        servicesPanel.setBackground(new java.awt.Color(192, 0, 0));
         servicesPanel.setPreferredSize(new java.awt.Dimension(300, 40));
 
+        jLabel4.setBackground(new java.awt.Color(192, 0, 0));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("SERVICES");
@@ -199,9 +212,10 @@ public class adminDashboard extends javax.swing.JFrame {
             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        clientsPanel.setBackground(new java.awt.Color(0, 128, 145));
+        clientsPanel.setBackground(new java.awt.Color(192, 0, 0));
         clientsPanel.setPreferredSize(new java.awt.Dimension(300, 40));
 
+        jLabel5.setBackground(new java.awt.Color(192, 0, 0));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("CLIENTS");
@@ -272,9 +286,10 @@ public class adminDashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(67, 104, 145));
+        jPanel2.setBackground(new java.awt.Color(52, 59, 64));
 
-        jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 36)); // NOI18N
+        jLabel6.setBackground(new java.awt.Color(52, 59, 64));
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Admin Person");
 
@@ -282,19 +297,19 @@ public class adminDashboard extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
                 .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                .addGap(21, 21, 21))
+                .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(227, 254, 224));
+        jPanel3.setBackground(new java.awt.Color(232, 232, 232));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -338,7 +353,7 @@ public class adminDashboard extends javax.swing.JFrame {
 
     private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
         // TODO add your handling code here:
-        employeesPanel.setBackground(new Color(0, 128, 145));
+        employeesPanel.setBackground(new Color(192,0,0));
     }//GEN-LAST:event_jLabel1MouseExited
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
@@ -354,7 +369,7 @@ public class adminDashboard extends javax.swing.JFrame {
 
     private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
         // TODO add your handling code here:
-        bookingsPanel.setBackground(new Color(0, 128, 145));
+        bookingsPanel.setBackground(new Color(192,0,0));
     }//GEN-LAST:event_jLabel2MouseExited
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
@@ -370,7 +385,7 @@ public class adminDashboard extends javax.swing.JFrame {
 
     private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
         // TODO add your handling code here:
-        usedCarsPanel.setBackground(new Color(0, 128, 145));
+        usedCarsPanel.setBackground(new Color(192,0,0));
     }//GEN-LAST:event_jLabel3MouseExited
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
@@ -386,7 +401,7 @@ public class adminDashboard extends javax.swing.JFrame {
 
     private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
         // TODO add your handling code here:
-        servicesPanel.setBackground(new Color(0, 128, 145));
+        servicesPanel.setBackground(new Color(192,0,0));
     }//GEN-LAST:event_jLabel4MouseExited
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
@@ -402,7 +417,7 @@ public class adminDashboard extends javax.swing.JFrame {
 
     private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
         // TODO add your handling code here:
-        clientsPanel.setBackground(new Color(0, 128, 145));
+        clientsPanel.setBackground(new Color(192,0,0));
     }//GEN-LAST:event_jLabel5MouseExited
 
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
@@ -463,6 +478,7 @@ public class adminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

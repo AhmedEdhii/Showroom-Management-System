@@ -6,6 +6,13 @@
 package showroom_management_system;
 
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -17,16 +24,37 @@ public class HR_dashboard_Bookings extends javax.swing.JFrame {
      * Creates new form adminDashboard
      */
     private int emp_id;
-
+    showroomManagementSystem app = new showroomManagementSystem();
+    Connection conn = app.getConnection();
+    PreparedStatement ps;
+    ResultSet rs;
     public HR_dashboard_Bookings() {
         initComponents();
+        updatetable();
     }
 
     public HR_dashboard_Bookings(int emp_id) {
         initComponents();
+        updatetable();
         this.emp_id = emp_id;
 
     }
+    
+    
+    private void updatetable() {
+        try {
+            ps = conn.prepareStatement("select * from  bookingForm");
+            rs = ps.executeQuery();
+            bookingsTable.setModel(DbUtils.resultSetToTableModel(rs));
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(employeeRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,9 +109,10 @@ public class HR_dashboard_Bookings extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(52, 59, 64));
 
-        bookingsPanel.setBackground(new java.awt.Color(194, 0, 21));
+        bookingsPanel.setBackground(new java.awt.Color(192, 0, 0));
         bookingsPanel.setPreferredSize(new java.awt.Dimension(300, 40));
 
+        jLabel2.setBackground(new java.awt.Color(192, 0, 0));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("BOOKINGS");
@@ -113,9 +142,10 @@ public class HR_dashboard_Bookings extends javax.swing.JFrame {
             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        usedCarsPanel.setBackground(new java.awt.Color(194, 0, 21));
+        usedCarsPanel.setBackground(new java.awt.Color(192, 0, 0));
         usedCarsPanel.setPreferredSize(new java.awt.Dimension(300, 40));
 
+        jLabel3.setBackground(new java.awt.Color(192, 0, 0));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("SERVICE");
@@ -201,7 +231,7 @@ public class HR_dashboard_Bookings extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(226, 236, 233));
+        jPanel3.setBackground(new java.awt.Color(232, 232, 232));
 
         bookingsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -295,7 +325,7 @@ public class HR_dashboard_Bookings extends javax.swing.JFrame {
 
     private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
         // TODO add your handling code here:
-        bookingsPanel.setBackground(new Color(0, 128, 145));
+        bookingsPanel.setBackground(new Color(192,0,0));
     }//GEN-LAST:event_jLabel2MouseExited
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
@@ -310,23 +340,25 @@ public class HR_dashboard_Bookings extends javax.swing.JFrame {
 
     private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
         // TODO add your handling code here:
-        usedCarsPanel.setBackground(new Color(0, 128, 145));
+        usedCarsPanel.setBackground(new Color(192,0,0));
     }//GEN-LAST:event_jLabel3MouseExited
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // TODO add your handling code here:
-
+        new HR_dashboard_services(emp_id).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jLabel3MousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new SalesBookingsRecord().setVisible(true);
+        new HR_booking_records(emp_id).setVisible(true);
         this.setVisible(false);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        new SalePersonDashboard().setVisible(true);
+
+        new HR_dashboard(emp_id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 

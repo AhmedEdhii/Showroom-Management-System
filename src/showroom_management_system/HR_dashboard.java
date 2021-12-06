@@ -77,9 +77,10 @@ public class HR_dashboard extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(52, 59, 64));
 
-        bookingsPanel.setBackground(new java.awt.Color(194, 0, 21));
+        bookingsPanel.setBackground(new java.awt.Color(192, 0, 0));
         bookingsPanel.setPreferredSize(new java.awt.Dimension(300, 40));
 
+        jLabel2.setBackground(new java.awt.Color(192, 0, 0));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("BOOKINGS");
@@ -109,7 +110,7 @@ public class HR_dashboard extends javax.swing.JFrame {
             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        usedCarsPanel.setBackground(new java.awt.Color(194, 0, 21));
+        usedCarsPanel.setBackground(new java.awt.Color(192, 0, 0));
         usedCarsPanel.setPreferredSize(new java.awt.Dimension(300, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -197,7 +198,7 @@ public class HR_dashboard extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(226, 236, 233));
+        jPanel3.setBackground(new java.awt.Color(232, 232, 232));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -241,12 +242,14 @@ public class HR_dashboard extends javax.swing.JFrame {
 
     private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
         // TODO add your handling code here:
-        bookingsPanel.setBackground(new Color(0, 128, 145));
+        bookingsPanel.setBackground(new Color(192,0,0));
     }//GEN-LAST:event_jLabel2MouseExited
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
         // TODO add your handling code here:
-
+        
+        new HR_dashboard_Bookings(emp_id).setVisible(true);;
+        this.setVisible(false);
     }//GEN-LAST:event_jLabel2MousePressed
 
     private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered
@@ -256,11 +259,13 @@ public class HR_dashboard extends javax.swing.JFrame {
 
     private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
         // TODO add your handling code here:
-        usedCarsPanel.setBackground(new Color(0, 128, 145));
+        usedCarsPanel.setBackground(new Color(192,0,0));
     }//GEN-LAST:event_jLabel3MouseExited
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // TODO add your handling code here:
+        new HR_dashboard_services(emp_id).setVisible(true);;
+        this.setVisible(false);
 
     }//GEN-LAST:event_jLabel3MousePressed
 

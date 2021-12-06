@@ -64,6 +64,7 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         employeesPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -84,26 +85,35 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(12, 75, 96));
+        jPanel1.setBackground(new java.awt.Color(52, 59, 64));
 
-        jPanel4.setBackground(new java.awt.Color(67, 104, 145));
+        jPanel4.setBackground(new java.awt.Color(52, 59, 64));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Toyota-Logo (Custom) (5).png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel5.setBackground(new java.awt.Color(12, 75, 96));
+        jPanel5.setBackground(new java.awt.Color(52, 59, 64));
 
-        employeesPanel.setBackground(new java.awt.Color(0, 128, 145));
+        employeesPanel.setBackground(new java.awt.Color(192, 0, 0));
         employeesPanel.setPreferredSize(new java.awt.Dimension(300, 40));
 
+        jLabel1.setBackground(new java.awt.Color(192, 0, 0));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("EMPLOYEES");
@@ -132,9 +142,10 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        bookingsPanel.setBackground(new java.awt.Color(0, 128, 145));
+        bookingsPanel.setBackground(new java.awt.Color(192, 0, 0));
         bookingsPanel.setPreferredSize(new java.awt.Dimension(300, 40));
 
+        jLabel2.setBackground(new java.awt.Color(192, 0, 0));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("BOOKINGS");
@@ -163,9 +174,10 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        usedCarsPanel.setBackground(new java.awt.Color(0, 128, 145));
+        usedCarsPanel.setBackground(new java.awt.Color(192, 0, 0));
         usedCarsPanel.setPreferredSize(new java.awt.Dimension(300, 40));
 
+        jLabel3.setBackground(new java.awt.Color(192, 0, 0));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("USED CARS");
@@ -194,9 +206,10 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        servicesPanel.setBackground(new java.awt.Color(0, 128, 145));
+        servicesPanel.setBackground(new java.awt.Color(192, 0, 0));
         servicesPanel.setPreferredSize(new java.awt.Dimension(300, 40));
 
+        jLabel4.setBackground(new java.awt.Color(192, 0, 0));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("SERVICES");
@@ -225,9 +238,10 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        clientsPanel.setBackground(new java.awt.Color(0, 128, 145));
+        clientsPanel.setBackground(new java.awt.Color(192, 0, 0));
         clientsPanel.setPreferredSize(new java.awt.Dimension(300, 40));
 
+        jLabel5.setBackground(new java.awt.Color(192, 0, 0));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("CLIENTS");
@@ -298,7 +312,7 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(67, 104, 145));
+        jPanel2.setBackground(new java.awt.Color(52, 59, 64));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -311,7 +325,7 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jPanel3.setBackground(new java.awt.Color(227, 254, 224));
+        jPanel3.setBackground(new java.awt.Color(232, 232, 232));
 
         usedCarsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -321,7 +335,7 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ChesisNo", "Model", "EngineNo", "Year", "Cost Price", "Sale Price", "EmployeeID", "Buyer Client ID", "Status"
+                "ChassisNo", "Model", "EngineNo", "Year", "Cost Price", "Sale Price", "EmployeeID", "Buyer Client ID", "Status"
             }
         ) {
             Class[] types = new Class [] {
@@ -357,13 +371,15 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(438, 438, 438)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -409,12 +425,12 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
 
     private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
         // TODO add your handling code here:
-        employeesPanel.setBackground(new Color(0, 128, 145));
+        employeesPanel.setBackground(new Color(192,0,0));
     }//GEN-LAST:event_jLabel1MouseExited
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         // TODO add your handling code here:
-        new adminDashboardEmployee().setVisible(true);
+        new adminDashboardEmployee(emp_id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel1MousePressed
 
@@ -425,12 +441,12 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
 
     private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
         // TODO add your handling code here:
-        bookingsPanel.setBackground(new Color(0, 128, 145));
+        bookingsPanel.setBackground(new Color(192,0,0));
     }//GEN-LAST:event_jLabel2MouseExited
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
         // TODO add your handling code here:
-        new adminDashboardBookings().setVisible(true);
+        new adminDashboardBookings(emp_id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel2MousePressed
 
@@ -441,7 +457,7 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
 
     private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
         // TODO add your handling code here:
-        usedCarsPanel.setBackground(new Color(0, 128, 145));
+        usedCarsPanel.setBackground(new Color(192,0,0));
     }//GEN-LAST:event_jLabel3MouseExited
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
@@ -455,12 +471,12 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
 
     private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
         // TODO add your handling code here:
-        servicesPanel.setBackground(new Color(0, 128, 145));
+        servicesPanel.setBackground(new Color(192,0,0));
     }//GEN-LAST:event_jLabel4MouseExited
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
         // TODO add your handling code here:
-        new adminDashboardServices().setVisible(true);
+        new adminDashboardServices(emp_id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel4MousePressed
 
@@ -471,12 +487,12 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
 
     private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
         // TODO add your handling code here:
-        clientsPanel.setBackground(new Color(0, 128, 145));
+        clientsPanel.setBackground(new Color(192,0,0));
     }//GEN-LAST:event_jLabel5MouseExited
 
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
         // TODO add your handling code here:
-        new adminDashboardClients().setVisible(true);
+        new adminDashboardClients(emp_id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel5MousePressed
 
@@ -488,7 +504,7 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new adminDashboard().setVisible(true);
+        new adminDashboard(emp_id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -545,6 +561,7 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

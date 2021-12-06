@@ -61,6 +61,7 @@ public class SalePersonDashboardInventory extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         bookingsPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -75,26 +76,39 @@ public class SalePersonDashboardInventory extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(12, 75, 96));
+        jPanel1.setBackground(new java.awt.Color(52, 59, 64));
 
-        jPanel4.setBackground(new java.awt.Color(67, 104, 145));
+        jPanel4.setBackground(new java.awt.Color(52, 59, 64));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Toyota-Logo (Custom) (5).png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(50, 50, 50)
+                    .addComponent(jLabel4)
+                    .addContainerGap(50, Short.MAX_VALUE)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 122, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel4)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jPanel5.setBackground(new java.awt.Color(12, 75, 96));
+        jPanel5.setBackground(new java.awt.Color(52, 59, 64));
 
-        bookingsPanel.setBackground(new java.awt.Color(0, 128, 145));
+        bookingsPanel.setBackground(new java.awt.Color(192, 0, 0));
         bookingsPanel.setPreferredSize(new java.awt.Dimension(300, 40));
 
+        jLabel2.setBackground(new java.awt.Color(192, 0, 0));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("BOOKINGS");
@@ -128,9 +142,10 @@ public class SalePersonDashboardInventory extends javax.swing.JFrame {
             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        usedCarsPanel.setBackground(new java.awt.Color(0, 128, 145));
+        usedCarsPanel.setBackground(new java.awt.Color(192, 0, 0));
         usedCarsPanel.setPreferredSize(new java.awt.Dimension(300, 40));
 
+        jLabel3.setBackground(new java.awt.Color(192, 0, 0));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("INVENTORY");
@@ -192,7 +207,7 @@ public class SalePersonDashboardInventory extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(67, 104, 145));
+        jPanel2.setBackground(new java.awt.Color(52, 59, 64));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -205,7 +220,7 @@ public class SalePersonDashboardInventory extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jPanel3.setBackground(new java.awt.Color(227, 254, 224));
+        jPanel3.setBackground(new java.awt.Color(232, 232, 232));
 
         usedCarsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -247,7 +262,7 @@ public class SalePersonDashboardInventory extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -299,7 +314,7 @@ public class SalePersonDashboardInventory extends javax.swing.JFrame {
 
     private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
         // TODO add your handling code here:
-        bookingsPanel.setBackground(new Color(0, 128, 145));
+        bookingsPanel.setBackground(new Color(192,0,0));
     }//GEN-LAST:event_jLabel2MouseExited
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
@@ -314,7 +329,7 @@ public class SalePersonDashboardInventory extends javax.swing.JFrame {
 
     private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
         // TODO add your handling code here:
-        usedCarsPanel.setBackground(new Color(0, 128, 145));
+        usedCarsPanel.setBackground(new Color(192,0,0));
     }//GEN-LAST:event_jLabel3MouseExited
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
@@ -393,6 +408,7 @@ public class SalePersonDashboardInventory extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

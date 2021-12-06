@@ -247,7 +247,9 @@ public class HR_dashboard extends javax.swing.JFrame {
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
         // TODO add your handling code here:
-
+        
+        new HR_dashboard_Bookings(emp_id).setVisible(true);;
+        this.setVisible(false);
     }//GEN-LAST:event_jLabel2MousePressed
 
     private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered
@@ -262,6 +264,8 @@ public class HR_dashboard extends javax.swing.JFrame {
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // TODO add your handling code here:
+        new HR_dashboard_services(emp_id).setVisible(true);;
+        this.setVisible(false);
 
     }//GEN-LAST:event_jLabel3MousePressed
 

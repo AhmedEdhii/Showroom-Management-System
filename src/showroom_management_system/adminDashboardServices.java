@@ -24,10 +24,17 @@ public class adminDashboardServices extends javax.swing.JFrame {
     PreparedStatement ps;
     ResultSet rs;
 
+    private int emp_id;
+    
     public adminDashboardServices() {
         initComponents();
     }
 
+        
+    public adminDashboardServices(int emp_id) {
+        initComponents();
+        this.emp_id=emp_id;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

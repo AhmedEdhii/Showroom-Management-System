@@ -28,9 +28,18 @@ public class ClientRecord extends javax.swing.JFrame {
     PreparedStatement ps;
     ResultSet rs;
 
+    private int emp_id;
+    
     public ClientRecord() {
         initComponents();
         updatetable();
+    }
+    
+    
+    public ClientRecord(int emp_id) {
+        initComponents();
+        updatetable();
+        this.emp_id=emp_id;                
     }
 
     private void updatetable() {

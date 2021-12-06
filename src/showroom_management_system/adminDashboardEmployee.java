@@ -27,10 +27,16 @@ public class adminDashboardEmployee extends javax.swing.JFrame {
     Connection conn = app.getConnection();
     PreparedStatement ps;
     ResultSet rs;
-
+    private int emp_id;
     public adminDashboardEmployee() {
         initComponents();
         updatetable();
+    }
+    
+    public adminDashboardEmployee(int emp_id) {
+        initComponents();
+        updatetable();
+        this.emp_id=emp_id;
     }
 
     private void updatetable() {
@@ -405,7 +411,7 @@ public class adminDashboardEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseExited
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
-        new adminDashboardBookings().setVisible(true);
+        new adminDashboardBookings(emp_id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel2MousePressed
 
@@ -421,7 +427,7 @@ public class adminDashboardEmployee extends javax.swing.JFrame {
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // TODO add your handling code here:
-        new adminDashboardUsedCars().setVisible(true);
+        new adminDashboardUsedCars(emp_id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel3MousePressed
 
@@ -437,7 +443,7 @@ public class adminDashboardEmployee extends javax.swing.JFrame {
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
         // TODO add your handling code here:
-        new adminDashboardServices().setVisible(true);
+        new adminDashboardServices(emp_id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel4MousePressed
 
@@ -453,19 +459,19 @@ public class adminDashboardEmployee extends javax.swing.JFrame {
 
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
         // TODO add your handling code here:
-        new adminDashboardClients().setVisible(true);
+        new adminDashboardClients(emp_id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel5MousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new employeeRecord().setVisible(true);
+        new employeeRecord(emp_id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new adminDashboard().setVisible(true);
+        new adminDashboard(emp_id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 

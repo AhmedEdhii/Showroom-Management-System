@@ -23,11 +23,21 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
     /**
      * Creates new form adminDashboard
      */
+    private int emp_id;
+    
     public adminDashboardUsedCars() {
         initComponents();
         updatetable();
     }
-
+    
+        
+    public adminDashboardUsedCars(int emp_id) {
+        initComponents();
+        updatetable();
+        this.emp_id=emp_id;
+    }
+    
+    
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
     PreparedStatement ps;

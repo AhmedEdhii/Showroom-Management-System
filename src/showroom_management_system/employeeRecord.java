@@ -1,7 +1,5 @@
 package showroom_management_system;
 
-
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,9 +29,17 @@ public class employeeRecord extends javax.swing.JFrame {
     PreparedStatement ps;
     ResultSet rs;
 
+    private int emp_id;
+
     public employeeRecord() {
         initComponents();
         updatetable();
+    }
+
+    public employeeRecord(int emp_id) {
+        initComponents();
+        updatetable();
+        this.emp_id=emp_id;
     }
 
     private void updatetable() {
@@ -609,7 +615,7 @@ public class employeeRecord extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Not Avalaible");
                 txtemployeeid.setText("");
                 txtemployeeid.requestFocus();
-            }           
+            }
         } catch (SQLException ex) {
             Logger.getLogger(employeeRecord.class.getName()).log(Level.SEVERE, null, ex);
         }

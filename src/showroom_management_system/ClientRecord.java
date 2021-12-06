@@ -25,21 +25,20 @@ public class ClientRecord extends javax.swing.JFrame {
      */
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
-    PreparedStatement ps;
-    ResultSet rs;
+    PreparedStatement ps, ps1;
+    ResultSet rs,rs1;
 
     private int emp_id;
-    
+
     public ClientRecord() {
         initComponents();
         updatetable();
     }
-    
-    
+
     public ClientRecord(int emp_id) {
         initComponents();
         updatetable();
-        this.emp_id=emp_id;                
+        this.emp_id = emp_id;
     }
 
     private void updatetable() {
@@ -221,6 +220,11 @@ public class ClientRecord extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back (Custom).jpg"))); // NOI18N
         jButton1.setText("Return");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -434,6 +438,31 @@ public class ClientRecord extends javax.swing.JFrame {
             Logger.getLogger(ClientRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            ps1 = conn.prepareStatement("select dept_id from employees where employee_id = ?");
+            ps1.setInt(1, emp_id);
+            rs1=ps1.executeQuery();
+            int dept_id=rs1.getInt("dept_id");
+            ps1.close();
+            if (dept_id==0) {
+                new adminDashboard(emp_id).setVisible(true);
+                this.setVisible(false);
+            }
+            else  if (dept_id==1) {
+                new SalePersonDashboard(emp_id).setVisible(true);
+                this.setVisible(false);
+            }
+            else{
+                System.out.println("Error");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

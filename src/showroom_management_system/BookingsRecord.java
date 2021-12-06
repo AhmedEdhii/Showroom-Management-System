@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -25,19 +27,20 @@ public class BookingsRecord extends javax.swing.JFrame {
      */
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
-    PreparedStatement ps, ps1, ps2, ps3;
-    ResultSet rs, rs1, rs2, rs3;
+    PreparedStatement ps, ps1, ps2, ps3, ps4;
+    ResultSet rs, rs1, rs2, rs3, rs4;
+    int oldemployeeid;
     private int emp_id;
 
     public BookingsRecord() {
         initComponents();
         updatetable();
     }
-    
+
     public BookingsRecord(int emp_id) {
         initComponents();
         updatetable();
-        this.emp_id=emp_id;
+        this.emp_id = emp_id;
     }
 
     private void updatetable() {
@@ -52,34 +55,26 @@ public class BookingsRecord extends javax.swing.JFrame {
 
     public void updateCarSold(int employeeID) {
         int oldcarsold = 0;
-        int carsold;
+        int newcarsold = 0;
         try {
             String query = "update employees set CarsSold = ? where employee_id = ?";
             ps1 = conn.prepareStatement(query);
-            String query1 = "select count(*) from bookings where employee_id = ?";
-            ps2 = conn.prepareStatement(query1);
             String query2 = "select CarsSold from employees where employee_id = ?";
-            ps3 = conn.prepareStatement(query2);
-            ps3.setInt(1, employeeID);
+            ps2 = conn.prepareStatement(query2);
             ps2.setInt(1, employeeID);
-            rs3 = ps3.executeQuery();
-            if (rs3.next()) {
-                oldcarsold = rs3.getInt(1);
-            }
             rs2 = ps2.executeQuery();
             if (rs2.next()) {
-                System.out.println(oldcarsold);
-                //System.out.println(rs2.getInt(1));
-                //carsold = oldcarsold + rs2.getInt(1);
-                System.out.println(rs2.getInt(1));
-                carsold = oldcarsold + 1;
-                System.out.println(carsold);
-                ps1.setInt(1, carsold);
-                ps1.setInt(2, employeeID);
-                ps1.executeUpdate();
+                oldcarsold = rs2.getInt(1);
+                // on insert
+                newcarsold = oldcarsold + 1;
             }
+            ps1.setInt(1, newcarsold);
+            ps1.setInt(2, employeeID);
+            ps1.executeUpdate();
+            ps1.close();
+            ps2.close();
         } catch (SQLException ex) {
-            Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -91,7 +86,6 @@ public class BookingsRecord extends javax.swing.JFrame {
             String query1 = "select CarsSold from employees where employee_id = ?";
             ps2 = conn.prepareStatement(query1);
             ps2.setInt(1, employeeID);
-            //System.out.println(ps1);
             rs2 = ps2.executeQuery();
             if (rs2.next()) {
                 carsold = rs2.getInt(1);
@@ -100,8 +94,125 @@ public class BookingsRecord extends javax.swing.JFrame {
                 ps1.setInt(2, employeeID);
                 ps1.executeUpdate();
             }
+            ps1.close();
+            ps2.close();
         } catch (SQLException ex) {
-            Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void onupdateCarSold(int newemployeeID) {
+        int oldcarsold = 0;
+        int newcarsold = 0;
+        try {
+            String query = "update employees set CarsSold = ? where employee_id = ?";
+            ps1 = conn.prepareStatement(query);
+            String query5 = "update employees set CarsSold = ? where employee_id = ?";
+            ps2 = conn.prepareStatement(query5);
+            String query2 = "select CarsSold from employees where employee_id = ?";
+            ps3 = conn.prepareStatement(query2);
+            String query3 = "select CarsSold from employees where employee_id = ?";
+            ps4 = conn.prepareStatement(query3);
+            ps3.setInt(1, newemployeeID);
+            ps4.setInt(1, oldemployeeid);
+            rs3 = ps3.executeQuery();
+            rs4 = ps4.executeQuery();
+            if (rs3.next()) {
+                newcarsold = rs3.getInt(1);
+            }
+            if (rs4.next()) {
+                oldcarsold = rs4.getInt(1);
+            }
+            // on update
+            if (!(oldemployeeid == newemployeeID)) {
+                oldcarsold = oldcarsold - 1;
+                System.out.println("first");
+                //System.out.println(oldcarsold);
+                newcarsold = newcarsold + 1;
+                //System.out.println(newcarsold);
+            }
+//            if condition not required
+//            if ((oldemployeeid == newemployeeID)) {
+//                System.out.println("second");
+//                //System.out.println(oldcarsold);
+//                //System.out.println(newcarsold);
+//            }
+            ps1.setInt(1, newcarsold);
+            ps1.setInt(2, newemployeeID);
+            ps1.executeUpdate();
+            ps2.setInt(1, oldcarsold);
+            ps2.setInt(2, oldemployeeid);
+            ps2.executeUpdate();
+            ps1.close();
+            ps2.close();
+            ps3.close();
+            ps4.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void onupdateCommission(int employeeID) {
+        int oldcarsold = 0;
+        int newcarsold = 0;
+        try {
+            String query = "update employees set Commission = ? where employee_id = ?";
+            ps1 = conn.prepareStatement(query);
+            String query1 = "update employees set Commission = ? where employee_id = ?";
+            ps2 = conn.prepareStatement(query1);
+            String query2 = "select CarsSold from employees where employee_id = ?";
+            ps3 = conn.prepareStatement(query2);
+            String query3 = "select CarsSold from employees where employee_id = ?";
+            ps4 = conn.prepareStatement(query3);
+            ps3.setInt(1, employeeID);
+            ps4.setInt(1, oldemployeeid);
+            rs3 = ps3.executeQuery();
+            rs4 = ps4.executeQuery();
+            if (rs3.next()) {
+                newcarsold = rs3.getInt(1);
+                //System.out.println(carsold);
+                ps1.setInt(1, newcarsold * 10000);
+                ps1.setInt(2, employeeID);
+                ps1.executeUpdate();
+            }
+            if (rs4.next()) {
+                oldcarsold = rs4.getInt(1);
+                ps2.setInt(1, oldcarsold * 10000);
+                ps2.setInt(2, oldemployeeid);
+                ps2.executeUpdate();
+            }
+            ps1.close();
+            ps2.close();
+            ps3.close();
+            ps4.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void ondeleteRecord(int employeeID) {
+        int oldcarsold = 0;
+        int newcarsold = 0;
+        //String status = "Sold";
+        try {
+            String query = "update employees set CarsSold = ? where employee_id = ?";
+            ps1 = conn.prepareStatement(query);
+            String query2 = "select CarsSold from employees where employee_id = ?";
+            ps2 = conn.prepareStatement(query2);
+            ps2.setInt(1, employeeID);
+            rs2 = ps2.executeQuery();
+            if (rs2.next()) {
+                oldcarsold = rs2.getInt(1);
+                // on delete record
+                newcarsold = oldcarsold - 1;
+            }
+            ps1.setInt(1, newcarsold);
+            ps1.setInt(2, employeeID);
+            ps1.executeUpdate();
+            ps1.close();
+            ps2.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -454,13 +565,25 @@ public class BookingsRecord extends javax.swing.JFrame {
             ps.setInt(3, Integer.parseInt(txtpaymentleft.getText()));
             ps.setString(4, txtdeliverydate.getText());
             ps.setInt(5, Integer.parseInt(txttotalcost.getText()));
-            ps.setInt(6, Integer.parseInt(txtclientid.getText()));
-            ps.setInt(7, Integer.parseInt(txtemployeeid.getText()));
+            if ((txtclientid.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Client ID!");
+            }
+            if ((txtemployeeid.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Employee ID!");
+            }
+            if (!(txtclientid.getText().equals(""))) {
+                ps.setInt(6, Integer.parseInt(txtclientid.getText()));
+            }
+            if (!(txtemployeeid.getText().equals(""))) {
+                ps.setInt(7, Integer.parseInt(txtemployeeid.getText()));
+            }
             int i = ps.executeUpdate();
             ps.close();
             if (i == 1) {
-                updateCarSold(Integer.parseInt(txtemployeeid.getText()));
-                updateCommission(Integer.parseInt(txtemployeeid.getText()));
+                if (!(txtemployeeid.getText().equals(""))) {
+                    updateCarSold(Integer.parseInt(txtemployeeid.getText()));
+                    updateCommission(Integer.parseInt(txtemployeeid.getText()));
+                }
                 updatetable();
                 JOptionPane.showMessageDialog(this, "Record Added!");
                 txtchassisno.setText("");
@@ -503,8 +626,8 @@ public class BookingsRecord extends javax.swing.JFrame {
             ps.close();
             //System.out.println("record deleted");
             if (i == 1) {
-                //updateCarSold(Integer.parseInt(txtemployeeid.getText()));
-                //updateCommission(Integer.parseInt(txtemployeeid.getText()));
+                ondeleteRecord(Integer.parseInt(txtemployeeid.getText()));
+                updateCommission(Integer.parseInt(txtemployeeid.getText()));
                 updatetable();
                 JOptionPane.showMessageDialog(this, "Record Deleted!");
                 txtchassisno.setText("");
@@ -542,16 +665,26 @@ public class BookingsRecord extends javax.swing.JFrame {
             ps.setInt(2, Integer.parseInt(txtpaymentleft.getText()));
             ps.setString(3, txtdeliverydate.getText());
             ps.setInt(4, Integer.parseInt(txttotalcost.getText()));
-            ps.setInt(5, Integer.parseInt(txtclientid.getText()));
-            ps.setInt(6, Integer.parseInt(txtemployeeid.getText()));
+            if ((txtclientid.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Client ID!");
+            }
+            if ((txtemployeeid.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Employee ID!");
+            }
+            if (!(txtclientid.getText().equals(""))) {
+                ps.setInt(5, Integer.parseInt(txtclientid.getText()));
+            }
+            if (!(txtemployeeid.getText().equals(""))) {
+                ps.setInt(6, Integer.parseInt(txtemployeeid.getText()));
+            }
             int chassis_no = Integer.parseInt(txtchassisno.getText());
             ps.setInt(7, chassis_no);
             int i = ps.executeUpdate();
             ps.close();
             //System.out.println("record updated");
             if (i == 1) {
-                //updateCarSold(Integer.parseInt(txtemployeeid.getText()));
-                //updateCommission(Integer.parseInt(txtemployeeid.getText()));
+                onupdateCarSold(Integer.parseInt(txtemployeeid.getText()));
+                onupdateCommission(Integer.parseInt(txtemployeeid.getText()));
                 updatetable();
                 JOptionPane.showMessageDialog(this, "Record Update!");
                 txtchassisno.setText("");
@@ -582,6 +715,7 @@ public class BookingsRecord extends javax.swing.JFrame {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
         try {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             ps = conn.prepareStatement("select * from bookings where chassis_no = ?");
             String chassis_no = txtchassisno1.getText();
             ps.setString(1, chassis_no);
@@ -590,14 +724,22 @@ public class BookingsRecord extends javax.swing.JFrame {
                 txtchassisno.setText(rs.getString(1));
                 txtpaymentreceived.setText(rs.getString(2));
                 txtpaymentleft.setText(rs.getString(3));
-                txtdeliverydate.setText(Integer.toString(rs.getInt(4)));
+                String strDate = dateFormat.format(rs.getDate(4));
+                txtdeliverydate.setText(strDate);
                 txttotalcost.setText(rs.getString(5));
                 txtclientid.setText(Integer.toString(rs.getInt(6)));
-                txtemployeeid.setText(Integer.toString(rs.getInt(7)));
+                oldemployeeid = rs.getInt(7);
+                txtemployeeid.setText(Integer.toString(oldemployeeid));
                 txtchassisno.requestFocus();
             } else {
                 JOptionPane.showMessageDialog(this, "Not Avalaible");
                 txtchassisno.setText("");
+                txtpaymentreceived.setText("");
+                txtpaymentleft.setText("");
+                txtdeliverydate.setText("");
+                txttotalcost.setText("");
+                txtclientid.setText("");
+                txtemployeeid.setText("");
                 txtchassisno.requestFocus();
             }
         } catch (SQLException ex) {

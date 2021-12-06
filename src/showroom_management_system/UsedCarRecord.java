@@ -25,20 +25,25 @@ public class UsedCarRecord extends javax.swing.JFrame {
      */
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
-    PreparedStatement ps, ps1, ps2, ps3;
-    ResultSet rs, rs1, rs2, rs3;
-
+    PreparedStatement ps, ps1, ps2, ps3, ps4, ps5;
+    ResultSet rs, rs1, rs2, rs3, rs4, rs5;
+    int oldemployeeid;
+    String oldstatus;
     private int emp_id;
-    
+
     public UsedCarRecord() {
         initComponents();
         updatetable();
+        txtemployeeid.setEnabled(false);
+        txtbuyerclientid.setEnabled(false);
     }
 
     public UsedCarRecord(int emp_id) {
         initComponents();
         updatetable();
-        this.emp_id=emp_id;
+        txtemployeeid.setEnabled(false);
+        txtbuyerclientid.setEnabled(false);
+        this.emp_id = emp_id;
     }
 
     private void updatetable() {
@@ -51,39 +56,88 @@ public class UsedCarRecord extends javax.swing.JFrame {
         }
     }
 
-    public void updateCarSold(int employeeID, String status) {
+    public void updateCarSold(int employeeID, String newstatus) {
         int oldcarsold = 0;
-        int carsold;
-        String status1 = "Sold";
+        int newcarsold = 0;
         try {
             String query = "update employees set CarsSold = ? where employee_id = ?";
             ps1 = conn.prepareStatement(query);
-            String query1 = "select count(*) from used_cars where employee_id = ? and statusOfCar = ?";
-            ps2 = conn.prepareStatement(query1);
+            String query2 = "select CarsSold from employees where employee_id = ?";
+            ps2 = conn.prepareStatement(query2);
+            ps2.setInt(1, employeeID);
+            rs2 = ps2.executeQuery();
+            if (rs2.next()) {
+                oldcarsold = rs2.getInt(1);
+                // on insert
+                if (newstatus.equals("Sold")) {
+                    newcarsold = oldcarsold + 1;
+                } else {
+                    newcarsold = oldcarsold;
+                }
+            }
+            ps1.setInt(1, newcarsold);
+            ps1.setInt(2, employeeID);
+            ps1.executeUpdate();
+            ps1.close();
+            ps2.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void onupdateCarSold(int newemployeeID, String newstatus) {
+        int oldcarsold = 0;
+        int newcarsold = 0;
+        try {
+            String query = "update employees set CarsSold = ? where employee_id = ?";
+            ps1 = conn.prepareStatement(query);
+            String query5 = "update employees set CarsSold = ? where employee_id = ?";
+            ps2 = conn.prepareStatement(query5);
             String query2 = "select CarsSold from employees where employee_id = ?";
             ps3 = conn.prepareStatement(query2);
-            ps2.setInt(1, employeeID);
-            ps2.setString(2, status1);
-            ps3.setInt(1, employeeID);
+            String query3 = "select CarsSold from employees where employee_id = ?";
+            ps4 = conn.prepareStatement(query3);
+            ps3.setInt(1, newemployeeID);
+            ps4.setInt(1, oldemployeeid);
             rs3 = ps3.executeQuery();
+            rs4 = ps4.executeQuery();
             if (rs3.next()) {
-                oldcarsold = rs3.getInt(1);
+                newcarsold = rs3.getInt(1);
             }
-            //System.out.println(ps1);
-            rs2 = ps2.executeQuery();
-
-            if (rs2.next()) {
-                //carsold = rs2.getInt(1);
-                //System.out.println(carsold);
-                if (status.equals(status1)) {
-                    carsold = oldcarsold + 1;
-                } else {
-                    carsold = oldcarsold;
-                }
-                ps1.setInt(1, carsold);
-                ps1.setInt(2, employeeID);
-                ps1.executeUpdate();
+            if (rs4.next()) {
+                oldcarsold = rs4.getInt(1);
             }
+            // on update
+            if (!(oldemployeeid == newemployeeID) && (newstatus.equals("Sold"))) {
+                oldcarsold = oldcarsold - 1;
+                System.out.println("first");
+                //System.out.println(oldcarsold);
+                newcarsold = newcarsold + 1;
+                //System.out.println(newcarsold);
+            }
+            if ((oldemployeeid == newemployeeID) && (newstatus.equals("UnSold"))) {
+                oldcarsold = oldcarsold - 1;
+                System.out.println("second");
+                //System.out.println(oldcarsold);
+                newcarsold = newcarsold - 1;
+                //System.out.println(newcarsold);
+            }
+            if (!(oldemployeeid == newemployeeID) && (newstatus.equals("UnSold"))) {
+                System.out.println("third");
+                oldcarsold = oldcarsold - 1;
+                //System.out.println(oldcarsold);
+                //System.out.println(newcarsold);
+            }
+            ps1.setInt(1, newcarsold);
+            ps1.setInt(2, newemployeeID);
+            ps1.executeUpdate();
+            ps2.setInt(1, oldcarsold);
+            ps2.setInt(2, oldemployeeid);
+            ps2.executeUpdate();
+            ps1.close();
+            ps2.close();
+            ps3.close();
+            ps4.close();
         } catch (SQLException ex) {
             Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -97,17 +151,80 @@ public class UsedCarRecord extends javax.swing.JFrame {
             String query1 = "select CarsSold from employees where employee_id = ?";
             ps2 = conn.prepareStatement(query1);
             ps2.setInt(1, employeeID);
-            //System.out.println(ps1);
             rs2 = ps2.executeQuery();
             if (rs2.next()) {
-                String s = rs2.getString(1);
-                System.out.println(s);
-                carsold = Integer.parseInt(s);
-                System.out.println(carsold);
+                carsold = rs2.getInt(1);
+                //System.out.println(carsold);
                 ps1.setInt(1, carsold * 10000);
                 ps1.setInt(2, employeeID);
                 ps1.executeUpdate();
             }
+            ps1.close();
+            ps2.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void onupdateCommission(int employeeID) {
+        int oldcarsold = 0;
+        int newcarsold = 0;
+        try {
+            String query = "update employees set Commission = ? where employee_id = ?";
+            ps1 = conn.prepareStatement(query);
+            String query1 = "update employees set Commission = ? where employee_id = ?";
+            ps2 = conn.prepareStatement(query1);
+            String query2 = "select CarsSold from employees where employee_id = ?";
+            ps3 = conn.prepareStatement(query2);
+            String query3 = "select CarsSold from employees where employee_id = ?";
+            ps4 = conn.prepareStatement(query3);
+            ps3.setInt(1, employeeID);
+            ps4.setInt(1, oldemployeeid);
+            rs3 = ps3.executeQuery();
+            rs4 = ps4.executeQuery();
+            if (rs3.next()) {
+                newcarsold = rs3.getInt(1);
+                //System.out.println(carsold);
+                ps1.setInt(1, newcarsold * 10000);
+                ps1.setInt(2, employeeID);
+                ps1.executeUpdate();
+            }
+            if (rs4.next()) {
+                oldcarsold = rs4.getInt(1);
+                ps2.setInt(1, oldcarsold * 10000);
+                ps2.setInt(2, oldemployeeid);
+                ps2.executeUpdate();
+            }
+            ps1.close();
+            ps2.close();
+            ps3.close();
+            ps4.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void ondeleteRecord(int employeeID) {
+        int oldcarsold = 0;
+        int newcarsold = 0;
+        //String status = "Sold";
+        try {
+            String query = "update employees set CarsSold = ? where employee_id = ?";
+            ps1 = conn.prepareStatement(query);
+            String query2 = "select CarsSold from employees where employee_id = ?";
+            ps2 = conn.prepareStatement(query2);
+            ps2.setInt(1, employeeID);
+            rs2 = ps2.executeQuery();
+            if (rs2.next()) {
+                oldcarsold = rs2.getInt(1);
+                // on delete record
+                newcarsold = oldcarsold - 1;
+            }
+            ps1.setInt(1, newcarsold);
+            ps1.setInt(2, employeeID);
+            ps1.executeUpdate();
+            ps1.close();
+            ps2.close();
         } catch (SQLException ex) {
             Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -163,17 +280,17 @@ public class UsedCarRecord extends javax.swing.JFrame {
 
         usedCarsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ChassisNo", "Model", "EngineNo", "Year", "Cost Price", "Sale Price", "EmployeeID", "Buyer Client ID", "Status"
+                "ID", "ChassisNo", "Model", "EngineNo", "Year", "Cost Price", "Sale Price", "EmployeeID", "Buyer Client ID", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -360,6 +477,11 @@ public class UsedCarRecord extends javax.swing.JFrame {
         jButton1.setText("Return");
 
         statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UnSold", "Sold" }));
+        statusComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statusComboBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -374,7 +496,6 @@ public class UsedCarRecord extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -389,16 +510,19 @@ public class UsedCarRecord extends javax.swing.JFrame {
                                     .addComponent(txtyear, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtcostprice, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtsaleprice, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtemployeeid, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtbuyerclientid, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtbuyerclientid, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(61, 61, 61))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton6)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton7)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton6)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton7))
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -425,6 +549,7 @@ public class UsedCarRecord extends javax.swing.JFrame {
                                 .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel1)
@@ -449,30 +574,30 @@ public class UsedCarRecord extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtsaleprice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6))
-                                .addGap(18, 18, 18)
+                                .addGap(25, 25, 25)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel10)
+                                    .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(24, 24, 24)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel7)
                                     .addComponent(txtemployeeid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel9)
-                                    .addComponent(txtbuyerclientid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel10)
-                                    .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtbuyerclientid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jButton5)
                                     .addComponent(jButton6)
-                                    .addComponent(jButton7)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(53, Short.MAX_VALUE))
+                                    .addComponent(jButton7))
+                                .addGap(20, 20, 20)))))
+                .addGap(47, 47, 47))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -483,7 +608,9 @@ public class UsedCarRecord extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -530,18 +657,23 @@ public class UsedCarRecord extends javax.swing.JFrame {
             ps.setInt(4, Integer.parseInt(txtyear.getText()));
             ps.setInt(5, Integer.parseInt(txtcostprice.getText()));
             ps.setInt(6, Integer.parseInt(txtsaleprice.getText()));
+            String status = statusComboBox.getSelectedItem().toString();
             if ((txtemployeeid.getText().equals(""))) {
-                ps.setString(7, null);
-            } else {
-                ps.setInt(7, Integer.parseInt(txtemployeeid.getText()));
+                JOptionPane.showMessageDialog(this, "Please enter Employee ID!");
             }
             if ((txtbuyerclientid.getText().equals(""))) {
-                ps.setString(8, null);
-            } else {
+                JOptionPane.showMessageDialog(this, "Please enter Client ID!");
+            }
+            if (status.equals("Sold") && !(txtemployeeid.getText().equals("")) && !(txtbuyerclientid.getText().equals(""))) {
+                ps.setInt(7, Integer.parseInt(txtemployeeid.getText()));
                 ps.setInt(8, Integer.parseInt(txtbuyerclientid.getText()));
             }
-            ps.setString(9, statusComboBox.getSelectedItem().toString());
-            System.out.println(statusComboBox.getSelectedItem().toString());
+            if (status.equals("UnSold") && !(txtemployeeid.getText().equals("")) && !(txtbuyerclientid.getText().equals(""))) {
+                ps.setString(7, null);
+                ps.setString(8, null);
+            }
+            ps.setString(9, status);
+            System.out.println(status);
             int i = ps.executeUpdate();
             ps.close();
             if (i == 1) {
@@ -592,9 +724,9 @@ public class UsedCarRecord extends javax.swing.JFrame {
             ps.close();
             //System.out.println("record deleted");
             if (i == 1) {
+                ondeleteRecord(Integer.parseInt(txtemployeeid.getText()));
+                updateCommission(Integer.parseInt(txtemployeeid.getText()));
                 updatetable();
-                //updateCarSold(Integer.parseInt(txtemployeeid.getText()), statusComboBox.getSelectedItem().toString());
-                //updateCommission(Integer.parseInt(txtemployeeid.getText()));
                 JOptionPane.showMessageDialog(this, "Record Deleted!");
                 txtchassisno.setText("");
                 txtmodel.setText("");
@@ -636,17 +768,30 @@ public class UsedCarRecord extends javax.swing.JFrame {
             ps.setInt(3, Integer.parseInt(txtyear.getText()));
             ps.setInt(4, Integer.parseInt(txtcostprice.getText()));
             ps.setInt(5, Integer.parseInt(txtsaleprice.getText()));
-            ps.setInt(6, Integer.parseInt(txtemployeeid.getText()));
-            ps.setInt(7, Integer.parseInt(txtbuyerclientid.getText()));
-            ps.setString(8, statusComboBox.getSelectedItem().toString());
+            String status = statusComboBox.getSelectedItem().toString();
+            if ((txtemployeeid.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Employee ID!");
+            }
+            if ((txtbuyerclientid.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Client ID!");
+            }
+            if (status.equals("Sold") && !(txtemployeeid.getText().equals("")) && !(txtbuyerclientid.getText().equals(""))) {
+                ps.setInt(6, Integer.parseInt(txtemployeeid.getText()));
+                ps.setInt(7, Integer.parseInt(txtbuyerclientid.getText()));
+            }
+            if (status.equals("UnSold") && !(txtemployeeid.getText().equals("")) && !(txtbuyerclientid.getText().equals(""))) {
+                ps.setString(6, null);
+                ps.setString(7, null);
+            }
+            ps.setString(8, status);
             int chassis_no = Integer.parseInt(txtchassisno.getText());
             ps.setInt(9, chassis_no);
             int i = ps.executeUpdate();
             ps.close();
             //System.out.println("record updated");
             if (i == 1) {
-                //updateCarSold(Integer.parseInt(txtemployeeid.getText()), statusComboBox.getSelectedItem().toString());
-                //updateCommission(Integer.parseInt(txtemployeeid.getText()));
+                onupdateCarSold(Integer.parseInt(txtemployeeid.getText()), statusComboBox.getSelectedItem().toString());
+                onupdateCommission(Integer.parseInt(txtemployeeid.getText()));
                 updatetable();
                 JOptionPane.showMessageDialog(this, "Record Update!");
                 txtchassisno.setText("");
@@ -692,19 +837,42 @@ public class UsedCarRecord extends javax.swing.JFrame {
                 txtyear.setText(Integer.toString(rs.getInt(5)));
                 txtcostprice.setText(Integer.toString(rs.getInt(6)));
                 txtsaleprice.setText(Integer.toString(rs.getInt(7)));
-                txtemployeeid.setText(Integer.toString(rs.getInt(8)));
+                oldemployeeid = rs.getInt(8);
+                txtemployeeid.setText(Integer.toString(oldemployeeid));
                 txtbuyerclientid.setText(Integer.toString(rs.getInt(9)));
-                statusComboBox.setSelectedItem(rs.getString(10));
+                oldstatus = rs.getString(10);
+                statusComboBox.setSelectedItem(oldstatus);
                 txtchassisno.requestFocus();
             } else {
                 JOptionPane.showMessageDialog(this, "Not Avalaible");
                 txtchassisno.setText("");
+                txtmodel.setText("");
+                txtengineno.setText("");
+                txtyear.setText("");
+                txtcostprice.setText("");
+                txtsaleprice.setText("");
+                txtemployeeid.setText("");
+                txtbuyerclientid.setText("");
+                statusComboBox.setSelectedIndex(0);
                 txtchassisno.requestFocus();
             }
         } catch (SQLException ex) {
             Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void statusComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusComboBoxActionPerformed
+        // TODO add your handling code here:
+        String status = statusComboBox.getSelectedItem().toString();
+        if (status.equals("Sold")) {
+            txtemployeeid.setEnabled(true);
+            txtbuyerclientid.setEnabled(true);
+        }
+        if (status.equals("UnSold")) {
+            txtemployeeid.setEnabled(false);
+            txtbuyerclientid.setEnabled(false);
+        }
+    }//GEN-LAST:event_statusComboBoxActionPerformed
 
     /**
      * @param args the command line arguments

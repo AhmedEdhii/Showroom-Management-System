@@ -25,8 +25,8 @@ public class SalesPersonInventory extends javax.swing.JFrame {
      */
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
-    PreparedStatement ps;
-    ResultSet rs;
+    PreparedStatement ps, ps1, ps2, ps3;
+    ResultSet rs, rs1, rs2, rs3;
     private int emp_id;
 
     public SalesPersonInventory() {
@@ -48,6 +48,68 @@ public class SalesPersonInventory extends javax.swing.JFrame {
             usedCarsTable.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (SQLException ex) {
             Logger.getLogger(SalesPersonInventory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateCarSold(int employeeID, String status) {
+        int oldcarsold = 0;
+        int carsold;
+        String status1 = "Sold";
+        try {
+            String query = "update employees set CarsSold = ? where employee_id = ?";
+            ps1 = conn.prepareStatement(query);
+            String query1 = "select count(*) from used_cars where employee_id = ? and statusOfCar = ?";
+            ps2 = conn.prepareStatement(query1);
+            String query2 = "select CarsSold from employees where employee_id = ?";
+            ps3 = conn.prepareStatement(query2);
+            ps2.setInt(1, employeeID);
+            ps2.setString(2, status1);
+            ps3.setInt(1, employeeID);
+            rs3 = ps3.executeQuery();
+            if (rs3.next()) {
+                oldcarsold = rs3.getInt(1);
+            }
+            //System.out.println(ps1);
+            rs2 = ps2.executeQuery();
+
+            if (rs2.next()) {
+                //carsold = rs2.getInt(1);
+                //System.out.println(carsold);
+                if (status.equals(status1)) {
+                    carsold = oldcarsold + 1;
+                } else {
+                    carsold = oldcarsold;
+                }
+                ps1.setInt(1, carsold);
+                ps1.setInt(2, employeeID);
+                ps1.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateCommission(int employeeID) {
+        int carsold;
+        try {
+            String query = "update employees set Commission = ? where employee_id = ?";
+            ps1 = conn.prepareStatement(query);
+            String query1 = "select CarsSold from employees where employee_id = ?";
+            ps2 = conn.prepareStatement(query1);
+            ps2.setInt(1, employeeID);
+            //System.out.println(ps1);
+            rs2 = ps2.executeQuery();
+            if (rs2.next()) {
+                String s = rs2.getString(1);
+                System.out.println(s);
+                carsold = Integer.parseInt(s);
+                System.out.println(carsold);
+                ps1.setInt(1, carsold * 10000);
+                ps1.setInt(2, employeeID);
+                ps1.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -81,10 +143,10 @@ public class SalesPersonInventory extends javax.swing.JFrame {
         txtbuyerclientid = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        txtstatus = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        statusComboBox = new javax.swing.JComboBox<>();
 
         jToolBar1.setRollover(true);
 
@@ -205,14 +267,6 @@ public class SalesPersonInventory extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
         jLabel10.setText("Status");
 
-        txtstatus.setBackground(new java.awt.Color(222, 226, 230));
-        txtstatus.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
-        txtstatus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtstatusActionPerformed(evt);
-            }
-        });
-
         jButton8.setBackground(new java.awt.Color(226, 51, 53));
         jButton8.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
         jButton8.setForeground(new java.awt.Color(255, 255, 255));
@@ -230,6 +284,8 @@ public class SalesPersonInventory extends javax.swing.JFrame {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Inventory");
         jLabel8.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UnSold", "Sold" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -264,7 +320,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                                     .addComponent(txtcostprice, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtsaleprice, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtbuyerclientid, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(61, 61, 61))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -315,7 +371,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(txtstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(23, 23, 23))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
@@ -380,10 +436,13 @@ public class SalesPersonInventory extends javax.swing.JFrame {
             //employee_id from login of sales person
             ps.setInt(7, emp_id);
             ps.setInt(8, Integer.parseInt(txtbuyerclientid.getText()));
-            ps.setString(9, txtstatus.getText());
+            ps.setString(9, statusComboBox.getSelectedItem().toString());
             int i = ps.executeUpdate();
             ps.close();
             if (i == 1) {
+                updateCarSold(emp_id, statusComboBox.getSelectedItem().toString());
+                updateCommission(emp_id);
+
                 updatetable();
                 JOptionPane.showMessageDialog(this, "Record Added!");
                 txtchassisno.setText("");
@@ -393,7 +452,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                 txtcostprice.setText("");
                 txtsaleprice.setText("");
                 txtbuyerclientid.setText("");
-                txtstatus.setText("");
+                statusComboBox.setSelectedIndex(0);
                 txtchassisno.requestFocus();
             } else {
                 JOptionPane.showMessageDialog(this, "Record not Added!");
@@ -404,7 +463,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                 txtcostprice.setText("");
                 txtsaleprice.setText("");
                 txtbuyerclientid.setText("");
-                txtstatus.setText("");
+                statusComboBox.setSelectedIndex(0);
                 txtchassisno.requestFocus();
             }
             //System.out.println("Inserted");
@@ -414,10 +473,6 @@ public class SalesPersonInventory extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void txtstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtstatusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtstatusActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
@@ -433,7 +488,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                 txtcostprice.setText(Integer.toString(rs.getInt(5)));
                 txtsaleprice.setText(Integer.toString(rs.getInt(6)));
                 txtbuyerclientid.setText(Integer.toString(rs.getInt(8)));
-                txtstatus.setText(rs.getString(9));
+                statusComboBox.setSelectedItem(rs.getString(9));
                 txtchassisno.requestFocus();
             } else {
                 JOptionPane.showMessageDialog(this, "Not Avalaible");
@@ -512,13 +567,13 @@ public class SalesPersonInventory extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JComboBox<String> statusComboBox;
     private javax.swing.JTextField txtbuyerclientid;
     private javax.swing.JTextField txtchassisno;
     private javax.swing.JTextField txtcostprice;
     private javax.swing.JTextField txtengineno;
     private javax.swing.JTextField txtmodel;
     private javax.swing.JTextField txtsaleprice;
-    private javax.swing.JTextField txtstatus;
     private javax.swing.JTextField txtyear;
     private javax.swing.JTable usedCarsTable;
     // End of variables declaration//GEN-END:variables

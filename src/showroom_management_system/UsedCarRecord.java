@@ -28,9 +28,17 @@ public class UsedCarRecord extends javax.swing.JFrame {
     PreparedStatement ps, ps1, ps2, ps3;
     ResultSet rs, rs1, rs2, rs3;
 
+    private int emp_id;
+    
     public UsedCarRecord() {
         initComponents();
         updatetable();
+    }
+
+    public UsedCarRecord(int emp_id) {
+        initComponents();
+        updatetable();
+        this.emp_id=emp_id;
     }
 
     private void updatetable() {

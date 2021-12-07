@@ -72,7 +72,7 @@ public class mainPage extends javax.swing.JFrame {
         jButton5.setBackground(new java.awt.Color(0.0f, 0.0f, 0.0f,0.0f));
         jButton5.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/db project/walls/1/edits/contact us.png"))); // NOI18N
-        jButton5.setText("Contact Us");
+        jButton5.setText("About Us");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -209,7 +209,7 @@ public class mainPage extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        new ContactUs().setVisible(true);
+        new Contact_Us_details().setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

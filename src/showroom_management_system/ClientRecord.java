@@ -456,18 +456,27 @@ public class ClientRecord extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
+         int dept_id = -1;
         try {
             ps1 = conn.prepareStatement("select dept_id from employees where employee_id = ?");
             ps1.setInt(1, emp_id);
             rs1 = ps1.executeQuery();
-            int dept_id = rs1.getInt("dept_id");
+            if (rs1.next()){
+             System.out.println(rs1.getString(1));
+             dept_id = rs1.getInt("dept_id");
+            
+            }
+           
             ps1.close();
             if (dept_id == 0) {
                 new adminDashboard(emp_id).setVisible(true);
                 this.setVisible(false);
+                 System.out.println(emp_id);
             } else if (dept_id == 1) {
                 new SalePersonDashboard(emp_id).setVisible(true);
                 this.setVisible(false);
+                System.out.println(emp_id);
             } else {
                 System.out.println("Error");
             }

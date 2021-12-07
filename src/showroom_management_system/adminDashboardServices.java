@@ -9,6 +9,12 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,16 +31,46 @@ public class adminDashboardServices extends javax.swing.JFrame {
     ResultSet rs;
 
     private int emp_id;
-    
+
     public adminDashboardServices() {
         initComponents();
+        updatetable();
     }
 
-        
     public adminDashboardServices(int emp_id) {
         initComponents();
-        this.emp_id=emp_id;
+        updatetable();
+        this.emp_id = emp_id;
     }
+
+    private void updatetable() {
+        try {
+            //ps = conn.prepareStatement("select part_desc, Quantity, Line_Total from service_details where Invoice_No = ?");
+            ps = conn.prepareStatement("select * from service");
+            rs = ps.executeQuery();
+            ResultSetMetaData rsd = rs.getMetaData();
+            int j = rsd.getColumnCount();
+            DefaultTableModel dft = (DefaultTableModel) InvoicesRecord.getModel();
+            dft.setRowCount(0);
+
+            while (rs.next()) {
+                Vector v2 = new Vector();
+                for (int i = 0; i <= j; i++) {
+                    v2.add(rs.getString("Invoice_No"));
+                    v2.add(rs.getString("client_id"));
+                    v2.add(rs.getString("mechanic_id"));
+                    v2.add(rs.getString("DOService"));
+                    v2.add(rs.getString("chassis_no"));
+                    v2.add(rs.getString("Total_Cost"));
+                }
+                dft.addRow(v2);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(employeeRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,7 +97,7 @@ public class adminDashboardServices extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        InvoicesRecord = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -309,29 +345,29 @@ public class adminDashboardServices extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(232, 232, 232));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        InvoicesRecord.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ServiceID", "Service Name", "Service Rate"
+                "Invoice No", "Client ID", "Mechanic ID", "Date of Service", "Chassis No", "Total Cost"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(InvoicesRecord);
 
         jButton1.setText("Edit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -404,7 +440,7 @@ public class adminDashboardServices extends javax.swing.JFrame {
 
     private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
         // TODO add your handling code here:
-        employeesPanel.setBackground(new Color(192,0,0));
+        employeesPanel.setBackground(new Color(192, 0, 0));
     }//GEN-LAST:event_jLabel1MouseExited
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
@@ -420,7 +456,7 @@ public class adminDashboardServices extends javax.swing.JFrame {
 
     private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
         // TODO add your handling code here:
-        bookingsPanel.setBackground(new Color(192,0,0));
+        bookingsPanel.setBackground(new Color(192, 0, 0));
     }//GEN-LAST:event_jLabel2MouseExited
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
@@ -436,7 +472,7 @@ public class adminDashboardServices extends javax.swing.JFrame {
 
     private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
         // TODO add your handling code here:
-        usedCarsPanel.setBackground(new Color(192,0,0));
+        usedCarsPanel.setBackground(new Color(192, 0, 0));
     }//GEN-LAST:event_jLabel3MouseExited
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
@@ -452,7 +488,7 @@ public class adminDashboardServices extends javax.swing.JFrame {
 
     private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
         // TODO add your handling code here:
-        servicesPanel.setBackground(new Color(192,0,0));
+        servicesPanel.setBackground(new Color(192, 0, 0));
     }//GEN-LAST:event_jLabel4MouseExited
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
@@ -466,7 +502,7 @@ public class adminDashboardServices extends javax.swing.JFrame {
 
     private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
         // TODO add your handling code here:
-        clientsPanel.setBackground(new Color(192,0,0));
+        clientsPanel.setBackground(new Color(192, 0, 0));
     }//GEN-LAST:event_jLabel5MouseExited
 
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
@@ -530,6 +566,7 @@ public class adminDashboardServices extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable InvoicesRecord;
     private javax.swing.JPanel bookingsPanel;
     private javax.swing.JPanel clientsPanel;
     private javax.swing.JPanel employeesPanel;
@@ -547,7 +584,6 @@ public class adminDashboardServices extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel servicesPanel;
     private javax.swing.JPanel usedCarsPanel;
     // End of variables declaration//GEN-END:variables

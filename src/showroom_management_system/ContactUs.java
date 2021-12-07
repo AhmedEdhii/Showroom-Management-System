@@ -223,10 +223,35 @@ public class ContactUs extends javax.swing.JFrame {
             ps = null;
             String query = "insert into contactus (name, phone_number, email, question) values (?,?,?,?) ";
             ps = conn.prepareStatement(query);
-            ps.setString(1, jName.getText());
-            ps.setString(2, jPhoneNumber.getText());
-            ps.setString(3, jEmailAddress.getText());
-            ps.setString(4, Question.toString());
+            if(jName.getText().equals("")){
+                 JOptionPane.showMessageDialog(this, "Please enter Name!");
+            }
+            else{
+                  ps.setString(1, jName.getText());
+            }
+             if(jPhoneNumber.getText().equals("")){
+                 JOptionPane.showMessageDialog(this, "Please enter Phone Number!");
+            }
+            else{
+               ps.setString(2, jPhoneNumber.getText());
+            }
+              if(jEmailAddress.getText().equals("")){
+                 JOptionPane.showMessageDialog(this, "Please enter Phone Number!");
+            }
+            else{
+                ps.setString(3, jEmailAddress.getText());
+            }
+              
+            if(Question.toString().equals("")){
+                 JOptionPane.showMessageDialog(this, "Please enter Phone Number!");
+            }
+            else{
+                ps.setString(4, Question.toString());
+            }
+           
+           
+           
+           
             int i = ps.executeUpdate();
             ps.close();
             if (i == 1) {

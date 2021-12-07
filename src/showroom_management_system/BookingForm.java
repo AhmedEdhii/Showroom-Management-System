@@ -265,10 +265,33 @@ public class BookingForm extends javax.swing.JFrame {
             ps = null;
             String query = "insert into bookingForm (name, phone_number, email, address, model ,color) values (?,?,?,?,?,?)";
             ps = conn.prepareStatement(query);
-            ps.setString(1, txtname.getText());
-            ps.setString(2, txtphonenumber.getText());
-            ps.setString(3, txtemail.getText());
-            ps.setString(4, txtaddress.getText());
+            
+            if(txtname.getText().equals("")){
+                 JOptionPane.showMessageDialog(this, "Please enter Name!");
+            }
+            else{
+                 ps.setString(1, txtname.getText());
+            }
+           if(txtphonenumber.getText().equals("")){
+                 JOptionPane.showMessageDialog(this, "Please enter Phone Number!");
+           }
+           else{
+               ps.setString(2, txtphonenumber.getText());
+           }
+           if(txtemail.getText().equals("")){
+                  JOptionPane.showMessageDialog(this, "Please enter Email!");
+             }
+           else{
+               ps.setString(3, txtemail.getText());
+           }
+           if(txtaddress.getText().equals("")){
+                  JOptionPane.showMessageDialog(this, "Please enter Address!");
+             }
+           else{
+               ps.setString(4, txtaddress.getText());
+           }  
+            
+           
             if (selectModelComboBox.getSelectedItem() == "Select Model") {
                 JOptionPane.showMessageDialog(this, "Please select a model");
 

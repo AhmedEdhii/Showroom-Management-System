@@ -190,7 +190,14 @@ public class Login extends javax.swing.JFrame {
                     this.setVisible(false);
                     mainpage.setVisible(false);
                 } else if (rs.getInt("dept_id") == 2) {
-                    //service
+                   new InvoiceGenerator(emp_id).setVisible(true);
+                    this.setVisible(false);
+                    mainpage.setVisible(false);
+                }
+                else if (rs.getInt("dept_id") == 3) {
+                   new HR_dashboard(emp_id).setVisible(true);
+                    this.setVisible(false);
+                    mainpage.setVisible(false);
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Record not Added!");

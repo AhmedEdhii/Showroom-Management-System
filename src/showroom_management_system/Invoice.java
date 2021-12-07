@@ -47,25 +47,24 @@ public class Invoice extends javax.swing.JFrame {
         this.invoice = String.valueOf(invoice);
         this.total = String.valueOf(total);
         initial();
-        table();
+        updatetable();
     }
 
-    private void table() {
+    private void updatetable() {
         try {
-            int c;
             //ps = conn.prepareStatement("select part_desc, Quantity, Line_Total from service_details where Invoice_No = ?");
             ps = conn.prepareStatement("select s.part_desc, p.unit_cost, s.Quantity, s.Line_Total from service_details s join parts p on s.part_desc = p.part_desc where s.Invoice_No = ?");
             int a = Integer.parseInt(invoice);
             ps.setInt(1, a);
             rs = ps.executeQuery();
             ResultSetMetaData rsd = rs.getMetaData();
-            c = rsd.getColumnCount();
+            int j = rsd.getColumnCount();
             DefaultTableModel dft = (DefaultTableModel) jTable1.getModel();
             dft.setRowCount(0);
 
             while (rs.next()) {
                 Vector v2 = new Vector();
-                for (int i = 0; i <= c; i++) {
+                for (int i = 0; i <= j; i++) {
                     v2.add(rs.getString("part_desc"));
                     v2.add(rs.getString("unit_cost"));
                     v2.add(rs.getString("Quantity"));

@@ -8,10 +8,13 @@ package showroom_management_system;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -26,8 +29,7 @@ public class ClientRecord extends javax.swing.JFrame {
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
     PreparedStatement ps, ps1;
-    ResultSet rs,rs1;
-
+    ResultSet rs, rs1;
     private int emp_id;
 
     public ClientRecord() {
@@ -45,7 +47,21 @@ public class ClientRecord extends javax.swing.JFrame {
         try {
             ps = conn.prepareStatement("select * from clients");
             rs = ps.executeQuery();
-            clientsTable.setModel(DbUtils.resultSetToTableModel(rs));
+            ResultSetMetaData rsd = rs.getMetaData();
+            int j = rsd.getColumnCount();
+            DefaultTableModel dft = (DefaultTableModel) clientsTable.getModel();
+            dft.setRowCount(0);
+
+            while (rs.next()) {
+                Vector v2 = new Vector();
+                for (int i = 0; i <= j; i++) {
+                    v2.add(rs.getString("client_id"));
+                    v2.add(rs.getString("name"));
+                    v2.add(rs.getString("phone_number"));
+                    v2.add(rs.getString("address"));
+                }
+                dft.addRow(v2);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ClientRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -443,18 +459,16 @@ public class ClientRecord extends javax.swing.JFrame {
         try {
             ps1 = conn.prepareStatement("select dept_id from employees where employee_id = ?");
             ps1.setInt(1, emp_id);
-            rs1=ps1.executeQuery();
-            int dept_id=rs1.getInt("dept_id");
+            rs1 = ps1.executeQuery();
+            int dept_id = rs1.getInt("dept_id");
             ps1.close();
-            if (dept_id==0) {
+            if (dept_id == 0) {
                 new adminDashboard(emp_id).setVisible(true);
                 this.setVisible(false);
-            }
-            else  if (dept_id==1) {
+            } else if (dept_id == 1) {
                 new SalePersonDashboard(emp_id).setVisible(true);
                 this.setVisible(false);
-            }
-            else{
+            } else {
                 System.out.println("Error");
             }
 

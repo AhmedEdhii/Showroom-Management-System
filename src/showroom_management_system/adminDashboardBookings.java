@@ -9,9 +9,12 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -44,9 +47,27 @@ public class adminDashboardBookings extends javax.swing.JFrame {
         try {
             ps = conn.prepareStatement("select * from bookings");
             rs = ps.executeQuery();
-            bookingsTable.setModel(DbUtils.resultSetToTableModel(rs));
+            ResultSetMetaData rsd = rs.getMetaData();
+            int j = rsd.getColumnCount();
+            DefaultTableModel dft = (DefaultTableModel) bookingsTable.getModel();
+            dft.setRowCount(0);
+
+            while (rs.next()) {
+                Vector v2 = new Vector();
+                for (int i = 0; i <= j; i++) {
+                    v2.add(rs.getString("chassis_no"));
+                    v2.add(rs.getString("Payment_Received"));
+                    v2.add(rs.getString("payment_left"));
+                    v2.add(rs.getString("delivery_date"));
+                    v2.add(rs.getString("Cost_of_car"));
+                    v2.add(rs.getString("client_id"));
+                    v2.add(rs.getString("Employee_id"));
+                }
+                dft.addRow(v2);
+            }
+
         } catch (SQLException ex) {
-            Logger.getLogger(employeeRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(adminDashboardBookings.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -332,7 +353,7 @@ public class adminDashboardBookings extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ChesisNo", "PaymentReceived", "PaymentLeft", "DeliveryDate", "TotalCostOfCar", "PaymentDate", "ClientID", "Employee ID"
+                "ChassisNo", "PaymentReceived", "PaymentLeft", "DeliveryDate", "TotalCostOfCar", "PaymentDate", "ClientID", "Employee ID"
             }
         ) {
             Class[] types = new Class [] {

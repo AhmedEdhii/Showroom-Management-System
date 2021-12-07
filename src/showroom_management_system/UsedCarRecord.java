@@ -8,10 +8,13 @@ package showroom_management_system;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -50,7 +53,26 @@ public class UsedCarRecord extends javax.swing.JFrame {
         try {
             ps = conn.prepareStatement("select * from used_cars");
             rs = ps.executeQuery();
-            usedCarsTable.setModel(DbUtils.resultSetToTableModel(rs));
+            ResultSetMetaData rsd = rs.getMetaData();
+            int j = rsd.getColumnCount();
+            DefaultTableModel dft = (DefaultTableModel) usedCarsTable.getModel();
+            dft.setRowCount(0);
+            while (rs.next()) {
+                Vector v2 = new Vector();
+                for (int i = 0; i <= j; i++) {
+                    v2.add(rs.getString("used_car_id"));
+                    v2.add(rs.getString("chassis_no"));
+                    v2.add(rs.getString("model"));
+                    v2.add(rs.getString("engine_no"));
+                    v2.add(rs.getString("manufactured_year"));
+                    v2.add(rs.getString("cost_price"));
+                    v2.add(rs.getString("sale_price"));
+                    v2.add(rs.getString("Employee_id"));
+                    v2.add(rs.getString("buyer_client_id"));
+                    v2.add(rs.getString("statusOfCar"));
+                }
+                dft.addRow(v2);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -586,12 +608,10 @@ public class UsedCarRecord extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel9)
                                     .addComponent(txtbuyerclientid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jButton5)
                                     .addComponent(jButton6)

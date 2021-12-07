@@ -9,9 +9,12 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -28,24 +31,45 @@ public class adminDashboardEmployee extends javax.swing.JFrame {
     PreparedStatement ps;
     ResultSet rs;
     private int emp_id;
+
     public adminDashboardEmployee() {
         initComponents();
         updatetable();
     }
-    
+
     public adminDashboardEmployee(int emp_id) {
         initComponents();
         updatetable();
-        this.emp_id=emp_id;
+        this.emp_id = emp_id;
     }
 
     private void updatetable() {
         try {
-            ps = conn.prepareStatement("select * from  employees");
+            ps = conn.prepareStatement("select * from employees");
             rs = ps.executeQuery();
-            employeesTable.setModel(DbUtils.resultSetToTableModel(rs));
+            ResultSetMetaData rsd = rs.getMetaData();
+            int j = rsd.getColumnCount();
+            DefaultTableModel dft = (DefaultTableModel) employeesTable.getModel();
+            dft.setRowCount(0);
+
+            while (rs.next()) {
+                Vector v2 = new Vector();
+                for (int i = 0; i <= j; i++) {
+                    v2.add(rs.getString("Employee_id"));
+                    v2.add(rs.getString("name"));
+                    v2.add(rs.getString("phone_number"));
+                    v2.add(rs.getString("Address"));
+                    v2.add(rs.getString("salary"));
+                    v2.add(rs.getString("password"));
+                    v2.add(rs.getString("CarsSold"));
+                    v2.add(rs.getString("Commission"));
+                    v2.add(rs.getString("dept_id"));
+                }
+                dft.addRow(v2);
+            }
+
         } catch (SQLException ex) {
-            Logger.getLogger(employeeRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(adminDashboardEmployee.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -331,9 +355,17 @@ public class adminDashboardEmployee extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "Phone Number", "Address", "Salary", "Department ID", "Password", "Cars Sold", "Comission", "Job ID"
+                "ID", "Name", "Phone Number", "Address", "Salary", "Password", "Cars Sold", "Comission", "Dept ID"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(employeesTable);
 
         jButton1.setText("Edit");
@@ -407,7 +439,7 @@ public class adminDashboardEmployee extends javax.swing.JFrame {
 
     private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
         // TODO add your handling code here:
-        employeesPanel.setBackground(new Color(192,0,0));
+        employeesPanel.setBackground(new Color(192, 0, 0));
     }//GEN-LAST:event_jLabel1MouseExited
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
@@ -421,7 +453,7 @@ public class adminDashboardEmployee extends javax.swing.JFrame {
 
     private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
         // TODO add your handling code here:
-        bookingsPanel.setBackground(new Color(192,0,0));
+        bookingsPanel.setBackground(new Color(192, 0, 0));
     }//GEN-LAST:event_jLabel2MouseExited
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
@@ -436,7 +468,7 @@ public class adminDashboardEmployee extends javax.swing.JFrame {
 
     private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
         // TODO add your handling code here:
-        usedCarsPanel.setBackground(new Color(192,0,0));
+        usedCarsPanel.setBackground(new Color(192, 0, 0));
     }//GEN-LAST:event_jLabel3MouseExited
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
@@ -452,7 +484,7 @@ public class adminDashboardEmployee extends javax.swing.JFrame {
 
     private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
         // TODO add your handling code here:
-        servicesPanel.setBackground(new Color(192,0,0));
+        servicesPanel.setBackground(new Color(192, 0, 0));
     }//GEN-LAST:event_jLabel4MouseExited
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
@@ -468,7 +500,7 @@ public class adminDashboardEmployee extends javax.swing.JFrame {
 
     private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
         // TODO add your handling code here:
-        clientsPanel.setBackground(new Color(192,0,0));
+        clientsPanel.setBackground(new Color(192, 0, 0));
     }//GEN-LAST:event_jLabel5MouseExited
 
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed

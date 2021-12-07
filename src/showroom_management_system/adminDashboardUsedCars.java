@@ -9,9 +9,12 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -45,11 +48,31 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
 
     private void updatetable() {
         try {
-            ps = conn.prepareStatement("select * from  used_cars");
+            ps = conn.prepareStatement("select * from used_cars");
             rs = ps.executeQuery();
-            usedCarsTable.setModel(DbUtils.resultSetToTableModel(rs));
+            ResultSetMetaData rsd = rs.getMetaData();
+            int j = rsd.getColumnCount();
+            DefaultTableModel dft = (DefaultTableModel) usedCarsTable.getModel();
+            dft.setRowCount(0);
+            while (rs.next()) {
+                Vector v2 = new Vector();
+                for (int i = 0; i <= j; i++) {
+                    v2.add(rs.getString("used_car_id"));
+                    v2.add(rs.getString("chassis_no"));
+                    v2.add(rs.getString("model"));
+                    v2.add(rs.getString("engine_no"));
+                    v2.add(rs.getString("manufactured_year"));
+                    v2.add(rs.getString("cost_price"));
+                    v2.add(rs.getString("sale_price"));
+                    v2.add(rs.getString("Employee_id"));
+                    v2.add(rs.getString("buyer_client_id"));
+                    v2.add(rs.getString("statusOfCar"));
+                }
+                dft.addRow(v2);
+            }
+
         } catch (SQLException ex) {
-            Logger.getLogger(employeeRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(adminDashboardUsedCars.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -329,17 +352,17 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
 
         usedCarsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ChassisNo", "Model", "EngineNo", "Year", "Cost Price", "Sale Price", "EmployeeID", "Buyer Client ID", "Status"
+                "ID", "ChassisNo", "Model", "EngineNo", "Year", "Cost Price", "Sale Price", "EmployeeID", "Buyer Client ID", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -348,8 +371,8 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(usedCarsTable);
         if (usedCarsTable.getColumnModel().getColumnCount() > 0) {
-            usedCarsTable.getColumnModel().getColumn(2).setResizable(false);
-            usedCarsTable.getColumnModel().getColumn(8).setResizable(false);
+            usedCarsTable.getColumnModel().getColumn(3).setResizable(false);
+            usedCarsTable.getColumnModel().getColumn(9).setResizable(false);
         }
 
         jButton1.setText("Edit");

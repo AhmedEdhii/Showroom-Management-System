@@ -9,9 +9,12 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -28,23 +31,43 @@ public class SalePersonDashboardBookings extends javax.swing.JFrame {
     PreparedStatement ps;
     ResultSet rs;
     private int emp_id;
+
     public SalePersonDashboardBookings() {
         initComponents();
         updatetable();
     }
+
     public SalePersonDashboardBookings(int emp_id) {
         initComponents();
         updatetable();
-        this.emp_id=emp_id;
+        this.emp_id = emp_id;
     }
 
     private void updatetable() {
         try {
-            ps = conn.prepareStatement("select * from  bookings");
+            ps = conn.prepareStatement("select * from bookings where employee_id = ?");
+            ps.setInt(1, emp_id);
             rs = ps.executeQuery();
-            bookingsTable.setModel(DbUtils.resultSetToTableModel(rs));
+            ResultSetMetaData rsd = rs.getMetaData();
+            int j = rsd.getColumnCount();
+            DefaultTableModel dft = (DefaultTableModel) bookingsTable.getModel();
+            dft.setRowCount(0);
+
+            while (rs.next()) {
+                Vector v2 = new Vector();
+                for (int i = 0; i <= j; i++) {
+                    v2.add(rs.getString("chassis_no"));
+                    v2.add(rs.getString("Payment_Received"));
+                    v2.add(rs.getString("payment_left"));
+                    v2.add(rs.getString("delivery_date"));
+                    v2.add(rs.getString("Cost_of_car"));
+                    v2.add(rs.getString("client_id"));
+                    v2.add(rs.getString("Employee_id"));
+                }
+                dft.addRow(v2);
+            }
         } catch (SQLException ex) {
-            Logger.getLogger(employeeRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalePersonDashboardBookings.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -304,7 +327,7 @@ public class SalePersonDashboardBookings extends javax.swing.JFrame {
 
     private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
         // TODO add your handling code here:
-        bookingsPanel.setBackground(new Color(192,0,0));
+        bookingsPanel.setBackground(new Color(192, 0, 0));
     }//GEN-LAST:event_jLabel2MouseExited
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
@@ -318,7 +341,7 @@ public class SalePersonDashboardBookings extends javax.swing.JFrame {
 
     private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
         // TODO add your handling code here:
-        usedCarsPanel.setBackground(new Color(192,0,0));
+        usedCarsPanel.setBackground(new Color(192, 0, 0));
     }//GEN-LAST:event_jLabel3MouseExited
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
@@ -329,7 +352,7 @@ public class SalePersonDashboardBookings extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         new SalesBookingsRecord().setVisible(true);
-        this.setVisible(false);      
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

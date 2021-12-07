@@ -3,10 +3,13 @@ package showroom_management_system;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 
@@ -39,14 +42,34 @@ public class employeeRecord extends javax.swing.JFrame {
     public employeeRecord(int emp_id) {
         initComponents();
         updatetable();
-        this.emp_id=emp_id;
+        this.emp_id = emp_id;
     }
 
     private void updatetable() {
         try {
             ps = conn.prepareStatement("select * from employees");
             rs = ps.executeQuery();
-            employeesTable.setModel(DbUtils.resultSetToTableModel(rs));
+            ResultSetMetaData rsd = rs.getMetaData();
+            int j = rsd.getColumnCount();
+            DefaultTableModel dft = (DefaultTableModel) employeesTable.getModel();
+            dft.setRowCount(0);
+
+            while (rs.next()) {
+                Vector v2 = new Vector();
+                for (int i = 0; i <= j; i++) {
+                    v2.add(rs.getString("Employee_id"));
+                    v2.add(rs.getString("name"));
+                    v2.add(rs.getString("phone_number"));
+                    v2.add(rs.getString("Address"));
+                    v2.add(rs.getString("salary"));
+                    v2.add(rs.getString("password"));
+                    v2.add(rs.getString("CarsSold"));
+                    v2.add(rs.getString("Commission"));
+                    v2.add(rs.getString("dept_id"));
+                }
+                dft.addRow(v2);
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(employeeRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -317,15 +340,23 @@ public class employeeRecord extends javax.swing.JFrame {
 
         employeesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "Phone Number", "Address", "Salary", "Department ID", "Password", "Cars Sold", "Comission"
+                "ID", "Name", "Phone Number", "Address", "Salary", "Department ID", "Password", "Cars Sold", "Comission"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(employeesTable);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);

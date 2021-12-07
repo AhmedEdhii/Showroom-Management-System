@@ -28,8 +28,8 @@ public class UsedCarRecord extends javax.swing.JFrame {
      */
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
-    PreparedStatement ps, ps1, ps2, ps3, ps4, ps5;
-    ResultSet rs, rs1, rs2, rs3, rs4, rs5;
+    PreparedStatement ps, ps1, ps2, ps3, ps4, ps5,ps6;
+    ResultSet rs, rs1, rs2, rs3, rs4, rs5,rs6;
     int oldemployeeid;
     String oldstatus;
     private int emp_id;
@@ -497,6 +497,11 @@ public class UsedCarRecord extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back (Custom).jpg"))); // NOI18N
         jButton1.setText("Return");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UnSold", "Sold" }));
         statusComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -942,6 +947,46 @@ public class UsedCarRecord extends javax.swing.JFrame {
             txtbuyerclientid.setEnabled(false);
         }
     }//GEN-LAST:event_statusComboBoxActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         int dept_id = -1;
+        try {
+            ps6 = conn.prepareStatement("select dept_id from employees where employee_id = ?");
+            ps6.setInt(1, emp_id);
+            rs6 = ps6.executeQuery();
+            if (rs6.next()) {
+                System.out.println(rs6.getString(1));
+                dept_id = rs6.getInt("dept_id");
+
+            }
+
+            ps6.close();
+            if (dept_id == 0) {
+                new adminDashboard(emp_id).setVisible(true);
+                this.setVisible(false);
+                //System.out.println(emp_id);
+            } else if (dept_id == 1) {
+                new SalePersonDashboard(emp_id).setVisible(true);
+                this.setVisible(false);
+                //System.out.println(emp_id);
+            } else if (dept_id == 2) {
+                int response = JOptionPane.showConfirmDialog(this, "Do you want to logout?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (response == JOptionPane.YES_OPTION) {
+                    this.setVisible(false);
+                    new mainPage().setVisible(true);
+                }
+            } else if (dept_id == 3) {
+                new HR_dashboard(emp_id).setVisible(true);
+                this.setVisible(false);
+            } else {
+                System.out.println("Error");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

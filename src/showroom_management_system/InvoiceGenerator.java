@@ -25,12 +25,18 @@ public class InvoiceGenerator extends javax.swing.JFrame {
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
     PreparedStatement ps;
-    PreparedStatement ps1, ps2, ps3, ps4;
-    ResultSet rs;
-
+    PreparedStatement ps1, ps2, ps3, ps4,ps5;
+    ResultSet rs,rs5;
+    private int emp_id;
     public InvoiceGenerator() {
         initComponents();
     }
+    
+    public InvoiceGenerator(int emp_id) {
+        initComponents();
+        this.emp_id=emp_id;
+    }
+
 
     int client_id;
     int invoiceno;
@@ -676,6 +682,43 @@ public class InvoiceGenerator extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+                
+        int dept_id = -1;
+        try {
+            ps5 = conn.prepareStatement("select dept_id from employees where employee_id = ?");
+            ps5.setInt(1, emp_id);
+            rs5 = ps5.executeQuery();
+            if (rs5.next()) {
+                System.out.println(rs5.getString(1));
+                dept_id = rs5.getInt("dept_id");
+
+            }
+
+            ps5.close();
+            if (dept_id == 0) {
+                new adminDashboard(emp_id).setVisible(true);
+                this.setVisible(false);
+                //System.out.println(emp_id);
+            } else if (dept_id == 1) {
+                new SalePersonDashboard(emp_id).setVisible(true);
+                this.setVisible(false);
+                //System.out.println(emp_id);
+            } else if (dept_id == 2) {
+                int response = JOptionPane.showConfirmDialog(this, "Do you want to logout?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (response == JOptionPane.YES_OPTION) {
+                    this.setVisible(false);
+                    new mainPage().setVisible(true);
+                }
+            } else if (dept_id == 3) {
+                new HR_dashboard(emp_id).setVisible(true);
+                this.setVisible(false);
+            } else {
+                System.out.println("Error");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void AirFilterComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AirFilterComboBoxActionPerformed

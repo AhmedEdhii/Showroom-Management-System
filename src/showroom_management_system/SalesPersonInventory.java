@@ -28,8 +28,8 @@ public class SalesPersonInventory extends javax.swing.JFrame {
      */
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
-    PreparedStatement ps, ps1, ps2, ps3;
-    ResultSet rs, rs1, rs2, rs3;
+    PreparedStatement ps, ps1, ps2, ps3, ps5;
+    ResultSet rs, rs1, rs2, rs3, rs5;
     private int emp_id;
 
     public SalesPersonInventory() {
@@ -182,6 +182,11 @@ public class SalesPersonInventory extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back (Custom).jpg"))); // NOI18N
         jButton1.setText("Return");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         usedCarsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -522,6 +527,46 @@ public class SalesPersonInventory extends javax.swing.JFrame {
             Logger.getLogger(SalesPersonInventory.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int dept_id = -1;
+        try {
+            ps5 = conn.prepareStatement("select dept_id from employees where employee_id = ?");
+            ps5.setInt(1, emp_id);
+            rs5 = ps5.executeQuery();
+            if (rs5.next()) {
+                System.out.println(rs5.getString(1));
+                dept_id = rs5.getInt("dept_id");
+
+            }
+
+            ps5.close();
+            if (dept_id == 0) {
+                new adminDashboard(emp_id).setVisible(true);
+                this.setVisible(false);
+                //System.out.println(emp_id);
+            } else if (dept_id == 1) {
+                new SalePersonDashboard(emp_id).setVisible(true);
+                this.setVisible(false);
+                //System.out.println(emp_id);
+            } else if (dept_id == 2) {
+                int response = JOptionPane.showConfirmDialog(this, "Do you want to logout?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (response == JOptionPane.YES_OPTION) {
+                    this.setVisible(false);
+                    new mainPage().setVisible(true);
+                }
+            } else if (dept_id == 3) {
+                new HR_dashboard(emp_id).setVisible(true);
+                this.setVisible(false);
+            } else {
+                System.out.println("Error");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

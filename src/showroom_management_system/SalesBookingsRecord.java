@@ -533,6 +533,7 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
             }
             //System.out.println("Inserted");
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Chassis No must be unique!");
             Logger.getLogger(SalesBookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton5ActionPerformed

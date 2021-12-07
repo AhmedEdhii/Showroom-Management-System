@@ -776,8 +776,6 @@ public class SalesPersonInventory extends javax.swing.JFrame {
             ps.close();
             //System.out.println("record updated");
             if (i == 1) {
-                //onupdateCarSold(Integer.parseInt(txtemployeeid.getText()), statusComboBox.getSelectedItem().toString());
-                //onupdateCommission(Integer.parseInt(txtemployeeid.getText()));
                 updatetable();
                 JOptionPane.showMessageDialog(this, "Record Update!");
                 txtchassisno.setText("");

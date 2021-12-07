@@ -39,13 +39,15 @@ public class SalePersonDashboardBookings extends javax.swing.JFrame {
 
     public SalePersonDashboardBookings(int emp_id) {
         initComponents();
-        updatetable();
         this.emp_id = emp_id;
+        updatetable();
+        System.out.println(".." + emp_id);
     }
 
     private void updatetable() {
         try {
             ps = conn.prepareStatement("select * from bookings where employee_id = ?");
+            System.out.println(" uiri" + emp_id);
             ps.setInt(1, emp_id);
             rs = ps.executeQuery();
             ResultSetMetaData rsd = rs.getMetaData();
@@ -243,7 +245,7 @@ public class SalePersonDashboardBookings extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ChesisNo", "PaymentReceived", "PaymentLeft", "DeliveryDate", "TotalCostOfCar", "ClientID", "Employee ID"
+                "Chassis No", "Payment Received", "Payment Left", "Delivery Date", "Total Cost", "Client ID", "Employee ID"
             }
         ) {
             Class[] types = new Class [] {
@@ -346,18 +348,19 @@ public class SalePersonDashboardBookings extends javax.swing.JFrame {
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // TODO add your handling code here:
-        new SalePersonDashboardInventory().setVisible(true);
+        new SalePersonDashboardInventory(emp_id).setVisible(true);
     }//GEN-LAST:event_jLabel3MousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new SalesBookingsRecord().setVisible(true);
+        System.out.println(emp_id);
+        new SalesBookingsRecord(emp_id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new SalePersonDashboard().setVisible(true);
+        new SalePersonDashboard(emp_id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 

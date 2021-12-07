@@ -465,7 +465,6 @@ public class ClientRecord extends javax.swing.JFrame {
             if (rs1.next()) {
                 System.out.println(rs1.getString(1));
                 dept_id = rs1.getInt("dept_id");
-
             }
 
             ps1.close();

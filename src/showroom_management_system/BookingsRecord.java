@@ -30,11 +30,10 @@ public class BookingsRecord extends javax.swing.JFrame {
      */
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
-    PreparedStatement ps, ps1, ps2, ps3, ps4,ps5;
-    ResultSet rs, rs1, rs2, rs3, rs4,rs5;
+    PreparedStatement ps, ps1, ps2, ps3, ps4, ps5;
+    ResultSet rs, rs1, rs2, rs3, rs4, rs5;
     int oldemployeeid;
     private int emp_id;
-    int totalcost;
 
     public BookingsRecord() {
         initComponents();
@@ -44,9 +43,9 @@ public class BookingsRecord extends javax.swing.JFrame {
 
     public BookingsRecord(int emp_id) {
         initComponents();
+        this.emp_id = emp_id;
         updatetable();
         txtpaymentleft.setEnabled(false);
-        this.emp_id = emp_id;
     }
 
     private void updatetable() {
@@ -289,7 +288,7 @@ public class BookingsRecord extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ChassisNo", "PaymentReceived", "PaymentLeft", "DeliveryDate", "TotalCostOfCar", "ClientID", "Employee ID"
+                "Chassis No", "Payment Received", "Payment Left", "Delivery Date", "Total Cost", "Client ID", "Employee ID"
             }
         ) {
             Class[] types = new Class [] {
@@ -720,14 +719,12 @@ public class BookingsRecord extends javax.swing.JFrame {
                 totalcost = Integer.parseInt(txttotalcost.getText());
                 ps.setInt(4, totalcost);
             }
-
             if ((txtpaymentreceived.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Payment Received!");
             } else {
                 paymentreceived = Integer.parseInt(txtpaymentreceived.getText());
                 ps.setInt(1, paymentreceived);
             }
-
             paymentleft = totalcost - paymentreceived;
             ps.setInt(2, paymentleft);
 
@@ -820,7 +817,7 @@ public class BookingsRecord extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         int dept_id = -1;
         try {
             ps5 = conn.prepareStatement("select dept_id from employees where employee_id = ?");
@@ -867,8 +864,6 @@ public class BookingsRecord extends javax.swing.JFrame {
 
     private void txttotalcostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttotalcostActionPerformed
         // TODO add your handling code here:
-        totalcost = Integer.parseInt(txttotalcost.getText());
-        System.out.println(totalcost);
     }//GEN-LAST:event_txttotalcostActionPerformed
 
     /**

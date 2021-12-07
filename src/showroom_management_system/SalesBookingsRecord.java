@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,19 +30,25 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
      */
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
-    PreparedStatement ps, ps1, ps2, ps3,ps5;
-    ResultSet rs, rs1, rs2, rs3,rs5;
+    PreparedStatement ps, ps1, ps2, ps3, ps5;
+    ResultSet rs, rs1, rs2, rs3, rs5;
     private int emp_id;
 
     public SalesBookingsRecord() {
         initComponents();
         updatetable();
+        txtpaymentleft.setEnabled(false);
+        txtemployeeid.setText(String.valueOf(emp_id));
+        txtemployeeid.setEnabled(false);
     }
 
     public SalesBookingsRecord(int emp_id) {
         initComponents();
-        updatetable();
         this.emp_id = emp_id;
+        updatetable();
+        txtpaymentleft.setEnabled(false);
+        txtemployeeid.setText(String.valueOf(emp_id));
+        txtemployeeid.setEnabled(false);
     }
 
     private void updatetable() {
@@ -152,10 +160,15 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
         txttotalcost = new javax.swing.JTextField();
         txtclientid = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        txtchassisno1 = new javax.swing.JTextField();
+        jButton8 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        txtemployeeid = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -169,7 +182,7 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ChassisNo", "PaymentReceived", "PaymentLeft", "DeliveryDate", "TotalCostOfCar", "ClientID", "Employee ID"
+                "Chassis No", "Payment Received", "Payment Left", "Delivery Date", "TotalCost", "Client ID", "Employee ID"
             }
         ) {
             Class[] types = new Class [] {
@@ -208,6 +221,11 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
 
         txtpaymentleft.setBackground(new java.awt.Color(222, 226, 230));
         txtpaymentleft.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        txtpaymentleft.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpaymentleftActionPerformed(evt);
+            }
+        });
 
         txtdeliverydate.setBackground(new java.awt.Color(222, 226, 230));
         txtdeliverydate.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
@@ -229,17 +247,6 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
             }
         });
 
-        jButton8.setBackground(new java.awt.Color(226, 51, 53));
-        jButton8.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search (Custom).png"))); // NOI18N
-        jButton8.setText("Search");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/db project/walls/1/edits/toyota-logo.png"))); // NOI18N
 
         jButton2.setBackground(new java.awt.Color(226, 51, 53));
@@ -257,6 +264,62 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Booking Records");
 
+        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel2.setForeground(new java.awt.Color(240, 240, 240));
+
+        jLabel9.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel9.setText("Chassis No");
+
+        txtchassisno1.setBackground(new java.awt.Color(222, 226, 230));
+        txtchassisno1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+
+        jButton8.setBackground(new java.awt.Color(226, 51, 53));
+        jButton8.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        jButton8.setForeground(new java.awt.Color(255, 255, 255));
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search (Custom).png"))); // NOI18N
+        jButton8.setText("Search");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtchassisno1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(208, 208, 208))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(136, 136, 136)
+                .addComponent(jButton8)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtchassisno1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addComponent(jButton8)
+                .addContainerGap())
+        );
+
+        jLabel10.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel10.setText("Employee ID");
+
+        txtemployeeid.setBackground(new java.awt.Color(222, 226, 230));
+        txtemployeeid.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -264,43 +327,51 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(32, 32, 32))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGap(18, 18, 18)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addComponent(jLabel2))
-                                                .addGap(18, 18, 18))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGap(21, 21, 21)))
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtpaymentreceived, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtchassisno, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtpaymentleft, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txttotalcost, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtdeliverydate, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtclientid, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel2))
+                                        .addGap(18, 18, 18)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtdeliverydate, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtpaymentreceived, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtchassisno, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtpaymentleft, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtclientid, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txttotalcost, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtemployeeid)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(287, 287, 287)
+                        .addComponent(jButton2))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -318,11 +389,15 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(txtchassisno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txttotalcost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txtpaymentreceived, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(16, 16, 16)
+                        .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txtpaymentleft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -330,20 +405,26 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(txtdeliverydate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txttotalcost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19)
+                        .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(txtclientid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(60, 60, 60)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton8)
-                    .addComponent(jButton2))
-                .addGap(93, 93, 93))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(txtemployeeid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton5)
+                                .addGap(10, 10, 10))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jButton2)))
+                .addGap(40, 40, 40))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -363,17 +444,46 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        int totalcost = 0;
+        int paymentreceived = 0;
+        int paymentleft = 0;
         try {
             ps = null;
             String query = "insert into bookings (chassis_no, Payment_Received, payment_left, delivery_date, Cost_of_car, client_id, Employee_id) values (?,?,?,?,?,?,?)";
             ps = conn.prepareStatement(query);
-            ps.setString(1, txtchassisno.getText());
-            ps.setInt(2, Integer.parseInt(txtpaymentreceived.getText()));
-            ps.setInt(3, Integer.parseInt(txtpaymentleft.getText()));
-            ps.setString(4, txtdeliverydate.getText());
-            ps.setInt(5, Integer.parseInt(txttotalcost.getText()));
-            ps.setInt(6, Integer.parseInt(txtclientid.getText()));
-            //employee_id from login of sales person
+            if ((txtchassisno.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Chassis No!");
+            } else {
+                ps.setString(1, txtchassisno.getText());
+            }
+
+            if ((txttotalcost.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Total Cost!");
+            } else {
+                totalcost = Integer.parseInt(txttotalcost.getText());
+                ps.setInt(5, totalcost);
+            }
+
+            if ((txtpaymentreceived.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Payment Received!");
+            } else {
+                paymentreceived = Integer.parseInt(txtpaymentreceived.getText());
+                ps.setInt(2, paymentreceived);
+            }
+
+            paymentleft = totalcost - paymentreceived;
+            ps.setInt(3, paymentleft);
+
+            if ((txtdeliverydate.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Delivery Date!");
+            } else {
+                ps.setString(4, txtdeliverydate.getText());
+            }
+            if ((txtclientid.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Client ID!");
+            } else {
+                ps.setInt(6, Integer.parseInt(txtclientid.getText()));
+            }
             ps.setInt(7, emp_id);
             int i = ps.executeUpdate();
             ps.close();
@@ -388,7 +498,7 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
                 txtdeliverydate.setText("");
                 txttotalcost.setText("");
                 txtclientid.setText("");
-
+                txtemployeeid.setText("");
                 txtchassisno.requestFocus();
             } else {
                 JOptionPane.showMessageDialog(this, "Record not Added!");
@@ -398,39 +508,70 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
                 txtdeliverydate.setText("");
                 txttotalcost.setText("");
                 txtclientid.setText("");
-
+                txtemployeeid.setText("");
                 txtchassisno.requestFocus();
             }
             //System.out.println("Inserted");
-
         } catch (SQLException ex) {
             Logger.getLogger(SalesBookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+//        try {
+//            ps = conn.prepareStatement("select * from bookings where chassis_no = ?");
+//            int chassis_no = Integer.parseInt(txtchassisno.getText());
+//            ps.setInt(1, chassis_no);
+//            rs = ps.executeQuery();
+//            if (rs.next() == true) {
+//                txtpaymentreceived.setText(rs.getString(2));
+//                txtpaymentleft.setText(rs.getString(3));
+//                txtdeliverydate.setText(Integer.toString(rs.getInt(4)));
+//                txttotalcost.setText(rs.getString(5));
+//                txtclientid.setText(Integer.toString(rs.getInt(6)));
+//                txtchassisno.requestFocus();
+//            } else {
+//                JOptionPane.showMessageDialog(this, "Not Avalaible");
+//                txtchassisno.setText("");
+//                txtchassisno.requestFocus();
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(SalesBookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         try {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             ps = conn.prepareStatement("select * from bookings where chassis_no = ?");
-            int chassis_no = Integer.parseInt(txtchassisno.getText());
-            ps.setInt(1, chassis_no);
+            String chassis_no = txtchassisno1.getText();
+            ps.setString(1, chassis_no);
             rs = ps.executeQuery();
             if (rs.next() == true) {
+                txtchassisno.setEnabled(false);
+                txtchassisno.setText(rs.getString(1));
                 txtpaymentreceived.setText(rs.getString(2));
                 txtpaymentleft.setText(rs.getString(3));
-                txtdeliverydate.setText(Integer.toString(rs.getInt(4)));
+                String strDate = dateFormat.format(rs.getDate(4));
+                txtdeliverydate.setText(strDate);
                 txttotalcost.setText(rs.getString(5));
+                txttotalcost.setEnabled(false);
                 txtclientid.setText(Integer.toString(rs.getInt(6)));
+                txtemployeeid.setText(Integer.toString(rs.getInt(7)));
                 txtchassisno.requestFocus();
             } else {
                 JOptionPane.showMessageDialog(this, "Not Avalaible");
                 txtchassisno.setText("");
+                txtpaymentreceived.setText("");
+                txtpaymentleft.setText("");
+                txtdeliverydate.setText("");
+                txttotalcost.setText("");
+                txtclientid.setText("");
+                txtemployeeid.setText("");
                 txtchassisno.requestFocus();
             }
         } catch (SQLException ex) {
             Logger.getLogger(SalesBookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -472,6 +613,11 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
             Logger.getLogger(ClientRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtpaymentleftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpaymentleftActionPerformed
+        // TODO add your handling code here:
+        txtpaymentleft.setEnabled(false);
+    }//GEN-LAST:event_txtpaymentleftActionPerformed
 
     /**
      * @param args the command line arguments
@@ -529,6 +675,7 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -536,11 +683,15 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtchassisno;
+    private javax.swing.JTextField txtchassisno1;
     private javax.swing.JTextField txtclientid;
     private javax.swing.JTextField txtdeliverydate;
+    private javax.swing.JTextField txtemployeeid;
     private javax.swing.JTextField txtpaymentleft;
     private javax.swing.JTextField txtpaymentreceived;
     private javax.swing.JTextField txttotalcost;

@@ -25,7 +25,6 @@ public class SalePersonDashboard extends javax.swing.JFrame {
     public SalePersonDashboard(int emp_id) {
         initComponents();
         this.emp_id = emp_id;
-
     }
 
     /**
@@ -245,6 +244,7 @@ public class SalePersonDashboard extends javax.swing.JFrame {
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
         // TODO add your handling code here:
+        //System.out.println(emp_id);
         new SalePersonDashboardBookings(emp_id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel2MousePressed

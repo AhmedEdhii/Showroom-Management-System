@@ -317,7 +317,7 @@
                     <Column editable="true" title="EngineNo" type="java.lang.String"/>
                     <Column editable="true" title="Year" type="java.lang.Integer"/>
                     <Column editable="true" title="Cost Price" type="java.lang.Integer"/>
-                    <Column editable="true" title="Sale Price" type="java.lang.Integer"/>
+                    <Column editable="true" title="Sell Price" type="java.lang.Integer"/>
                     <Column editable="true" title="EmployeeID" type="java.lang.Integer"/>
                     <Column editable="true" title="Buyer Client ID" type="java.lang.Integer"/>
                     <Column editable="true" title="Status" type="java.lang.String"/>

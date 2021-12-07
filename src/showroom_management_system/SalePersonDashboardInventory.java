@@ -39,8 +39,8 @@ public class SalePersonDashboardInventory extends javax.swing.JFrame {
 
     public SalePersonDashboardInventory(int emp_id) {
         initComponents();
-        updatetable();
         this.emp_id = emp_id;
+        updatetable();
     }
 
     private void updatetable() {
@@ -254,7 +254,7 @@ public class SalePersonDashboardInventory extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "ChassisNo", "Model", "EngineNo", "Year", "Cost Price", "Sale Price", "EmployeeID", "Buyer Client ID", "Status"
+                "ID", "ChassisNo", "Model", "EngineNo", "Year", "Cost Price", "Sell Price", "EmployeeID", "Buyer Client ID", "Status"
             }
         ) {
             Class[] types = new Class [] {
@@ -343,7 +343,7 @@ public class SalePersonDashboardInventory extends javax.swing.JFrame {
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
         // TODO add your handling code here:
-        new SalePersonDashboardBookings().setVisible(true);
+        new SalePersonDashboardBookings(emp_id).setVisible(true);
     }//GEN-LAST:event_jLabel2MousePressed
 
     private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered
@@ -362,13 +362,13 @@ public class SalePersonDashboardInventory extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new SalesPersonInventory().setVisible(true);
+        new SalesPersonInventory(emp_id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new SalePersonDashboard().setVisible(true);
+        new SalePersonDashboard(emp_id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 

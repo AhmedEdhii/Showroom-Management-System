@@ -171,7 +171,7 @@ public class Login extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String user_id = jTextField1.getText();
         String password = jPasswordField1.getText();
-        int emp_id=Integer.parseInt(user_id);
+        int emp_id= Integer.parseInt(user_id);
         try {
             //idher * pe dept dalna hai
             ps = conn.prepareStatement("select dept_id from employees where employee_id = ? and password = ?");
@@ -185,6 +185,7 @@ public class Login extends javax.swing.JFrame {
                     //mainPage().setVisible(false);
                     mainpage.setVisible(false);
                 } else if (rs.getInt("dept_id") == 1) {
+                    //System.out.println(emp_id);
                     new SalePersonDashboard(emp_id).setVisible(true);
                     this.setVisible(false);
                     mainpage.setVisible(false);

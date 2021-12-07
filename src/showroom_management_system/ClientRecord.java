@@ -269,8 +269,8 @@ public class ClientRecord extends javax.swing.JFrame {
                                         .addGap(44, 44, 44)
                                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(30, 30, 30)
-                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jButton5)
                                         .addGap(18, 18, 18)
                                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
@@ -291,9 +291,7 @@ public class ClientRecord extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -343,9 +341,23 @@ public class ClientRecord extends javax.swing.JFrame {
             ps = null;
             String query = "insert into clients (name, phone_number, address) values (?,?,?,?)";
             ps = conn.prepareStatement(query);
-            ps.setString(1, txtname.getText());
-            ps.setString(2, txtphonenumber.getText());
-            ps.setString(3, txtaddress.getText());
+            if ((txtname.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Name!");
+            } else {
+                ps.setString(1, txtname.getText());
+            }
+
+            if ((txtphonenumber.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Phone Number!");
+            } else {
+                ps.setString(2, txtphonenumber.getText());
+            }
+
+            if ((txtaddress.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Address!");
+            } else {
+                ps.setString(3, txtaddress.getText());
+            }
             int i = ps.executeUpdate();
             ps.close();
             if (i == 1) {
@@ -427,9 +439,22 @@ public class ClientRecord extends javax.swing.JFrame {
             ps = null;
             String query = "update clients set name = ?, phone_number = ?, address = ? where client_id = ?";
             ps = conn.prepareStatement(query);
-            ps.setString(1, txtname.getText());
-            ps.setString(2, txtphonenumber.getText());
-            ps.setString(3, txtaddress.getText());
+            if ((txtname.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Name!");
+            } else {
+                ps.setString(1, txtname.getText());
+            }
+            if ((txtphonenumber.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Phone Number!");
+            } else {
+                ps.setString(2, txtphonenumber.getText());
+            }
+            
+            if ((txtaddress.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Address!");
+            } else {
+                ps.setString(3, txtaddress.getText());
+            }
             int client_id = Integer.parseInt(txtclientid.getText());
             ps.setInt(4, client_id);
             int i = ps.executeUpdate();

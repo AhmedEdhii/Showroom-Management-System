@@ -180,6 +180,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
         jButton13 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         txtemployeeid = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
 
         jToolBar1.setRollover(true);
 
@@ -377,15 +378,23 @@ public class SalesPersonInventory extends javax.swing.JFrame {
         txtemployeeid.setBackground(new java.awt.Color(222, 226, 230));
         txtemployeeid.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
 
+        jButton6.setBackground(new java.awt.Color(226, 51, 53));
+        jButton6.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/update black (Custom).png"))); // NOI18N
+        jButton6.setText("Update");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -398,7 +407,6 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
-                            .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,7 +420,16 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                                 .addComponent(txtemployeeid))
                             .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtbuyerclientid, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(61, 61, 61)))
+                        .addGap(61, 61, 61))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jButton5)
+                                .addGap(26, 26, 26)
+                                .addComponent(jButton6)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -429,9 +446,9 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(txtchassisno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -458,11 +475,9 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                         .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10))
-                        .addGap(12, 12, 12))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel10)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(70, 70, 70)
@@ -480,7 +495,9 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                                     .addComponent(jLabel9)
                                     .addComponent(txtbuyerclientid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(41, 41, 41)
-                                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(24, 24, 24))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -677,6 +694,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                 txtsaleprice.setText(Integer.toString(rs.getInt(7)));
                 txtemployeeid.setText(Integer.toString(rs.getInt(8)));
                 txtbuyerclientid.setText(Integer.toString(rs.getInt(9)));
+                statusComboBox.setEnabled(false);
                 statusComboBox.setSelectedItem(rs.getString(10));
                 txtchassisno.requestFocus();
             } else {
@@ -703,16 +721,93 @@ public class SalesPersonInventory extends javax.swing.JFrame {
 
     private void statusComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusComboBoxActionPerformed
         // TODO add your handling code here:
-        String status = statusComboBox.getSelectedItem().toString();
-        if (status.equals("Sold")) {
-            txtemployeeid.setEnabled(true);
-            txtbuyerclientid.setEnabled(true);
-        }
-        if (status.equals("UnSold")) {
-            txtemployeeid.setEnabled(false);
-            txtbuyerclientid.setEnabled(false);
-        }
     }//GEN-LAST:event_statusComboBoxActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        try {
+            ps = null;
+            String query = "update used_cars set model = ?, engine_no = ?, manufactured_year = ?, cost_price = ?, sale_price = ?, Employee_id = ?, buyer_client_id = ?, statusOfCar = ? where chassis_no = ?";
+            ps = conn.prepareStatement(query);
+            if ((txtmodel.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Model No!");
+            } else {
+                ps.setString(1, txtmodel.getText());
+            }
+            if ((txtengineno.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Engine No!");
+            } else {
+                ps.setString(2, txtengineno.getText());
+            }
+            if ((txtyear.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Year of Model!");
+            } else {
+                ps.setInt(3, Integer.parseInt(txtyear.getText()));
+            }
+            if ((txtcostprice.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Cost Price!");
+            } else {
+                ps.setInt(4, Integer.parseInt(txtcostprice.getText()));
+            }
+            if ((txtsaleprice.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Sell Price!");
+            } else {
+                ps.setInt(5, Integer.parseInt(txtsaleprice.getText()));
+            }
+            String status = statusComboBox.getSelectedItem().toString();
+            if ((txtemployeeid.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Employee ID!");
+            }
+            if ((txtbuyerclientid.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Client ID!");
+            }
+            if (status.equals("Sold") && !(txtemployeeid.getText().equals("")) && !(txtbuyerclientid.getText().equals(""))) {
+                ps.setInt(6, Integer.parseInt(txtemployeeid.getText()));
+                ps.setInt(7, Integer.parseInt(txtbuyerclientid.getText()));
+            }
+            if (status.equals("UnSold") && !(txtemployeeid.getText().equals("")) && !(txtbuyerclientid.getText().equals(""))) {
+                ps.setString(6, null);
+                ps.setString(7, null);
+            }
+            ps.setString(8, status);
+            int chassis_no = Integer.parseInt(txtchassisno.getText());
+            ps.setInt(9, chassis_no);
+            int i = ps.executeUpdate();
+            ps.close();
+            //System.out.println("record updated");
+            if (i == 1) {
+                //onupdateCarSold(Integer.parseInt(txtemployeeid.getText()), statusComboBox.getSelectedItem().toString());
+                //onupdateCommission(Integer.parseInt(txtemployeeid.getText()));
+                updatetable();
+                JOptionPane.showMessageDialog(this, "Record Update!");
+                txtchassisno.setText("");
+                txtmodel.setText("");
+                txtengineno.setText("");
+                txtyear.setText("");
+                txtcostprice.setText("");
+                txtsaleprice.setText("");
+                txtemployeeid.setText("");
+                txtbuyerclientid.setText("");
+                statusComboBox.setSelectedIndex(0);
+                txtchassisno.requestFocus();
+            } else {
+                JOptionPane.showMessageDialog(this, "Record not Updated!");
+                txtchassisno.setText("");
+                txtmodel.setText("");
+                txtengineno.setText("");
+                txtyear.setText("");
+                txtcostprice.setText("");
+                txtsaleprice.setText("");
+                txtemployeeid.setText("");
+                txtbuyerclientid.setText("");
+                statusComboBox.setSelectedIndex(0);
+                txtchassisno.requestFocus();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -768,6 +863,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;

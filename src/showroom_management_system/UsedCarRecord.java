@@ -671,12 +671,36 @@ public class UsedCarRecord extends javax.swing.JFrame {
             ps = null;
             String query = "insert into used_cars (chassis_no, model, engine_no, manufactured_year, cost_price, sale_price, Employee_id, buyer_client_id, statusOfCar) values (?,?,?,?,?,?,?,?,?)";
             ps = conn.prepareStatement(query);
-            ps.setString(1, txtchassisno.getText());
-            ps.setString(2, txtmodel.getText());
-            ps.setString(3, txtengineno.getText());
-            ps.setInt(4, Integer.parseInt(txtyear.getText()));
-            ps.setInt(5, Integer.parseInt(txtcostprice.getText()));
-            ps.setInt(6, Integer.parseInt(txtsaleprice.getText()));
+            if ((txtchassisno.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Chassis No!");
+            } else {
+                ps.setString(1, txtchassisno.getText());
+            }
+            if ((txtmodel.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Model No!");
+            } else {
+                ps.setString(2, txtmodel.getText());
+            }
+            if ((txtengineno.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Engine No!");
+            } else {
+                ps.setString(3, txtengineno.getText());
+            }
+            if ((txtyear.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Year of Model!");
+            } else {
+                ps.setInt(4, Integer.parseInt(txtyear.getText()));
+            }
+            if ((txtcostprice.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Cost Price!");
+            } else {
+                ps.setInt(5, Integer.parseInt(txtcostprice.getText()));
+            }
+            if ((txtsaleprice.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Sell Price!");
+            } else {
+                ps.setInt(6, Integer.parseInt(txtsaleprice.getText()));
+            }
             String status = statusComboBox.getSelectedItem().toString();
             if ((txtemployeeid.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Employee ID!");
@@ -783,11 +807,31 @@ public class UsedCarRecord extends javax.swing.JFrame {
             ps = null;
             String query = "update used_cars set model = ?, engine_no = ?, manufactured_year = ?, cost_price = ?, sale_price = ?, Employee_id = ?, buyer_client_id = ?, statusOfCar = ? where chassis_no = ?";
             ps = conn.prepareStatement(query);
-            ps.setString(1, txtmodel.getText());
-            ps.setString(2, txtengineno.getText());
-            ps.setInt(3, Integer.parseInt(txtyear.getText()));
-            ps.setInt(4, Integer.parseInt(txtcostprice.getText()));
-            ps.setInt(5, Integer.parseInt(txtsaleprice.getText()));
+            if ((txtmodel.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Model No!");
+            } else {
+                ps.setString(1, txtmodel.getText());
+            }
+            if ((txtengineno.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Engine No!");
+            } else {
+                ps.setString(2, txtengineno.getText());
+            }
+            if ((txtyear.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Year of Model!");
+            } else {
+                ps.setInt(3, Integer.parseInt(txtyear.getText()));
+            }
+            if ((txtcostprice.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Cost Price!");
+            } else {
+                ps.setInt(4, Integer.parseInt(txtcostprice.getText()));
+            }
+            if ((txtsaleprice.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Sell Price!");
+            } else {
+                ps.setInt(5, Integer.parseInt(txtsaleprice.getText()));
+            }
             String status = statusComboBox.getSelectedItem().toString();
             if ((txtemployeeid.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Employee ID!");
@@ -851,10 +895,15 @@ public class UsedCarRecord extends javax.swing.JFrame {
             ps.setString(1, chassis_no);
             rs = ps.executeQuery();
             if (rs.next() == true) {
+                txtchassisno.setEnabled(false);
                 txtchassisno.setText(rs.getString(2));
+                txtmodel.setEnabled(false);
                 txtmodel.setText(rs.getString(3));
+                txtengineno.setEnabled(false);
                 txtengineno.setText(rs.getString(4));
+                txtyear.setEnabled(false);
                 txtyear.setText(Integer.toString(rs.getInt(5)));
+                txtcostprice.setEnabled(false);
                 txtcostprice.setText(Integer.toString(rs.getInt(6)));
                 txtsaleprice.setText(Integer.toString(rs.getInt(7)));
                 oldemployeeid = rs.getInt(8);

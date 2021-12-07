@@ -219,6 +219,11 @@ public class Invoice extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(250, 250, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/db project/walls/1/edits/white tick.svg.png"))); // NOI18N
         jButton1.setText("OK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/db project/walls/1/edits/toyota-logo.png"))); // NOI18N
 
@@ -325,6 +330,10 @@ public class Invoice extends javax.swing.JFrame {
     private void txtinvoicenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtinvoicenoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtinvoicenoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

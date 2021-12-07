@@ -34,15 +34,18 @@ public class BookingsRecord extends javax.swing.JFrame {
     ResultSet rs, rs1, rs2, rs3, rs4;
     int oldemployeeid;
     private int emp_id;
+    int totalcost;
 
     public BookingsRecord() {
         initComponents();
         updatetable();
+        txtpaymentleft.setEnabled(false);
     }
 
     public BookingsRecord(int emp_id) {
         initComponents();
         updatetable();
+        txtpaymentleft.setEnabled(false);
         this.emp_id = emp_id;
     }
 
@@ -152,12 +155,6 @@ public class BookingsRecord extends javax.swing.JFrame {
                 newcarsold = newcarsold + 1;
                 //System.out.println(newcarsold);
             }
-//            if condition not required
-//            if ((oldemployeeid == newemployeeID)) {
-//                System.out.println("second");
-//                //System.out.println(oldcarsold);
-//                //System.out.println(newcarsold);
-//            }
             ps1.setInt(1, newcarsold);
             ps1.setInt(2, newemployeeID);
             ps1.executeUpdate();
@@ -214,7 +211,6 @@ public class BookingsRecord extends javax.swing.JFrame {
     public void ondeleteRecord(int employeeID) {
         int oldcarsold = 0;
         int newcarsold = 0;
-        //String status = "Sold";
         try {
             String query = "update employees set CarsSold = ? where employee_id = ?";
             ps1 = conn.prepareStatement(query);
@@ -343,12 +339,22 @@ public class BookingsRecord extends javax.swing.JFrame {
 
         txtpaymentleft.setBackground(new java.awt.Color(222, 226, 230));
         txtpaymentleft.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        txtpaymentleft.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpaymentleftActionPerformed(evt);
+            }
+        });
 
         txtdeliverydate.setBackground(new java.awt.Color(222, 226, 230));
         txtdeliverydate.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
 
         txttotalcost.setBackground(new java.awt.Color(222, 226, 230));
         txttotalcost.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
+        txttotalcost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txttotalcostActionPerformed(evt);
+            }
+        });
 
         txtclientid.setBackground(new java.awt.Color(222, 226, 230));
         txtclientid.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
@@ -472,15 +478,19 @@ public class BookingsRecord extends javax.swing.JFrame {
                                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtpaymentleft, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                                    .addComponent(txtdeliverydate, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                                    .addComponent(txttotalcost, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                                    .addComponent(txtclientid, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                                    .addComponent(txtemployeeid, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                                    .addComponent(txtpaymentreceived)
-                                    .addComponent(txtchassisno)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtpaymentleft, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                                            .addComponent(txtdeliverydate, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                                            .addComponent(txtclientid, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                                            .addComponent(txtemployeeid, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                                            .addComponent(txtpaymentreceived)
+                                            .addComponent(txtchassisno)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txttotalcost, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(32, 32, 32)
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -507,56 +517,53 @@ public class BookingsRecord extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 21, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(txtchassisno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txttotalcost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtpaymentreceived, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtpaymentleft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtdeliverydate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(txtclientid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(txtemployeeid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(70, 70, 70))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(66, 66, 66)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(txtchassisno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(txtpaymentreceived, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(16, 16, 16)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(txtpaymentleft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(21, 21, 21)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(txtdeliverydate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(22, 22, 22)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(txttotalcost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(19, 19, 19)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(txtclientid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(19, 19, 19)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(txtemployeeid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(45, 45, 45))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(36, 36, 36)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton5)
-                                .addComponent(jButton6)
-                                .addComponent(jButton7))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(455, 455, 455)
-                        .addComponent(jButton1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton5)
+                            .addComponent(jButton6)
+                            .addComponent(jButton7))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(16, 16, 16))
         );
 
@@ -577,25 +584,49 @@ public class BookingsRecord extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        int totalcost = 0;
+        int paymentreceived = 0;
+        int paymentleft = 0;
         try {
             ps = null;
             String query = "insert into bookings (chassis_no, Payment_Received, payment_left, delivery_date, Cost_of_car, client_id, Employee_id) values (?,?,?,?,?,?,?)";
             ps = conn.prepareStatement(query);
-            ps.setString(1, txtchassisno.getText());
-            ps.setInt(2, Integer.parseInt(txtpaymentreceived.getText()));
-            ps.setInt(3, Integer.parseInt(txtpaymentleft.getText()));
-            ps.setString(4, txtdeliverydate.getText());
-            ps.setInt(5, Integer.parseInt(txttotalcost.getText()));
+            if ((txtchassisno.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Chassis No!");
+            } else {
+                ps.setString(1, txtchassisno.getText());
+            }
+
+            if ((txttotalcost.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Total Cost!");
+            } else {
+                totalcost = Integer.parseInt(txttotalcost.getText());
+                ps.setInt(5, totalcost);
+            }
+
+            if ((txtpaymentreceived.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Payment Received!");
+            } else {
+                paymentreceived = Integer.parseInt(txtpaymentreceived.getText());
+                ps.setInt(2, paymentreceived);
+            }
+
+            paymentleft = totalcost - paymentreceived;
+            ps.setInt(3, paymentleft);
+
+            if ((txtdeliverydate.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Delivery Date!");
+            } else {
+                ps.setString(4, txtdeliverydate.getText());
+            }
             if ((txtclientid.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Client ID!");
+            } else {
+                ps.setInt(6, Integer.parseInt(txtclientid.getText()));
             }
             if ((txtemployeeid.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Employee ID!");
-            }
-            if (!(txtclientid.getText().equals(""))) {
-                ps.setInt(6, Integer.parseInt(txtclientid.getText()));
-            }
-            if (!(txtemployeeid.getText().equals(""))) {
+            } else {
                 ps.setInt(7, Integer.parseInt(txtemployeeid.getText()));
             }
             int i = ps.executeUpdate();
@@ -615,7 +646,6 @@ public class BookingsRecord extends javax.swing.JFrame {
                 txtclientid.setText("");
                 txtemployeeid.setText("");
                 txtchassisno.requestFocus();
-
             } else {
                 JOptionPane.showMessageDialog(this, "Record not Added!");
                 txtchassisno.setText("");
@@ -628,7 +658,6 @@ public class BookingsRecord extends javax.swing.JFrame {
                 txtchassisno.requestFocus();
             }
             //System.out.println("Inserted");
-
         } catch (SQLException ex) {
             Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -679,23 +708,42 @@ public class BookingsRecord extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         try {
+            int totalcost = 0;
+            int paymentreceived = 0;
+            int paymentleft = 0;
             ps = null;
             String query = "update bookings set Payment_Received = ?, payment_left = ?, delivery_date = ?, Cost_of_car = ?, client_id = ?, Employee_id = ? where chassis_no = ?";
             ps = conn.prepareStatement(query);
-            ps.setInt(1, Integer.parseInt(txtpaymentreceived.getText()));
-            ps.setInt(2, Integer.parseInt(txtpaymentleft.getText()));
-            ps.setString(3, txtdeliverydate.getText());
-            ps.setInt(4, Integer.parseInt(txttotalcost.getText()));
+            if ((txttotalcost.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Total Cost!");
+            } else {
+                totalcost = Integer.parseInt(txttotalcost.getText());
+                ps.setInt(4, totalcost);
+            }
+
+            if ((txtpaymentreceived.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Payment Received!");
+            } else {
+                paymentreceived = Integer.parseInt(txtpaymentreceived.getText());
+                ps.setInt(1, paymentreceived);
+            }
+
+            paymentleft = totalcost - paymentreceived;
+            ps.setInt(2, paymentleft);
+
+            if ((txtdeliverydate.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Delivery Date!");
+            } else {
+                ps.setString(3, txtdeliverydate.getText());
+            }
             if ((txtclientid.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Client ID!");
+            } else {
+                ps.setInt(5, Integer.parseInt(txtclientid.getText()));
             }
             if ((txtemployeeid.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Employee ID!");
-            }
-            if (!(txtclientid.getText().equals(""))) {
-                ps.setInt(5, Integer.parseInt(txtclientid.getText()));
-            }
-            if (!(txtemployeeid.getText().equals(""))) {
+            } else {
                 ps.setInt(6, Integer.parseInt(txtemployeeid.getText()));
             }
             int chassis_no = Integer.parseInt(txtchassisno.getText());
@@ -742,12 +790,14 @@ public class BookingsRecord extends javax.swing.JFrame {
             ps.setString(1, chassis_no);
             rs = ps.executeQuery();
             if (rs.next() == true) {
+                txtchassisno.setEnabled(false);
                 txtchassisno.setText(rs.getString(1));
                 txtpaymentreceived.setText(rs.getString(2));
                 txtpaymentleft.setText(rs.getString(3));
                 String strDate = dateFormat.format(rs.getDate(4));
                 txtdeliverydate.setText(strDate);
                 txttotalcost.setText(rs.getString(5));
+                txttotalcost.setEnabled(false);
                 txtclientid.setText(Integer.toString(rs.getInt(6)));
                 oldemployeeid = rs.getInt(7);
                 txtemployeeid.setText(Integer.toString(oldemployeeid));
@@ -771,6 +821,17 @@ public class BookingsRecord extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtpaymentleftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpaymentleftActionPerformed
+        // TODO add your handling code here:
+        txtpaymentleft.setEnabled(false);
+    }//GEN-LAST:event_txtpaymentleftActionPerformed
+
+    private void txttotalcostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttotalcostActionPerformed
+        // TODO add your handling code here:
+        totalcost = Integer.parseInt(txttotalcost.getText());
+        System.out.println(totalcost);
+    }//GEN-LAST:event_txttotalcostActionPerformed
 
     /**
      * @param args the command line arguments

@@ -60,7 +60,6 @@ public class UsedCarRecord extends javax.swing.JFrame {
             while (rs.next()) {
                 Vector v2 = new Vector();
                 for (int i = 0; i <= j; i++) {
-                    v2.add(rs.getString("used_car_id"));
                     v2.add(rs.getString("chassis_no"));
                     v2.add(rs.getString("model"));
                     v2.add(rs.getString("engine_no"));
@@ -302,17 +301,17 @@ public class UsedCarRecord extends javax.swing.JFrame {
 
         usedCarsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "ChassisNo", "Model", "EngineNo", "Year", "Cost Price", "Sale Price", "EmployeeID", "Buyer Client ID", "Status"
+                "ChassisNo", "Model", "EngineNo", "Year", "Cost Price", "Sale Price", "EmployeeID", "Buyer Client ID", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -757,6 +756,7 @@ public class UsedCarRecord extends javax.swing.JFrame {
             }
             //System.out.println("Inserted");
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Chassis No must be unique!");
             Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton5ActionPerformed

@@ -55,7 +55,6 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
             while (rs.next()) {
                 Vector v2 = new Vector();
                 for (int i = 0; i <= j; i++) {
-                    v2.add(rs.getString("used_car_id"));
                     v2.add(rs.getString("chassis_no"));
                     v2.add(rs.getString("model"));
                     v2.add(rs.getString("engine_no"));
@@ -350,17 +349,17 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
 
         usedCarsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "ChassisNo", "Model", "EngineNo", "Year", "Cost Price", "Sale Price", "EmployeeID", "Buyer Client ID", "Status"
+                "ChassisNo", "Model", "EngineNo", "Year", "Cost Price", "Sale Price", "EmployeeID", "Buyer Client ID", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -369,8 +368,8 @@ public class adminDashboardUsedCars extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(usedCarsTable);
         if (usedCarsTable.getColumnModel().getColumnCount() > 0) {
-            usedCarsTable.getColumnModel().getColumn(3).setResizable(false);
-            usedCarsTable.getColumnModel().getColumn(9).setResizable(false);
+            usedCarsTable.getColumnModel().getColumn(2).setResizable(false);
+            usedCarsTable.getColumnModel().getColumn(8).setResizable(false);
         }
 
         jButton1.setText("Edit");

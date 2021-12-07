@@ -247,11 +247,7 @@ public class ContactUs extends javax.swing.JFrame {
             }
             else{
                 ps.setString(4, Question.toString());
-            }
-           
-           
-           
-           
+            }      
             int i = ps.executeUpdate();
             ps.close();
             if (i == 1) {

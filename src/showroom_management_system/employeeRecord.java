@@ -534,14 +534,47 @@ public class employeeRecord extends javax.swing.JFrame {
             ps = null;
             String query = "insert into employees (name, phone_number, Address, salary, password, CarsSold, Commission, dept_id) values (?,?,?,?,?,?,?,?)";
             ps = conn.prepareStatement(query);
-            ps.setString(1, txtname.getText());
-            ps.setString(2, txtphonenumber.getText());
-            ps.setString(3, txtaddress.getText());
-            ps.setInt(4, Integer.parseInt(txtsalary.getText()));
-            ps.setString(5, txtpassword.getText());
+            if ((txtname.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Name!");
+            } else {
+                ps.setString(1, txtname.getText());
+            }
+            if ((txtphonenumber.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Phone Number!");
+            } else {
+                ps.setString(2, txtphonenumber.getText());
+            }
+            
+            if ((txtaddress.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Address!");
+            } else {
+                ps.setString(3, txtaddress.getText());
+            }
+            if ((txtsalary.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Salary!");
+            } else {
+                ps.setInt(4, Integer.parseInt(txtsalary.getText()));
+            }
+            if ((txtpassword.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Password!");
+            } else {
+              ps.setString(5, txtpassword.getText());
+            }
+            if ((txtcarssold.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Cars sold!");
+            } else {
             ps.setInt(6, Integer.parseInt(txtcarssold.getText()));
+            }
+            if ((txtcomission.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Comission!");
+            } else {
             ps.setInt(7, Integer.parseInt(txtcomission.getText()));
+            }
+            if ((txtdepartmentid.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Deparment ID!");
+            } else {
             ps.setInt(8, Integer.parseInt(txtdepartmentid.getText()));
+            }
             int i = ps.executeUpdate();
             ps.close();
             if (i == 1) {
@@ -595,15 +628,47 @@ public class employeeRecord extends javax.swing.JFrame {
         try {
             ps = null;
             String query = "update employees set name = ?, phone_number = ?, Address = ?, salary = ?, password = ?, CarsSold = ?, Commission = ?, dept_id = ? where Employee_id = ?";
-            ps = conn.prepareStatement(query);
-            ps.setString(1, txtname.getText());
-            ps.setString(2, txtphonenumber.getText());
-            ps.setString(3, txtaddress.getText());
-            ps.setInt(4, Integer.parseInt(txtsalary.getText()));
-            ps.setString(5, txtpassword.getText());
+            if ((txtname.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Name!");
+            } else {
+                ps.setString(1, txtname.getText());
+            }
+            if ((txtphonenumber.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Phone Number!");
+            } else {
+                ps.setString(2, txtphonenumber.getText());
+            }
+            
+            if ((txtaddress.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Address!");
+            } else {
+                ps.setString(3, txtaddress.getText());
+            }
+            if ((txtsalary.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Salary!");
+            } else {
+                ps.setInt(4, Integer.parseInt(txtsalary.getText()));
+            }
+            if ((txtpassword.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Password!");
+            } else {
+              ps.setString(5, txtpassword.getText());
+            }
+            if ((txtcarssold.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Cars sold!");
+            } else {
             ps.setInt(6, Integer.parseInt(txtcarssold.getText()));
+            }
+            if ((txtcomission.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Comission!");
+            } else {
             ps.setInt(7, Integer.parseInt(txtcomission.getText()));
+            }
+            if ((txtdepartmentid.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Deparment ID!");
+            } else {
             ps.setInt(8, Integer.parseInt(txtdepartmentid.getText()));
+            }
             int employee_id = Integer.parseInt(txtemployeeid.getText());
             ps.setInt(9, employee_id);
             int i = ps.executeUpdate();

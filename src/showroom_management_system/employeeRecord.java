@@ -29,8 +29,8 @@ public class employeeRecord extends javax.swing.JFrame {
      */
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
-    PreparedStatement ps,ps1;
-    ResultSet rs,rs1;
+    PreparedStatement ps, ps1;
+    ResultSet rs, rs1;
 
     private int emp_id;
 
@@ -41,8 +41,8 @@ public class employeeRecord extends javax.swing.JFrame {
 
     public employeeRecord(int emp_id) {
         initComponents();
-        updatetable();
         this.emp_id = emp_id;
+        updatetable();
     }
 
     private void updatetable() {

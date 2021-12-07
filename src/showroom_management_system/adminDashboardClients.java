@@ -30,20 +30,19 @@ public class adminDashboardClients extends javax.swing.JFrame {
     Connection conn = app.getConnection();
     PreparedStatement ps;
     ResultSet rs;
-    
     private int emp_id;
-    
+
     public adminDashboardClients() {
         initComponents();
         updatetable();
     }
-    
+
     public adminDashboardClients(int emp_id) {
         initComponents();
+        this.emp_id = emp_id;
         updatetable();
-        this.emp_id=emp_id;
     }
-    
+
     private void updatetable() {
         try {
             ps = conn.prepareStatement("select * from clients");
@@ -431,7 +430,7 @@ public class adminDashboardClients extends javax.swing.JFrame {
 
     private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
         // TODO add your handling code here:
-        employeesPanel.setBackground(new Color(192,0,0));
+        employeesPanel.setBackground(new Color(192, 0, 0));
     }//GEN-LAST:event_jLabel1MouseExited
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
@@ -447,7 +446,7 @@ public class adminDashboardClients extends javax.swing.JFrame {
 
     private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
         // TODO add your handling code here:
-        bookingsPanel.setBackground(new Color(192,0,0));
+        bookingsPanel.setBackground(new Color(192, 0, 0));
     }//GEN-LAST:event_jLabel2MouseExited
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
@@ -463,7 +462,7 @@ public class adminDashboardClients extends javax.swing.JFrame {
 
     private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
         // TODO add your handling code here:
-        usedCarsPanel.setBackground(new Color(192,0,0));
+        usedCarsPanel.setBackground(new Color(192, 0, 0));
     }//GEN-LAST:event_jLabel3MouseExited
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
@@ -479,7 +478,7 @@ public class adminDashboardClients extends javax.swing.JFrame {
 
     private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
         // TODO add your handling code here:
-        servicesPanel.setBackground(new Color(192,0,0));
+        servicesPanel.setBackground(new Color(192, 0, 0));
     }//GEN-LAST:event_jLabel4MouseExited
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
@@ -495,7 +494,7 @@ public class adminDashboardClients extends javax.swing.JFrame {
 
     private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
         // TODO add your handling code here:
-        clientsPanel.setBackground(new Color(192,0,0));
+        clientsPanel.setBackground(new Color(192, 0, 0));
     }//GEN-LAST:event_jLabel5MouseExited
 
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed

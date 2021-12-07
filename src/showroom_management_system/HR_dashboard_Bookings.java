@@ -39,9 +39,8 @@ public class HR_dashboard_Bookings extends javax.swing.JFrame {
 
     public HR_dashboard_Bookings(int emp_id) {
         initComponents();
-        updatetable();
         this.emp_id = emp_id;
-
+        updatetable();
     }
 
     private void updatetable() {

@@ -39,8 +39,8 @@ public class adminDashboardEmployee extends javax.swing.JFrame {
 
     public adminDashboardEmployee(int emp_id) {
         initComponents();
-        updatetable();
         this.emp_id = emp_id;
+        updatetable();
     }
 
     private void updatetable() {

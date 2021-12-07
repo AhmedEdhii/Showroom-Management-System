@@ -41,13 +41,13 @@ public class SalePersonDashboardBookings extends javax.swing.JFrame {
         initComponents();
         this.emp_id = emp_id;
         updatetable();
-        System.out.println(".." + emp_id);
+        //System.out.println(".." + emp_id);
     }
 
     private void updatetable() {
         try {
             ps = conn.prepareStatement("select * from bookings where employee_id = ?");
-            System.out.println(" uiri" + emp_id);
+            //System.out.println("z" + emp_id);
             ps.setInt(1, emp_id);
             rs = ps.executeQuery();
             ResultSetMetaData rsd = rs.getMetaData();

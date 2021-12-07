@@ -28,8 +28,8 @@ public class UsedCarRecord extends javax.swing.JFrame {
      */
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
-    PreparedStatement ps, ps1, ps2, ps3, ps4, ps5,ps6;
-    ResultSet rs, rs1, rs2, rs3, rs4, rs5,rs6;
+    PreparedStatement ps, ps1, ps2, ps3, ps4, ps5, ps6;
+    ResultSet rs, rs1, rs2, rs3, rs4, rs5, rs6;
     int oldemployeeid;
     String oldstatus;
     private int emp_id;
@@ -43,10 +43,10 @@ public class UsedCarRecord extends javax.swing.JFrame {
 
     public UsedCarRecord(int emp_id) {
         initComponents();
-        updatetable();
         txtemployeeid.setEnabled(false);
         txtbuyerclientid.setEnabled(false);
         this.emp_id = emp_id;
+        updatetable();
     }
 
     private void updatetable() {
@@ -950,7 +950,7 @@ public class UsedCarRecord extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         int dept_id = -1;
+        int dept_id = -1;
         try {
             ps6 = conn.prepareStatement("select dept_id from employees where employee_id = ?");
             ps6.setInt(1, emp_id);

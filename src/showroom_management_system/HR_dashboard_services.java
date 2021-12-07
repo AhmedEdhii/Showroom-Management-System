@@ -25,7 +25,6 @@ public class HR_dashboard_services extends javax.swing.JFrame {
     public HR_dashboard_services(int emp_id) {
         initComponents();
         this.emp_id = emp_id;
-
     }
 
     /**

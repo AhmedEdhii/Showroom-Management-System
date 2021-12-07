@@ -658,6 +658,7 @@ public class BookingsRecord extends javax.swing.JFrame {
             }
             //System.out.println("Inserted");
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Chassis No must be unique!");
             Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
 

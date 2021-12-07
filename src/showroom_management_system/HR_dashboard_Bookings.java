@@ -163,7 +163,7 @@ public class HR_dashboard_Bookings extends javax.swing.JFrame {
         jLabel3.setBackground(new java.awt.Color(192, 0, 0));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("SERVICE");
+        jLabel3.setText("SERVICES");
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel3MouseEntered(evt);

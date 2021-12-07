@@ -263,50 +263,42 @@ public class BookingForm extends javax.swing.JFrame {
         //System.out.println(selectModelComboBox.getSelectedIndex());
         try {
             ps = null;
-            String query = "insert into bookingForm (name, phone_number, email, address, model ,color) values (?,?,?,?,?,?)";
+            String query = "insert into bookingForm (name, phone_number, email, address, model, color) values (?,?,?,?,?,?)";
             ps = conn.prepareStatement(query);
-            
-            if(txtname.getText().equals("")){
-                 JOptionPane.showMessageDialog(this, "Please enter Name!");
+
+            if (txtname.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter Name!");
+            } else {
+                ps.setString(1, txtname.getText());
             }
-            else{
-                 ps.setString(1, txtname.getText());
+            if (txtphonenumber.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter Phone Number!");
+            } else {
+                ps.setString(2, txtphonenumber.getText());
             }
-           if(txtphonenumber.getText().equals("")){
-                 JOptionPane.showMessageDialog(this, "Please enter Phone Number!");
-           }
-           else{
-               ps.setString(2, txtphonenumber.getText());
-           }
-           if(txtemail.getText().equals("")){
-                  JOptionPane.showMessageDialog(this, "Please enter Email!");
-             }
-           else{
-               ps.setString(3, txtemail.getText());
-           }
-           if(txtaddress.getText().equals("")){
-                  JOptionPane.showMessageDialog(this, "Please enter Address!");
-             }
-           else{
-               ps.setString(4, txtaddress.getText());
-           }  
-            
-           
+            if (txtemail.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter Email!");
+            } else {
+                ps.setString(3, txtemail.getText());
+            }
+            if (txtaddress.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter Address!");
+            } else {
+                ps.setString(4, txtaddress.getText());
+            }
             if (selectModelComboBox.getSelectedItem() == "Select Model") {
                 JOptionPane.showMessageDialog(this, "Please select a model");
 
             } else {
-                ps.setString(5, (String) selectModelComboBox.getSelectedItem());
+                ps.setString(5, selectModelComboBox.getSelectedItem().toString());
             }
             if (selectcolorComboBox.getSelectedItem() == "Select Color") {
-                ps.setString(6, null);
+                //ps.setString(6, null);
                 JOptionPane.showMessageDialog(this, "Please select a color");
             } else {
-                ps.setString(6, (String) selectcolorComboBox.getSelectedItem());
+                ps.setString(6, selectcolorComboBox.getSelectedItem().toString());
             }
             //boolean loop_end = false;
-
-
             /*   if (selectModelComboBox.getSelectedItem() != "Select Model" && selectcolorComboBox.getSelectedItem() != "Select Color") {
                     ps.setString(5, (String) selectModelComboBox.getSelectedItem());
                     ps.setString(6, (String) selectcolorComboBox.getSelectedItem());
@@ -336,8 +328,10 @@ public class BookingForm extends javax.swing.JFrame {
                 txtname.requestFocus();
             }
         } catch (SQLException ex) {
-            //Logger.getLogger(ContactUs.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Error! Email must contain @");
+            Logger.getLogger(ContactUs.class.getName()).log(Level.SEVERE, null, ex);
+            if (!txtemail.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Error! Email must contain @");
+            }
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -6,6 +6,15 @@
 package showroom_management_system;
 
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,15 +25,47 @@ public class HR_dashboard_services extends javax.swing.JFrame {
     /**
      * Creates new form adminDashboard
      */
+    showroomManagementSystem app = new showroomManagementSystem();
+    Connection conn = app.getConnection();
+    PreparedStatement ps;
+    ResultSet rs;
     private int emp_id;
 
     public HR_dashboard_services() {
         initComponents();
+        updatetable();
     }
 
     public HR_dashboard_services(int emp_id) {
         initComponents();
         this.emp_id = emp_id;
+        updatetable();
+    }
+
+    private void updatetable() {
+        try {
+            ps = conn.prepareStatement("select * from  bookingForm");
+            rs = ps.executeQuery();
+            ResultSetMetaData rsd = rs.getMetaData();
+            int j = rsd.getColumnCount();
+            DefaultTableModel dft = (DefaultTableModel) ServiceTable.getModel();
+            dft.setRowCount(0);
+            while (rs.next()) {
+                Vector v2 = new Vector();
+                for (int i = 0; i <= j; i++) {
+                    v2.add(rs.getString("ServiceForm_id"));
+                    v2.add(rs.getString("name"));
+                    v2.add(rs.getString("email"));
+                    v2.add(rs.getString("phone_number"));
+                    v2.add(rs.getString("service_required"));
+                    v2.add(rs.getString("answered"));
+                }
+                dft.addRow(v2);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(HR_service_records.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -48,7 +89,7 @@ public class HR_dashboard_services extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        bookingsTable = new javax.swing.JTable();
+        ServiceTable = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
@@ -204,26 +245,26 @@ public class HR_dashboard_services extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(232, 232, 232));
 
-        bookingsTable.setModel(new javax.swing.table.DefaultTableModel(
+        ServiceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ChesisNo", "PaymentReceived", "PaymentLeft", "DeliveryDate", "TotalCostOfCar", "ClientID", "Employee ID"
+                "ID", "Name", "Email", "Phone Number", "Service Required", "Answered"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(bookingsTable);
+        jScrollPane1.setViewportView(ServiceTable);
 
         jButton2.setText("Back");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -492,8 +533,8 @@ public class HR_dashboard_services extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable ServiceTable;
     private javax.swing.JPanel bookingsPanel;
-    private javax.swing.JTable bookingsTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

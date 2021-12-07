@@ -272,7 +272,7 @@
               <Font name="Times New Roman" size="48" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Service Records"/>
+            <Property name="text" type="java.lang.String" value="Booking Forms"/>
             <Property name="verticalAlignment" type="int" value="3"/>
           </Properties>
         </Component>

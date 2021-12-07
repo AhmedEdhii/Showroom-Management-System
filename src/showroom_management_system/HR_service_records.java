@@ -9,9 +9,12 @@ package showroom_management_system;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -49,10 +52,25 @@ public class HR_service_records extends javax.swing.JFrame {
         try {
             ps = conn.prepareStatement("select * from  bookingForm");
             rs = ps.executeQuery();
-            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+            ResultSetMetaData rsd = rs.getMetaData();
+            int j = rsd.getColumnCount();
+            DefaultTableModel dft = (DefaultTableModel) jTable1.getModel();
+            dft.setRowCount(0);
+            while (rs.next()) {
+                Vector v2 = new Vector();
+                for (int i = 0; i <= j; i++) {
+                    v2.add(rs.getString("ServiceForm_id"));
+                    v2.add(rs.getString("name"));
+                    v2.add(rs.getString("email"));
+                    v2.add(rs.getString("phone_number"));
+                    v2.add(rs.getString("service_required"));
+                    v2.add(rs.getString("answered"));
+                }
+                dft.addRow(v2);
+            }
             ps.close();
         } catch (SQLException ex) {
-            Logger.getLogger(employeeRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HR_service_records.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -102,23 +120,23 @@ public class HR_service_records extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "Phone Number", "Email", "Address", "Model", "Color", "Answered"
+                "ID", "Name", "Email", "Phone Number", "Service Required", "Answered"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, true, true, true, false, true, true
+                true, true, true, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {

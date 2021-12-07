@@ -127,7 +127,7 @@ public class cust_service extends javax.swing.JFrame {
         jComboBox1.setBackground(new java.awt.Color(222, 226, 230));
         jComboBox1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(40, 40, 48));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Service", "Oil Change", "Basic Maintennace ", "General Maintennace", "Check Up", "Parts Replacement", "Denting and Painting", "Detailing", "Brake Service", " " }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Service", "Oil Change", "Basic Maintennace ", "General Maintennace", "Check Up", "Parts Replacement", "Denting and Painting", "Detailing", "Brake Service" }));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/db project/walls/1/edits/toyota-logo.png"))); // NOI18N
 
@@ -227,12 +227,28 @@ public class cust_service extends javax.swing.JFrame {
 
         try {
             ps = null;
-            String query = "insert into cust_service (name, phone_number, email, address,type_of_service) values (?,?,?,?) ";
+            String query = "insert into ServiceForm (name, email, phone_number, service_required) values (?,?,?,?) ";
             ps = conn.prepareStatement(query);
-            ps.setString(1, Name.getText());
-            ps.setString(2, PhoneNumber.getText());
-            ps.setString(3, Email.getText());
-            ps.setString(4, jComboBox1.getSelectedItem().toString());
+            if (Name.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter Name!");
+            } else {
+                ps.setString(1, Name.getText());
+            }
+            if (Email.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter Email!");
+            } else {
+                ps.setString(2, Email.getText());
+            }
+            if (PhoneNumber.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Please enter Phone Number!");
+            } else {
+                ps.setString(3, PhoneNumber.getText());
+            }
+            if (jComboBox1.getSelectedItem() == "Select Service") {
+                JOptionPane.showMessageDialog(this, "Please select the Service Required!");
+            } else {
+                ps.setString(4, jComboBox1.getSelectedItem().toString());
+            }
             int i = ps.executeUpdate();
             ps.close();
             if (i == 1) {
@@ -243,6 +259,9 @@ public class cust_service extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(ContactUs.class.getName()).log(Level.SEVERE, null, ex);
+            if (!Email.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Error! Email must contain @");
+            }
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed

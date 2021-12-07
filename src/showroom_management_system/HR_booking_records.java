@@ -193,7 +193,7 @@ public class HR_booking_records extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Service Records");
+        jLabel5.setText("Booking Forms");
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jButton2.setBackground(new java.awt.Color(226, 51, 53));

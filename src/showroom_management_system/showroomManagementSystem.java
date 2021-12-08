@@ -8,6 +8,8 @@ package showroom_management_system;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,21 +18,22 @@ import java.sql.SQLException;
 public class showroomManagementSystem {
 
     Connection conn;
-
     static int i = 0;
 
     public Connection getConnection() {
-
         String url = "jdbc:mysql://localhost:3306/DbProject";
         String username = "root";
-        //String password = "IBA@2244";
         String password = "";
+        //String password = "IBA@2244";
         try {
             conn = DriverManager.getConnection(url, username, password);
-            System.out.println("Connected");
+            if (i == 0) {
+                System.out.println("Database Connected");
+                i++;
+            }
         } catch (SQLException ex) {
-            System.out.println("Oops");
-            ex.printStackTrace();
+            System.out.println("Database not connected");
+            Logger.getLogger(showroomManagementSystem.class.getName()).log(Level.SEVERE, null, ex);
         }
         return conn;
     }

@@ -58,6 +58,7 @@ public class adminDashboard extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(960, 540));
 
         jPanel1.setBackground(new java.awt.Color(52, 59, 64));
 

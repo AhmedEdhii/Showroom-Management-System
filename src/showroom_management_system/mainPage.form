@@ -99,10 +99,13 @@
                   <Connection code="new java.awt.Color(0.0f, 0.0f, 0.0f,0.0f)" type="code"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Times New Roman" size="20" style="1"/>
+                  <Font name="Segoe UI" size="20" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/db project/walls/1/edits/used car.png"/>
+                  <Image iconType="3" name="/images/car (1) (Custom).png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Used Cars"/>
               </Properties>
@@ -116,10 +119,13 @@
                   <Connection code="new java.awt.Color(0.0f, 0.0f, 0.0f,0.0f)" type="code"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Times New Roman" size="20" style="1"/>
+                  <Font name="Segoe UI" size="20" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/db project/walls/1/edits/booking.jpg"/>
+                  <Image iconType="3" name="/images/booking (2) (Custom).png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Booking"/>
               </Properties>
@@ -133,10 +139,13 @@
                   <Connection code="new java.awt.Color(0.0f, 0.0f, 0.0f,0.0f)" type="code"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Times New Roman" size="20" style="1"/>
+                  <Font name="Segoe UI" size="20" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/db project/walls/1/edits/contact us.png"/>
+                  <Image iconType="3" name="/images/contact (Custom).png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="About Us"/>
               </Properties>
@@ -150,10 +159,13 @@
                   <Connection code="new java.awt.Color(0.0f, 0.0f, 0.0f,0.0f)" type="code"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Times New Roman" size="20" style="1"/>
+                  <Font name="Segoe UI" size="20" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/db project/walls/1/edits/service.png"/>
+                  <Image iconType="3" name="/images/repair-tools.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Service Car"/>
               </Properties>
@@ -164,13 +176,13 @@
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Times New Roman" size="36" style="1"/>
+                  <Font name="Segoe UI" size="36" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="e8" green="e5" red="fd" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Clifton Motors"/>
+                <Property name="text" type="java.lang.String" value="Currie Motors"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
@@ -180,10 +192,13 @@
                   <Connection code="new java.awt.Color(0.0f, 0.0f, 0.0f,0.0f)" type="code"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Times New Roman" size="20" style="1"/>
+                  <Font name="Segoe UI" size="20" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/db project/walls/1/edits/log.png"/>
+                  <Image iconType="3" name="/images/login (1) (Custom).png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Login"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>

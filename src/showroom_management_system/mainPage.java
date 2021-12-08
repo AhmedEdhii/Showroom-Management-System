@@ -50,8 +50,9 @@ public class mainPage extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(212, 80, 83));
 
         jButton2.setBackground(new java.awt.Color(0.0f, 0.0f, 0.0f,0.0f));
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/db project/walls/1/edits/used car.png"))); // NOI18N
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/car (1) (Custom).png"))); // NOI18N
         jButton2.setText("Used Cars");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,8 +61,9 @@ public class mainPage extends javax.swing.JFrame {
         });
 
         jButton3.setBackground(new java.awt.Color(0.0f, 0.0f, 0.0f,0.0f));
-        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/db project/walls/1/edits/booking.jpg"))); // NOI18N
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/booking (2) (Custom).png"))); // NOI18N
         jButton3.setText("Booking");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,8 +72,9 @@ public class mainPage extends javax.swing.JFrame {
         });
 
         jButton5.setBackground(new java.awt.Color(0.0f, 0.0f, 0.0f,0.0f));
-        jButton5.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/db project/walls/1/edits/contact us.png"))); // NOI18N
+        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/contact (Custom).png"))); // NOI18N
         jButton5.setText("About Us");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,8 +83,9 @@ public class mainPage extends javax.swing.JFrame {
         });
 
         jButton4.setBackground(new java.awt.Color(0.0f, 0.0f, 0.0f,0.0f));
-        jButton4.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/db project/walls/1/edits/service.png"))); // NOI18N
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/repair-tools.png"))); // NOI18N
         jButton4.setText("Service Car");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,15 +93,16 @@ public class mainPage extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(253, 229, 232));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Clifton Motors");
+        jLabel1.setText("Currie Motors");
         jLabel1.setToolTipText("");
 
         jButton1.setBackground(new java.awt.Color(0.0f, 0.0f, 0.0f,0.0f));
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/db project/walls/1/edits/log.png"))); // NOI18N
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login (1) (Custom).png"))); // NOI18N
         jButton1.setText("Login");
         jButton1.setToolTipText("");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

@@ -25,8 +25,8 @@ public class InvoiceGenerator extends javax.swing.JFrame {
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
     PreparedStatement ps;
-    PreparedStatement ps1, ps2, ps3, ps4, ps5;
-    ResultSet rs, rs5;
+    PreparedStatement ps1, ps2, ps3, ps4, ps5, ps6;
+    ResultSet rs, rs5, rs6;
     private int emp_id;
     private int client_id;
     private int invoiceno;
@@ -43,6 +43,26 @@ public class InvoiceGenerator extends javax.swing.JFrame {
 
     public static float getBOTTOM_ALIGNMENT() {
         return BOTTOM_ALIGNMENT;
+    }
+
+    public boolean servicesEmployeeID(int employee_id) {
+        int dept_id = -1;
+        try {
+            String query = "select dept_id from employees where employee_id =?";
+            ps6 = conn.prepareStatement(query);
+            ps6.setInt(1, employee_id);
+            rs6 = ps6.executeQuery();
+            if (rs6.next()) {
+                dept_id = rs6.getInt(1);
+            }
+            if (dept_id != 2) {
+                JOptionPane.showMessageDialog(this, "Employee must belong to Services Department!");
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InvoiceGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
     }
 
     /**
@@ -431,7 +451,7 @@ public class InvoiceGenerator extends javax.swing.JFrame {
             }
             if ((txtmechanicid.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Mechanic ID!");
-            } else {
+            } else if (servicesEmployeeID(Integer.parseInt(txtmechanicid.getText()))) {
                 ps.setString(2, txtmechanicid.getText());
             }
             ps.setDate(3, new java.sql.Date(new java.util.Date().getTime()));

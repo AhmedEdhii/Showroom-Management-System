@@ -25,18 +25,18 @@ public class InvoiceGenerator extends javax.swing.JFrame {
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
     PreparedStatement ps;
-    PreparedStatement ps1, ps2, ps3, ps4,ps5;
-    ResultSet rs,rs5;
+    PreparedStatement ps1, ps2, ps3, ps4, ps5;
+    ResultSet rs, rs5;
     private int emp_id;
+
     public InvoiceGenerator() {
         initComponents();
     }
-    
+
     public InvoiceGenerator(int emp_id) {
         initComponents();
-        this.emp_id=emp_id;
+        this.emp_id = emp_id;
     }
-
 
     int client_id;
     int invoiceno;
@@ -422,10 +422,22 @@ public class InvoiceGenerator extends javax.swing.JFrame {
             String query5 = "update service set Total_Cost = ? where Invoice_No = ?";
             ps4 = conn.prepareStatement(query5);
 
-            ps.setInt(1, Integer.parseInt(txtclientid.getText()));
-            ps.setInt(2, Integer.parseInt(txtmechanicid.getText()));
+            if ((txtclientid.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Client ID!");
+            } else {
+                ps.setString(1, txtclientid.getText());
+            }
+            if ((txtmechanicid.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Mechanic ID!");
+            } else {
+                ps.setString(2, txtmechanicid.getText());
+            }
             ps.setDate(3, new java.sql.Date(new java.util.Date().getTime()));
-            ps.setString(4, txtchassisno.getText());
+            if ((txtchassisno.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Chassis No!");
+            } else {
+                ps.setString(4, txtchassisno.getText());
+            }
             ps.setInt(5, 0);
             ps.executeUpdate();
             rs = ps3.executeQuery();
@@ -682,7 +694,6 @@ public class InvoiceGenerator extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-                
         int dept_id = -1;
         try {
             ps5 = conn.prepareStatement("select dept_id from employees where employee_id = ?");
@@ -693,7 +704,6 @@ public class InvoiceGenerator extends javax.swing.JFrame {
                 dept_id = rs5.getInt("dept_id");
 
             }
-
             ps5.close();
             if (dept_id == 0) {
                 new adminDashboard(emp_id).setVisible(true);

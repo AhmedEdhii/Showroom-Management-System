@@ -290,6 +290,7 @@ public class BookingsRecord extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(250, 250, 255));
 
@@ -606,6 +607,7 @@ public class BookingsRecord extends javax.swing.JFrame {
         int totalcost = 0;
         int paymentreceived = 0;
         int paymentleft = 0;
+        int i = 0;
         try {
             ps = null;
             String query = "insert into bookings (chassis_no, Payment_Received, payment_left, delivery_date, Cost_of_car, client_id, Employee_id) values (?,?,?,?,?,?,?)";
@@ -645,11 +647,8 @@ public class BookingsRecord extends javax.swing.JFrame {
             }
             if ((txtemployeeid.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Employee ID!");
-            } else {
+            } else if (salesEmployeeID(Integer.parseInt(txtemployeeid.getText()))) {
                 ps.setInt(7, Integer.parseInt(txtemployeeid.getText()));
-            }
-            int i = 0;
-            if (salesEmployeeID(Integer.parseInt(txtemployeeid.getText()))) {
                 i = ps.executeUpdate();
             }
             ps.close();
@@ -681,7 +680,9 @@ public class BookingsRecord extends javax.swing.JFrame {
             }
             //System.out.println("Inserted");
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            if (ex.getMessage().split(" ")[0].equals("Duplicate")) {
+                JOptionPane.showMessageDialog(this, "Chassis No must be unique!");
+            }
             Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -764,15 +765,12 @@ public class BookingsRecord extends javax.swing.JFrame {
             }
             if ((txtemployeeid.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Employee ID!");
-            } else {
+            } else if (salesEmployeeID(Integer.parseInt(txtemployeeid.getText()))) {
                 ps.setInt(6, Integer.parseInt(txtemployeeid.getText()));
             }
             int chassis_no = Integer.parseInt(txtchassisno.getText());
             ps.setInt(7, chassis_no);
-           int i = 0;
-            if (salesEmployeeID(Integer.parseInt(txtemployeeid.getText()))) {
-                i = ps.executeUpdate();
-            }
+            int i = ps.executeUpdate();
             ps.close();
             //System.out.println("record updated");
             if (i == 1) {
@@ -853,9 +851,7 @@ public class BookingsRecord extends javax.swing.JFrame {
             if (rs5.next()) {
                 System.out.println(rs5.getString(1));
                 dept_id = rs5.getInt("dept_id");
-
             }
-
             ps5.close();
             if (dept_id == 0) {
                 new adminDashboard(emp_id).setVisible(true);

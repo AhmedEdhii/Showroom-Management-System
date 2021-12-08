@@ -57,6 +57,7 @@ public class adminDashboard extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(52, 59, 64));
 
@@ -501,8 +502,6 @@ public class adminDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel bookingsPanel;
     private javax.swing.JPanel clientsPanel;
     private javax.swing.JPanel employeesPanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

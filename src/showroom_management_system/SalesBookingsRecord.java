@@ -172,6 +172,7 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(250, 250, 255));
 
@@ -531,7 +532,9 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
             }
             //System.out.println("Inserted");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Chassis No must be unique!");
+            if (ex.getMessage().split(" ")[0].equals("Duplicate")) {
+                JOptionPane.showMessageDialog(this, "Chassis No must be unique!");
+            }
             Logger.getLogger(SalesBookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -583,9 +586,7 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
             if (rs5.next()) {
                 System.out.println(rs5.getString(1));
                 dept_id = rs5.getInt("dept_id");
-
             }
-
             ps5.close();
             if (dept_id == 0) {
                 new adminDashboard(emp_id).setVisible(true);
@@ -607,7 +608,6 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
             } else {
                 System.out.println("Error");
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(ClientRecord.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -89,6 +89,7 @@ public class InvoiceGenerator extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(250, 250, 255));
 
@@ -677,7 +678,7 @@ public class InvoiceGenerator extends javax.swing.JFrame {
                 txtmechanicid.setText("");
                 txtchassisno.setText("");
                 txtclientid.requestFocus();
-                new Invoice(client_id, new java.sql.Date(new java.util.Date().getTime()), this.invoiceno, total).setVisible(true);
+                new Invoice(emp_id, client_id, new java.sql.Date(new java.util.Date().getTime()), this.invoiceno, total).setVisible(true);
                 this.setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(this, "Invoice not Generated!");

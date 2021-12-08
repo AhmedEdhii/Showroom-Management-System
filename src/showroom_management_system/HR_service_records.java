@@ -148,6 +148,7 @@ public class HR_service_records extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(250, 250, 255));
 

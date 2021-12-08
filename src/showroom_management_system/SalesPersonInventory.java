@@ -184,6 +184,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(250, 250, 255));
 
@@ -479,7 +480,6 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -630,7 +630,9 @@ public class SalesPersonInventory extends javax.swing.JFrame {
             }
             //System.out.println("Inserted");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Chassis No must be unique!");
+            if (ex.getMessage().split(" ")[0].equals("Duplicate")) {
+                JOptionPane.showMessageDialog(this, "Chassis No must be unique!");
+            }
             Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -682,20 +684,20 @@ public class SalesPersonInventory extends javax.swing.JFrame {
             rs = ps.executeQuery();
             if (rs.next() == true) {
                 txtchassisno.setEnabled(false);
-                txtchassisno.setText(rs.getString(2));
+                txtchassisno.setText(rs.getString(1));
                 txtmodel.setEnabled(false);
-                txtmodel.setText(rs.getString(3));
+                txtmodel.setText(rs.getString(2));
                 txtengineno.setEnabled(false);
-                txtengineno.setText(rs.getString(4));
+                txtengineno.setText(rs.getString(3));
                 txtyear.setEnabled(false);
-                txtyear.setText(Integer.toString(rs.getInt(5)));
+                txtyear.setText(Integer.toString(rs.getInt(4)));
                 txtcostprice.setEnabled(false);
-                txtcostprice.setText(Integer.toString(rs.getInt(6)));
-                txtsaleprice.setText(Integer.toString(rs.getInt(7)));
-                txtemployeeid.setText(Integer.toString(rs.getInt(8)));
-                txtbuyerclientid.setText(Integer.toString(rs.getInt(9)));
+                txtcostprice.setText(Integer.toString(rs.getInt(5)));
+                txtsaleprice.setText(Integer.toString(rs.getInt(6)));
+                txtemployeeid.setText(Integer.toString(rs.getInt(7)));
+                txtbuyerclientid.setText(Integer.toString(rs.getInt(8)));
                 statusComboBox.setEnabled(false);
-                statusComboBox.setSelectedItem(rs.getString(10));
+                statusComboBox.setSelectedItem(rs.getString(9));
                 txtchassisno.requestFocus();
             } else {
                 JOptionPane.showMessageDialog(this, "Not Avalaible");

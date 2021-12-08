@@ -44,7 +44,7 @@ public class HR_dashboard_services extends javax.swing.JFrame {
 
     private void updatetable() {
         try {
-            ps = conn.prepareStatement("select * from  bookingForm");
+            ps = conn.prepareStatement("select * from  ServiceForm");
             rs = ps.executeQuery();
             ResultSetMetaData rsd = rs.getMetaData();
             int j = rsd.getColumnCount();
@@ -374,7 +374,8 @@ public class HR_dashboard_services extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
+        new HR_service_records(emp_id).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

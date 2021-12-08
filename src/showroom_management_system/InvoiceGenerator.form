@@ -622,7 +622,7 @@
                   <Color blue="ff" green="fa" red="fa" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/back (Custom).jpg"/>
+                  <Image iconType="3" name="/img_ext/left (Custom).png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Back"/>
               </Properties>

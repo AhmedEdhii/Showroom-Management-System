@@ -65,6 +65,8 @@ public class mainPage extends javax.swing.JFrame {
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/booking (2) (Custom).png"))); // NOI18N
         jButton3.setText("Booking");
+        jButton3.setVerifyInputWhenFocusTarget(false);
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);

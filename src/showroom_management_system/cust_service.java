@@ -116,7 +116,7 @@ public class cust_service extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(226, 51, 53));
         jButton2.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
         jButton2.setForeground(new java.awt.Color(240, 240, 240));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/db project/walls/1/edits/80-806189_red-x-circle-icon-hd-png-download (Custom).jpeg"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close (Custom) (1).png"))); // NOI18N
         jButton2.setText("Close");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

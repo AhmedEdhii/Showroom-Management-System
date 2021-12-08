@@ -143,7 +143,7 @@ public class BookingForm extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(226, 51, 53));
         jButton2.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
         jButton2.setForeground(new java.awt.Color(240, 240, 240));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/db project/walls/1/edits/80-806189_red-x-circle-icon-hd-png-download (Custom).jpeg"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close (Custom) (1).png"))); // NOI18N
         jButton2.setText("Close");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,10 +191,11 @@ public class BookingForm extends javax.swing.JFrame {
                         .addGap(273, 273, 273)
                         .addComponent(jButton1)
                         .addGap(39, 39, 39)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton2)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                         .addComponent(jLabel1)))
                 .addGap(242, 242, 242))
         );

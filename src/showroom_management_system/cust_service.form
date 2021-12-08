@@ -249,7 +249,7 @@
               <Color blue="f0" green="f0" red="f0" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/db project/walls/1/edits/80-806189_red-x-circle-icon-hd-png-download (Custom).jpeg"/>
+              <Image iconType="3" name="/images/close (Custom) (1).png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Close"/>
           </Properties>

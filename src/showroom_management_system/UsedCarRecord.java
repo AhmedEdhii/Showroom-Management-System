@@ -960,6 +960,7 @@ public class UsedCarRecord extends javax.swing.JFrame {
                 dept_id = rs6.getInt("dept_id");
 
             }
+            System.out.println(dept_id);
             ps6.close();
             if (dept_id == 0) {
                 new adminDashboard(emp_id).setVisible(true);

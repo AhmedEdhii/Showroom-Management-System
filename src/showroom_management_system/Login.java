@@ -201,7 +201,7 @@ public class Login extends javax.swing.JFrame {
                     mainpage.setVisible(false);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Record not Added!");
+                JOptionPane.showMessageDialog(this, "LogIn Failed");
             }
 
         } catch (SQLException ex) {

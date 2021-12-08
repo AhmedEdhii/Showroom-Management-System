@@ -343,8 +343,8 @@ public class SalePersonDashboardBookings extends javax.swing.JFrame {
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
         // TODO add your handling code here:
-        new SalePersonDashboardBookings(emp_id).setVisible(true);
-        this.setVisible(false);
+        //new SalePersonDashboardBookings(emp_id).setVisible(true);
+        //this.setVisible(false);
     }//GEN-LAST:event_jLabel2MousePressed
 
     private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered
@@ -365,7 +365,7 @@ public class SalePersonDashboardBookings extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        System.out.println(emp_id);
+        //System.out.println(emp_id);
         new SalesBookingsRecord(emp_id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed

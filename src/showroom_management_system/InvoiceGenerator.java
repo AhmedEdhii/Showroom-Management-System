@@ -702,7 +702,7 @@ public class InvoiceGenerator extends javax.swing.JFrame {
             if (rs5.next()) {
                 System.out.println(rs5.getString(1));
                 dept_id = rs5.getInt("dept_id");
-
+                
             }
             ps5.close();
             if (dept_id == 0) {

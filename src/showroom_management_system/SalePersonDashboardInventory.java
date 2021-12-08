@@ -351,6 +351,7 @@ public class SalePersonDashboardInventory extends javax.swing.JFrame {
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
         // TODO add your handling code here:
         new SalePersonDashboardBookings(emp_id).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jLabel2MousePressed
 
     private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered

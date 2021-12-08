@@ -14,8 +14,8 @@ import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -31,6 +31,7 @@ public class HR_service_records extends javax.swing.JFrame {
     PreparedStatement ps;
     ResultSet rs;
     private int emp_id;
+    private int service_form_id;
 
     public HR_service_records() {
         initComponents();
@@ -50,7 +51,7 @@ public class HR_service_records extends javax.swing.JFrame {
      */
     private void updatetable() {
         try {
-            ps = conn.prepareStatement("select * from  bookingForm");
+            ps = conn.prepareStatement("select * from  ServiceForm");
             rs = ps.executeQuery();
             ResultSetMetaData rsd = rs.getMetaData();
             int j = rsd.getColumnCount();
@@ -74,27 +75,59 @@ public class HR_service_records extends javax.swing.JFrame {
         }
     }
 
-    //where dalna hai
     private void unanswered() {
         try {
-            ps = conn.prepareStatement("select * from  bookingForm");
+            String answered = "No";
+            ps = conn.prepareStatement("select * from  ServiceForm where answered = ?");
+            ps.setString(1, answered);
             rs = ps.executeQuery();
-            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+            ResultSetMetaData rsd = rs.getMetaData();
+            int j = rsd.getColumnCount();
+            DefaultTableModel dft = (DefaultTableModel) jTable1.getModel();
+            dft.setRowCount(0);
+            while (rs.next()) {
+                Vector v2 = new Vector();
+                for (int i = 0; i <= j; i++) {
+                    v2.add(rs.getString("ServiceForm_id"));
+                    v2.add(rs.getString("name"));
+                    v2.add(rs.getString("email"));
+                    v2.add(rs.getString("phone_number"));
+                    v2.add(rs.getString("service_required"));
+                    v2.add(rs.getString("answered"));
+                }
+                dft.addRow(v2);
+            }
             ps.close();
         } catch (SQLException ex) {
-            Logger.getLogger(employeeRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HR_service_records.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    //where dalna hai
 
     private void answered() {
         try {
-            ps = conn.prepareStatement("select * from  bookingForm");
+            String answered = "Yes";
+            ps = conn.prepareStatement("select * from  ServiceForm where answered = ?");
+            ps.setString(1, answered);
             rs = ps.executeQuery();
-            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+            ResultSetMetaData rsd = rs.getMetaData();
+            int j = rsd.getColumnCount();
+            DefaultTableModel dft = (DefaultTableModel) jTable1.getModel();
+            dft.setRowCount(0);
+            while (rs.next()) {
+                Vector v2 = new Vector();
+                for (int i = 0; i <= j; i++) {
+                    v2.add(rs.getString("ServiceForm_id"));
+                    v2.add(rs.getString("name"));
+                    v2.add(rs.getString("email"));
+                    v2.add(rs.getString("phone_number"));
+                    v2.add(rs.getString("service_required"));
+                    v2.add(rs.getString("answered"));
+                }
+                dft.addRow(v2);
+            }
             ps.close();
         } catch (SQLException ex) {
-            Logger.getLogger(employeeRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HR_service_records.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -113,7 +146,6 @@ public class HR_service_records extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,6 +178,11 @@ public class HR_service_records extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -192,7 +229,7 @@ public class HR_service_records extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Service Records");
+        jLabel5.setText("Service Forms");
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jButton2.setBackground(new java.awt.Color(226, 51, 53));
@@ -214,12 +251,6 @@ public class HR_service_records extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(226, 51, 53));
-        jButton1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img_ext/tick (Custom).png"))); // NOI18N
-        jButton1.setText("Done");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -230,26 +261,25 @@ public class HR_service_records extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(96, 96, 96)
-                        .addComponent(jLabel5))
+                        .addComponent(jLabel5)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                                .addGap(33, 33, 33)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)))
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -264,16 +294,14 @@ public class HR_service_records extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addGap(32, 32, 32)
+                        .addGap(73, 73, 73)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton5)
-                            .addComponent(jButton7))
+                            .addComponent(jButton6))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton6)
-                            .addComponent(jButton2)))
+                            .addComponent(jButton2)
+                            .addComponent(jButton7)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(64, 64, 64)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -310,13 +338,44 @@ public class HR_service_records extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        try {
+            String answered = jComboBox1.getSelectedItem().toString();
+            System.out.println(answered);
+            ps = conn.prepareStatement("update ServiceForm set answered = ? where ServiceForm_id = ?");
+            if (!answered.equals("Select")) {
+                ps.setString(1, answered);
+                ps.setInt(2, service_form_id);
+            } else {
+                JOptionPane.showMessageDialog(this, "Please Select Yes or No!");
+            }
+            int i = ps.executeUpdate();
+            if (i == 1) {
+                updatetable();
+                JOptionPane.showMessageDialog(this, "Record Update!");
+                jComboBox1.setSelectedIndex(0);
+                jComboBox1.requestFocus();
+            } else {
+                JOptionPane.showMessageDialog(this, "Record not Updated!");
+                jComboBox1.setSelectedIndex(0);
+                jComboBox1.requestFocus();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HR_booking_records.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new HR_dashboard_Bookings(emp_id).setVisible(true);
+        new HR_dashboard_services(emp_id).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
+        int selectedindex = jTable1.getSelectedRow();
+        service_form_id = Integer.parseInt(df.getValueAt(selectedindex, 0).toString());
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -369,7 +428,6 @@ public class HR_service_records extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;

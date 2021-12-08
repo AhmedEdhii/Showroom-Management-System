@@ -3,18 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/Invoice.java</file>
-            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/employeeRecord.java</file>
-            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/Login.java</file>
+            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/adminDashboardEmployee.java</file>
+            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/adminDashboard.java</file>
+            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/adminDashboardServices.java</file>
+            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/BookingForm.java</file>
+            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/adminDashboardUsedCars.java</file>
+            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/HR_booking_records.java</file>
+            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/HR_dashboard_services.java</file>
+            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/HR_dashboard.java</file>
             <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/HR_service_records.java</file>
-            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/Contact_Us_details.java</file>
-            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/ClientRecord.java</file>
-            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/SalesPersonInventory.java</file>
-            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/cust_service.java</file>
-            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/ContactUs.java</file>
-            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/SalesBookingsRecord.java</file>
-            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/InvoiceGenerator.java</file>
-            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/UsedCarRecord.java</file>
+            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/SalePersonDashboardInventory.java</file>
+            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/adminDashboardClients.java</file>
+            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/SalePersonDashboardBookings.java</file>
+            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/HR_dashboard_Bookings.java</file>
+            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/adminDashboardBookings.java</file>
+            <file>file:/C:/Users/Vishal/Documents/GitHub/showroom_management/src/showroom_management_system/SalePersonDashboard.java</file>
         </group>
     </open-files>
 </project-private>

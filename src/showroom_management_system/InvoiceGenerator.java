@@ -406,7 +406,6 @@ public class InvoiceGenerator extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try {
-            client_id = Integer.parseInt(txtclientid.getText());
             int qty;
             int unit_cost;
             int line_total;
@@ -427,6 +426,7 @@ public class InvoiceGenerator extends javax.swing.JFrame {
             if ((txtclientid.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Client ID!");
             } else {
+                client_id = Integer.parseInt(txtclientid.getText());
                 ps.setString(1, txtclientid.getText());
             }
             if ((txtmechanicid.getText().equals(""))) {

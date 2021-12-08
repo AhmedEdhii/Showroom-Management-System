@@ -260,8 +260,8 @@ public class UsedCarRecord extends javax.swing.JFrame {
             if (rs6.next()) {
                 dept_id = rs6.getInt(1);
             }
-            if (dept_id == -1) {
-                JOptionPane.showMessageDialog(this, "Employee ID is not from Sales Department");
+            if (dept_id != 1) {
+                JOptionPane.showMessageDialog(this, "Employee must belong to Sales Department!");
                 return false;
             }
         } catch (SQLException ex) {
@@ -724,27 +724,29 @@ public class UsedCarRecord extends javax.swing.JFrame {
             } else {
                 ps.setInt(6, Integer.parseInt(txtsaleprice.getText()));
             }
-            if ((txtemployeeid.getText().equals(""))) {
+            String status = statusComboBox.getSelectedItem().toString();
+            if (status.equals("Sold") && !(txtemployeeid.getText().equals(""))) {
+                if (salesEmployeeID(Integer.parseInt(txtemployeeid.getText()))) {
+                    ps.setInt(7, Integer.parseInt(txtemployeeid.getText()));
+                }
+            }
+            if (status.equals("Sold") && (txtemployeeid.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Employee ID!");
             }
-            if ((txtbuyerclientid.getText().equals(""))) {
-                JOptionPane.showMessageDialog(this, "Please enter Client ID!");
-            }
-            String status = statusComboBox.getSelectedItem().toString();
-            if (salesEmployeeID(Integer.parseInt(txtemployeeid.getText())) && status.equals("Sold") && !(txtemployeeid.getText().equals(""))) {
-                ps.setInt(7, Integer.parseInt(txtemployeeid.getText()));
-            }
-            if (status.equals("UnSold") && !(txtemployeeid.getText().equals(""))) {
+            if (status.equals("UnSold") && (!txtemployeeid.getText().equals(""))) {
                 ps.setString(7, null);
             }
             if (status.equals("Sold") && !(txtbuyerclientid.getText().equals(""))) {
                 ps.setInt(8, Integer.parseInt(txtbuyerclientid.getText()));
             }
-            if (status.equals("UnSold") && !(txtbuyerclientid.getText().equals(""))) {
+            if (status.equals("Sold") && (txtbuyerclientid.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Client ID!");
+            }
+            if (status.equals("UnSold") && (!txtbuyerclientid.getText().equals(""))) {
                 ps.setString(8, null);
             }
             ps.setString(9, status);
-            System.out.println(status);
+            //System.out.println(status);
             int i = ps.executeUpdate();
             ps.close();
             if (i == 1) {
@@ -862,30 +864,27 @@ public class UsedCarRecord extends javax.swing.JFrame {
             } else {
                 ps.setInt(5, Integer.parseInt(txtsaleprice.getText()));
             }
-            if ((txtemployeeid.getText().equals(""))) {
-                JOptionPane.showMessageDialog(this, "Please enter Employee ID!");
-            }
-            if ((txtbuyerclientid.getText().equals(""))) {
-                JOptionPane.showMessageDialog(this, "Please enter Client ID!");
-            }
             String status = statusComboBox.getSelectedItem().toString();
-            if (status.equals("Sold")) {
-                if (salesEmployeeID(Integer.parseInt(txtemployeeid.getText())) && !(txtemployeeid.getText().equals(""))) {
+            if (status.equals("Sold") && !(txtemployeeid.getText().equals(""))) {
+                if (salesEmployeeID(Integer.parseInt(txtemployeeid.getText()))) {
                     ps.setInt(6, Integer.parseInt(txtemployeeid.getText()));
-                    System.out.println("844r8y8e");
                 }
             }
-            if (status.equals("UnSold") && !(txtemployeeid.getText().equals(""))) {
-                System.out.println("dy8");
+            if (status.equals("Sold") && (txtemployeeid.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Employee ID!");
+            }
+            if (status.equals("UnSold") && (!txtemployeeid.getText().equals(""))) {
+                System.out.println("y4i4y");
                 ps.setString(6, null);
             }
             if (status.equals("Sold") && !(txtbuyerclientid.getText().equals(""))) {
                 ps.setInt(7, Integer.parseInt(txtbuyerclientid.getText()));
-                System.out.println("9797044");
             }
-            if (status.equals("UnSold") && !(txtbuyerclientid.getText().equals(""))) {
+            if (status.equals("Sold") && (txtbuyerclientid.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Client ID!");
+            }
+            if (status.equals("UnSold") && (!txtbuyerclientid.getText().equals(""))) {
                 ps.setString(7, null);
-                System.out.println("839448804");
             }
             ps.setString(8, status);
             int chassis_no = Integer.parseInt(txtchassisno.getText());

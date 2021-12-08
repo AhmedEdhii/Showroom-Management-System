@@ -239,12 +239,12 @@ public class BookingsRecord extends javax.swing.JFrame {
             if (rs6.next()) {
                 dept_id = rs6.getInt(1);
             }
+            if (dept_id != 1) {
+                JOptionPane.showMessageDialog(this, "Employee must belong to Sales Department!");
+                return false;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (dept_id != 1) {
-            JOptionPane.showMessageDialog(this, "Employee ID is not from Sales Department");
-            return false;
         }
         return true;
     }
@@ -648,8 +648,8 @@ public class BookingsRecord extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Please enter Employee ID!");
             } else if (salesEmployeeID(Integer.parseInt(txtemployeeid.getText()))) {
                 ps.setInt(7, Integer.parseInt(txtemployeeid.getText()));
-                i = ps.executeUpdate();
             }
+            i = ps.executeUpdate();
             ps.close();
             if (i == 1) {
                 if (!(txtemployeeid.getText().equals(""))) {

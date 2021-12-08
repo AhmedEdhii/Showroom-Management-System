@@ -6,7 +6,6 @@
 package showroom_management_system;
 
 import java.awt.Desktop;
-import java.net.URI;
 import java.net.URL;
 
 /**

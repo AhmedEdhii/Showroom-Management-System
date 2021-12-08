@@ -64,7 +64,7 @@ public class HR_dashboard_services extends javax.swing.JFrame {
             }
             ps.close();
         } catch (SQLException ex) {
-            Logger.getLogger(HR_service_records.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HR_dashboard_services.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

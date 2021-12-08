@@ -14,9 +14,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -32,11 +30,11 @@ public class Invoice extends javax.swing.JFrame {
     PreparedStatement ps, ps1, ps5;
     ResultSet rs, rs1, rs5;
     private int emp_id;
-    int client;
-    Date date;
-    String name;
-    String invoice;
-    String total;
+    private int client;
+    private Date date;
+    private String name;
+    private String invoice;
+    private String total;
 
     public Invoice() {
         initComponents();
@@ -64,7 +62,6 @@ public class Invoice extends javax.swing.JFrame {
             int j = rsd.getColumnCount();
             DefaultTableModel dft = (DefaultTableModel) jTable1.getModel();
             dft.setRowCount(0);
-
             while (rs.next()) {
                 Vector v2 = new Vector();
                 for (int i = 0; i <= j; i++) {
@@ -75,9 +72,8 @@ public class Invoice extends javax.swing.JFrame {
                 }
                 dft.addRow(v2);
             }
-
         } catch (SQLException ex) {
-            Logger.getLogger(employeeRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Invoice.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -100,7 +96,6 @@ public class Invoice extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Invoice.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     /**
@@ -364,11 +359,9 @@ public class Invoice extends javax.swing.JFrame {
             } else {
                 System.out.println("Error");
             }
-
         } catch (SQLException ex) {
-            Logger.getLogger(ClientRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Invoice.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

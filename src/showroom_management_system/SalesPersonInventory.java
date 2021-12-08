@@ -10,13 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -112,7 +110,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                 ps1.executeUpdate();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalesPersonInventory.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -136,7 +134,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                 ps1.executeUpdate();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalesPersonInventory.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -633,7 +631,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
             if (ex.getMessage().split(" ")[0].equals("Duplicate")) {
                 JOptionPane.showMessageDialog(this, "Chassis No must be unique!");
             }
-            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalesPersonInventory.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -671,7 +669,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(ClientRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalesPersonInventory.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -713,7 +711,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                 txtchassisno.requestFocus();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalesPersonInventory.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton13ActionPerformed
 
@@ -805,7 +803,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalesPersonInventory.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 

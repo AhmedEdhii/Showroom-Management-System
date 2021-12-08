@@ -15,7 +15,6 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -51,7 +50,6 @@ public class adminDashboardClients extends javax.swing.JFrame {
             int j = rsd.getColumnCount();
             DefaultTableModel dft = (DefaultTableModel) clientsTable.getModel();
             dft.setRowCount(0);
-
             while (rs.next()) {
                 Vector v2 = new Vector();
                 for (int i = 0; i <= j; i++) {
@@ -61,8 +59,7 @@ public class adminDashboardClients extends javax.swing.JFrame {
                     v2.add(rs.getString("address"));
                 }
                 dft.addRow(v2);
-            }
-
+           }
         } catch (SQLException ex) {
             Logger.getLogger(adminDashboardClients.class.getName()).log(Level.SEVERE, null, ex);
         }

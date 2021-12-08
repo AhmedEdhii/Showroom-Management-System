@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import net.proteanit.sql.DbUtils;
 
 
 /*
@@ -31,7 +30,6 @@ public class employeeRecord extends javax.swing.JFrame {
     Connection conn = app.getConnection();
     PreparedStatement ps, ps1;
     ResultSet rs, rs1;
-
     private int emp_id;
 
     public employeeRecord() {
@@ -53,7 +51,6 @@ public class employeeRecord extends javax.swing.JFrame {
             int j = rsd.getColumnCount();
             DefaultTableModel dft = (DefaultTableModel) employeesTable.getModel();
             dft.setRowCount(0);
-
             while (rs.next()) {
                 Vector v2 = new Vector();
                 for (int i = 0; i <= j; i++) {
@@ -69,7 +66,6 @@ public class employeeRecord extends javax.swing.JFrame {
                 }
                 dft.addRow(v2);
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(employeeRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -508,7 +504,6 @@ public class employeeRecord extends javax.swing.JFrame {
                 txtcarssold.setText("");
                 txtcomission.setText("");
                 txtdepartmentid.setText("");
-                //txtemployeeid.setText("");
                 txtname.requestFocus();
             } else {
                 JOptionPane.showMessageDialog(this, "Record not Deleted!");
@@ -520,7 +515,6 @@ public class employeeRecord extends javax.swing.JFrame {
                 txtcarssold.setText("");
                 txtcomission.setText("");
                 txtdepartmentid.setText("");
-                //txtemployeeid.setText("");
                 txtname.requestFocus();
             }
 
@@ -545,7 +539,7 @@ public class employeeRecord extends javax.swing.JFrame {
             } else {
                 ps.setString(2, txtphonenumber.getText());
             }
-            
+
             if ((txtaddress.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Address!");
             } else {
@@ -559,22 +553,22 @@ public class employeeRecord extends javax.swing.JFrame {
             if ((txtpassword.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Password!");
             } else {
-              ps.setString(5, txtpassword.getText());
+                ps.setString(5, txtpassword.getText());
             }
             if ((txtcarssold.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Cars sold!");
             } else {
-            ps.setInt(6, Integer.parseInt(txtcarssold.getText()));
+                ps.setInt(6, Integer.parseInt(txtcarssold.getText()));
             }
             if ((txtcomission.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Comission!");
             } else {
-            ps.setInt(7, Integer.parseInt(txtcomission.getText()));
+                ps.setInt(7, Integer.parseInt(txtcomission.getText()));
             }
             if ((txtdepartmentid.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Deparment ID!");
             } else {
-            ps.setInt(8, Integer.parseInt(txtdepartmentid.getText()));
+                ps.setInt(8, Integer.parseInt(txtdepartmentid.getText()));
             }
             int i = ps.executeUpdate();
             ps.close();
@@ -602,8 +596,6 @@ public class employeeRecord extends javax.swing.JFrame {
                 txtdepartmentid.setText("");
                 txtname.requestFocus();
             }
-            //System.out.println("Inserted");
-
         } catch (SQLException ex) {
             Logger.getLogger(employeeRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -629,6 +621,7 @@ public class employeeRecord extends javax.swing.JFrame {
         try {
             ps = null;
             String query = "update employees set name = ?, phone_number = ?, Address = ?, salary = ?, password = ?, CarsSold = ?, Commission = ?, dept_id = ? where Employee_id = ?";
+            ps = conn.prepareStatement(query);
             if ((txtname.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Name!");
             } else {
@@ -639,7 +632,7 @@ public class employeeRecord extends javax.swing.JFrame {
             } else {
                 ps.setString(2, txtphonenumber.getText());
             }
-            
+
             if ((txtaddress.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Address!");
             } else {
@@ -653,22 +646,22 @@ public class employeeRecord extends javax.swing.JFrame {
             if ((txtpassword.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Password!");
             } else {
-              ps.setString(5, txtpassword.getText());
+                ps.setString(5, txtpassword.getText());
             }
             if ((txtcarssold.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Cars sold!");
             } else {
-            ps.setInt(6, Integer.parseInt(txtcarssold.getText()));
+                ps.setInt(6, Integer.parseInt(txtcarssold.getText()));
             }
             if ((txtcomission.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Comission!");
             } else {
-            ps.setInt(7, Integer.parseInt(txtcomission.getText()));
+                ps.setInt(7, Integer.parseInt(txtcomission.getText()));
             }
             if ((txtdepartmentid.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Deparment ID!");
             } else {
-            ps.setInt(8, Integer.parseInt(txtdepartmentid.getText()));
+                ps.setInt(8, Integer.parseInt(txtdepartmentid.getText()));
             }
             int employee_id = Integer.parseInt(txtemployeeid.getText());
             ps.setInt(9, employee_id);
@@ -686,7 +679,6 @@ public class employeeRecord extends javax.swing.JFrame {
                 txtcarssold.setText("");
                 txtcomission.setText("");
                 txtdepartmentid.setText("");
-                //txtemployeeid.setText("");
                 txtname.requestFocus();
             } else {
                 JOptionPane.showMessageDialog(this, "Record not Updated!");
@@ -698,10 +690,8 @@ public class employeeRecord extends javax.swing.JFrame {
                 txtcarssold.setText("");
                 txtcomission.setText("");
                 txtdepartmentid.setText("");
-                //txtemployeeid.setText("");
                 txtname.requestFocus();
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(employeeRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -744,9 +734,7 @@ public class employeeRecord extends javax.swing.JFrame {
             if (rs1.next()) {
                 System.out.println(rs1.getString(1));
                 dept_id = rs1.getInt("dept_id");
-
             }
-
             ps1.close();
             if (dept_id == 0) {
                 new adminDashboard(emp_id).setVisible(true);
@@ -767,7 +755,6 @@ public class employeeRecord extends javax.swing.JFrame {
             } else {
                 System.out.println("Error");
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(ClientRecord.class.getName()).log(Level.SEVERE, null, ex);
         }

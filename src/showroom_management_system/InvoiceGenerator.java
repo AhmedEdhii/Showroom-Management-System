@@ -28,6 +28,9 @@ public class InvoiceGenerator extends javax.swing.JFrame {
     PreparedStatement ps1, ps2, ps3, ps4, ps5;
     ResultSet rs, rs5;
     private int emp_id;
+    private int client_id;
+    private int invoiceno;
+    private int total;
 
     public InvoiceGenerator() {
         initComponents();
@@ -37,10 +40,6 @@ public class InvoiceGenerator extends javax.swing.JFrame {
         initComponents();
         this.emp_id = emp_id;
     }
-
-    int client_id;
-    int invoiceno;
-    int total;
 
     public static float getBOTTOM_ALIGNMENT() {
         return BOTTOM_ALIGNMENT;
@@ -689,7 +688,7 @@ public class InvoiceGenerator extends javax.swing.JFrame {
             }
             //System.out.println("Inserted");
         } catch (SQLException ex) {
-            Logger.getLogger(employeeRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InvoiceGenerator.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -703,7 +702,6 @@ public class InvoiceGenerator extends javax.swing.JFrame {
             if (rs5.next()) {
                 System.out.println(rs5.getString(1));
                 dept_id = rs5.getInt("dept_id");
-                
             }
             ps5.close();
             if (dept_id == 0) {
@@ -728,7 +726,7 @@ public class InvoiceGenerator extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(ClientRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InvoiceGenerator.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

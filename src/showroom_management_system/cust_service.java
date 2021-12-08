@@ -19,9 +19,6 @@ import javax.swing.JOptionPane;
  */
 public class cust_service extends javax.swing.JFrame {
 
-    /**
-     * Creates new form cust_service
-     */
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
     PreparedStatement ps;
@@ -218,13 +215,10 @@ public class cust_service extends javax.swing.JFrame {
         int response = JOptionPane.showConfirmDialog(this, "Do you want to close?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
             this.setVisible(false);
-
         }
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
         try {
             ps = null;
             String query = "insert into ServiceForm (name, email, phone_number, service_required) values (?,?,?,?) ";
@@ -258,12 +252,11 @@ public class cust_service extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Error! Please fill the Form correctly");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ContactUs.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(cust_service.class.getName()).log(Level.SEVERE, null, ex);
             if (!Email.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Error! Email must contain @");
             }
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

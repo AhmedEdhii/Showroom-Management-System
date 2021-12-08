@@ -361,7 +361,7 @@ public class HR_service_records extends javax.swing.JFrame {
                 jComboBox1.requestFocus();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(HR_booking_records.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HR_service_records.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 

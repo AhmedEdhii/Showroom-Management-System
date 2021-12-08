@@ -52,7 +52,6 @@ public class adminDashboardServices extends javax.swing.JFrame {
             int j = rsd.getColumnCount();
             DefaultTableModel dft = (DefaultTableModel) InvoicesRecord.getModel();
             dft.setRowCount(0);
-
             while (rs.next()) {
                 Vector v2 = new Vector();
                 for (int i = 0; i <= j; i++) {
@@ -65,7 +64,6 @@ public class adminDashboardServices extends javax.swing.JFrame {
                 }
                 dft.addRow(v2);
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(employeeRecord.class.getName()).log(Level.SEVERE, null, ex);
         }

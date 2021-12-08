@@ -15,7 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -30,8 +29,8 @@ public class UsedCarRecord extends javax.swing.JFrame {
     Connection conn = app.getConnection();
     PreparedStatement ps, ps1, ps2, ps3, ps4, ps5, ps6;
     ResultSet rs, rs1, rs2, rs3, rs4, rs5, rs6;
-    int oldemployeeid;
-    String oldstatus;
+    private int oldemployeeid;
+    private String oldstatus;
     private int emp_id;
 
     public UsedCarRecord() {
@@ -131,20 +130,20 @@ public class UsedCarRecord extends javax.swing.JFrame {
             // on update
             if (!(oldemployeeid == newemployeeID) && (newstatus.equals("Sold"))) {
                 oldcarsold = oldcarsold - 1;
-                System.out.println("first");
+                //System.out.println("first");
                 //System.out.println(oldcarsold);
                 newcarsold = newcarsold + 1;
                 //System.out.println(newcarsold);
             }
             if ((oldemployeeid == newemployeeID) && (newstatus.equals("UnSold"))) {
                 oldcarsold = oldcarsold - 1;
-                System.out.println("second");
+                //System.out.println("second");
                 //System.out.println(oldcarsold);
                 newcarsold = newcarsold - 1;
                 //System.out.println(newcarsold);
             }
             if (!(oldemployeeid == newemployeeID) && (newstatus.equals("UnSold"))) {
-                System.out.println("third");
+                //System.out.println("third");
                 oldcarsold = oldcarsold - 1;
                 //System.out.println(oldcarsold);
                 //System.out.println(newcarsold);
@@ -266,7 +265,7 @@ public class UsedCarRecord extends javax.swing.JFrame {
                 return false;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
         return true;
     }
@@ -1021,7 +1020,7 @@ public class UsedCarRecord extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(ClientRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

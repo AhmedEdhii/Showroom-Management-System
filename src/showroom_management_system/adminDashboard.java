@@ -457,7 +457,6 @@ public class adminDashboard extends javax.swing.JFrame {
             this.setVisible(false);
             new mainPage().setVisible(true);
         }
-
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

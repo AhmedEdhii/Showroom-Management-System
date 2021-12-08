@@ -17,7 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -32,7 +31,7 @@ public class BookingsRecord extends javax.swing.JFrame {
     Connection conn = app.getConnection();
     PreparedStatement ps, ps1, ps2, ps3, ps4, ps5, ps6;
     ResultSet rs, rs1, rs2, rs3, rs4, rs5, rs6;
-    int oldemployeeid;
+    private int oldemployeeid;
     private int emp_id;
 
     public BookingsRecord() {
@@ -56,7 +55,6 @@ public class BookingsRecord extends javax.swing.JFrame {
             int j = rsd.getColumnCount();
             DefaultTableModel dft = (DefaultTableModel) bookingsTable.getModel();
             dft.setRowCount(0);
-
             while (rs.next()) {
                 Vector v2 = new Vector();
                 for (int i = 0; i <= j; i++) {
@@ -70,7 +68,6 @@ public class BookingsRecord extends javax.swing.JFrame {
                 }
                 dft.addRow(v2);
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -97,7 +94,7 @@ public class BookingsRecord extends javax.swing.JFrame {
             ps1.close();
             ps2.close();
         } catch (SQLException ex) {
-            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -120,7 +117,7 @@ public class BookingsRecord extends javax.swing.JFrame {
             ps1.close();
             ps2.close();
         } catch (SQLException ex) {
-            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -203,7 +200,7 @@ public class BookingsRecord extends javax.swing.JFrame {
             ps3.close();
             ps4.close();
         } catch (SQLException ex) {
-            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -228,7 +225,7 @@ public class BookingsRecord extends javax.swing.JFrame {
             ps1.close();
             ps2.close();
         } catch (SQLException ex) {
-            Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -797,7 +794,6 @@ public class BookingsRecord extends javax.swing.JFrame {
                 txtemployeeid.setText("");
                 txtchassisno.requestFocus();
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -842,7 +838,6 @@ public class BookingsRecord extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
         int dept_id = -1;
         try {
             ps5 = conn.prepareStatement("select dept_id from employees where employee_id = ?");
@@ -874,10 +869,8 @@ public class BookingsRecord extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(ClientRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtpaymentleftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpaymentleftActionPerformed

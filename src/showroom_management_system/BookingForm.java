@@ -294,19 +294,10 @@ public class BookingForm extends javax.swing.JFrame {
                 ps.setString(5, selectModelComboBox.getSelectedItem().toString());
             }
             if (selectcolorComboBox.getSelectedItem() == "Select Color") {
-                //ps.setString(6, null);
                 JOptionPane.showMessageDialog(this, "Please select a color");
             } else {
                 ps.setString(6, selectcolorComboBox.getSelectedItem().toString());
             }
-            //boolean loop_end = false;
-            /*   if (selectModelComboBox.getSelectedItem() != "Select Model" && selectcolorComboBox.getSelectedItem() != "Select Color") {
-                    ps.setString(5, (String) selectModelComboBox.getSelectedItem());
-                    ps.setString(6, (String) selectcolorComboBox.getSelectedItem());
-                    loop_end = true;
-                } else {
-                    JOptionPane.showConfirmDialog(this, "Please select the model and color?", "Confirm", JOptionPane.ERROR_MESSAGE, JOptionPane.WARNING_MESSAGE);
-                }*/
             int i = ps.executeUpdate();
             ps.close();
             if (i == 1) {
@@ -329,7 +320,7 @@ public class BookingForm extends javax.swing.JFrame {
                 txtname.requestFocus();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ContactUs.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BookingForm.class.getName()).log(Level.SEVERE, null, ex);
             if (!txtemail.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Error! Email must contain @");
             }

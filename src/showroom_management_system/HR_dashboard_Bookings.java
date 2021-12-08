@@ -15,7 +15,6 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -26,11 +25,11 @@ public class HR_dashboard_Bookings extends javax.swing.JFrame {
     /**
      * Creates new form adminDashboard
      */
-    private int emp_id;
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
     PreparedStatement ps;
     ResultSet rs;
+    private int emp_id;
 
     public HR_dashboard_Bookings() {
         initComponents();

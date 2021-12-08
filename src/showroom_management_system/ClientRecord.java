@@ -15,7 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -375,8 +374,6 @@ public class ClientRecord extends javax.swing.JFrame {
                 txtaddress.setText("");
                 txtname.requestFocus();
             }
-            //System.out.println("Inserted");
-
         } catch (SQLException ex) {
             Logger.getLogger(ClientRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -392,7 +389,6 @@ public class ClientRecord extends javax.swing.JFrame {
             ps.setInt(1, client_id);
             int i = ps.executeUpdate();
             ps.close();
-            //System.out.println("record deleted");
             if (i == 1) {
                 updatetable();
                 JOptionPane.showMessageDialog(this, "Record Deleted!");
@@ -450,7 +446,7 @@ public class ClientRecord extends javax.swing.JFrame {
             } else {
                 ps.setString(2, txtphonenumber.getText());
             }
-            
+
             if ((txtaddress.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Address!");
             } else {
@@ -492,7 +488,6 @@ public class ClientRecord extends javax.swing.JFrame {
                 System.out.println(rs1.getString(1));
                 dept_id = rs1.getInt("dept_id");
             }
-
             ps1.close();
             if (dept_id == 0) {
                 new adminDashboard(emp_id).setVisible(true);
@@ -513,11 +508,9 @@ public class ClientRecord extends javax.swing.JFrame {
             } else {
                 System.out.println("Error");
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(ClientRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

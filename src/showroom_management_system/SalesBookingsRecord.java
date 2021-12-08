@@ -17,7 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -109,7 +108,7 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
                 ps1.executeUpdate();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalesBookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -131,7 +130,7 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
                 ps1.executeUpdate();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalesBookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -609,7 +608,7 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
                 System.out.println("Error");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ClientRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalesBookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -686,7 +685,7 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalesBookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 

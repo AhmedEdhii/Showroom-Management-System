@@ -30,8 +30,8 @@ public class BookingsRecord extends javax.swing.JFrame {
      */
     showroomManagementSystem app = new showroomManagementSystem();
     Connection conn = app.getConnection();
-    PreparedStatement ps, ps1, ps2, ps3, ps4, ps5;
-    ResultSet rs, rs1, rs2, rs3, rs4, rs5;
+    PreparedStatement ps, ps1, ps2, ps3, ps4, ps5, ps6;
+    ResultSet rs, rs1, rs2, rs3, rs4, rs5, rs6;
     int oldemployeeid;
     private int emp_id;
 
@@ -230,6 +230,26 @@ public class BookingsRecord extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public boolean salesEmployeeID(int employee_id) {
+        int dept_id = -1;
+        try {
+            String query = "select dept_id from employees where employee_id =?";
+            ps6 = conn.prepareStatement(query);
+            ps6.setInt(1, employee_id);
+            rs6 = ps6.executeQuery();
+            if (rs6.next()) {
+                dept_id = rs6.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (dept_id != 1) {
+            JOptionPane.showMessageDialog(this, "Employee ID is not from Sales Department");
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -590,12 +610,12 @@ public class BookingsRecord extends javax.swing.JFrame {
             ps = null;
             String query = "insert into bookings (chassis_no, Payment_Received, payment_left, delivery_date, Cost_of_car, client_id, Employee_id) values (?,?,?,?,?,?,?)";
             ps = conn.prepareStatement(query);
+
             if ((txtchassisno.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Chassis No!");
             } else {
                 ps.setString(1, txtchassisno.getText());
             }
-
             if ((txttotalcost.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Total Cost!");
             } else {
@@ -628,7 +648,10 @@ public class BookingsRecord extends javax.swing.JFrame {
             } else {
                 ps.setInt(7, Integer.parseInt(txtemployeeid.getText()));
             }
-            int i = ps.executeUpdate();
+            int i = 0;
+            if (salesEmployeeID(Integer.parseInt(txtemployeeid.getText()))) {
+                i = ps.executeUpdate();
+            }
             ps.close();
             if (i == 1) {
                 if (!(txtemployeeid.getText().equals(""))) {
@@ -658,7 +681,7 @@ public class BookingsRecord extends javax.swing.JFrame {
             }
             //System.out.println("Inserted");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Chassis No must be unique!");
+            System.out.println(ex.getMessage());
             Logger.getLogger(BookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -746,7 +769,10 @@ public class BookingsRecord extends javax.swing.JFrame {
             }
             int chassis_no = Integer.parseInt(txtchassisno.getText());
             ps.setInt(7, chassis_no);
-            int i = ps.executeUpdate();
+           int i = 0;
+            if (salesEmployeeID(Integer.parseInt(txtemployeeid.getText()))) {
+                i = ps.executeUpdate();
+            }
             ps.close();
             //System.out.println("record updated");
             if (i == 1) {

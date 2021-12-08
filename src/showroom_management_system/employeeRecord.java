@@ -118,7 +118,7 @@ public class employeeRecord extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(250, 250, 255));
 
-        jPanel1.setBackground(new java.awt.Color(250, 250, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 251, 252));
 
         jLabel1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);

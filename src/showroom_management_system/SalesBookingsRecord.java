@@ -173,7 +173,7 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(250, 250, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 251, 252));
 
         bookingsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

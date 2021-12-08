@@ -110,7 +110,7 @@ public class InvoiceGenerator extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(250, 250, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 251, 252));
 
         jLabel1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
         jLabel1.setText("Oil Filter");

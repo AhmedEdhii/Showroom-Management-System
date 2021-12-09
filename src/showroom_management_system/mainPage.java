@@ -175,12 +175,12 @@ public class mainPage extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 1280, 50));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 640, 1280, 50));
 
         jLabel3.setBackground(new java.awt.Color(212, 80, 83));
         jLabel3.setForeground(new java.awt.Color(253, 229, 232));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/db project/walls/1/edits/output-onlinepngtools.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 690));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

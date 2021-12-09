@@ -892,8 +892,8 @@ public class UsedCarRecord extends javax.swing.JFrame {
                 ps.setString(7, null);
             }
             ps.setString(8, status);
-            int chassis_no = Integer.parseInt(txtchassisno.getText());
-            ps.setInt(9, chassis_no);
+            String chassis_no = txtchassisno.getText();
+            ps.setString(9, chassis_no);
             int i = ps.executeUpdate();
             ps.close();
             //System.out.println("record updated");

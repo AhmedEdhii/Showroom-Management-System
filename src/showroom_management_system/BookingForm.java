@@ -302,6 +302,7 @@ public class BookingForm extends javax.swing.JFrame {
             ps.close();
             if (i == 1) {
                 JOptionPane.showMessageDialog(this, "Form Submitted!");
+                this.setVisible(false);
                 txtname.setText("");
                 txtphonenumber.setText("");
                 txtemail.setText("");

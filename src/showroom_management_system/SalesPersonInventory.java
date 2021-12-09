@@ -34,6 +34,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
     public SalesPersonInventory() {
         initComponents();
         updatetable();
+        txtemployeeid.setText(String.valueOf(emp_id));
         txtemployeeid.setEnabled(false);
         txtbuyerclientid.setEnabled(false);
     }
@@ -42,6 +43,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
         initComponents();
         this.emp_id = emp_id;
         updatetable();
+        txtemployeeid.setText(String.valueOf(emp_id));
         txtemployeeid.setEnabled(false);
         txtbuyerclientid.setEnabled(false);
     }
@@ -70,7 +72,6 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                 }
                 dft.addRow(v2);
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(SalesPersonInventory.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -96,7 +97,6 @@ public class SalesPersonInventory extends javax.swing.JFrame {
             }
             //System.out.println(ps1);
             rs2 = ps2.executeQuery();
-
             if (rs2.next()) {
                 //carsold = rs2.getInt(1);
                 //System.out.println(carsold);
@@ -456,9 +456,9 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(txtchassisno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(txtmodel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtmodel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
                         .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -580,29 +580,28 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                 ps.setInt(6, Integer.parseInt(txtsaleprice.getText()));
             }
             String status = statusComboBox.getSelectedItem().toString();
-            if ((txtemployeeid.getText().equals(""))) {
-                JOptionPane.showMessageDialog(this, "Please enter Employee ID!");
-            }
-            if ((txtbuyerclientid.getText().equals(""))) {
-                JOptionPane.showMessageDialog(this, "Please enter Client ID!");
-            }
-            if (status.equals("Sold") && !(txtemployeeid.getText().equals("")) && !(txtbuyerclientid.getText().equals(""))) {
+            if (status.equals("Sold") && !(txtemployeeid.getText().equals(""))) {
                 ps.setInt(7, Integer.parseInt(txtemployeeid.getText()));
+            }
+            if (status.equals("UnSold") && (!txtemployeeid.getText().equals(""))) {
+                ps.setString(7, null);
+            }
+            if (status.equals("Sold") && !(txtbuyerclientid.getText().equals(""))) {
                 ps.setInt(8, Integer.parseInt(txtbuyerclientid.getText()));
             }
-            if (status.equals("UnSold") && !(txtemployeeid.getText().equals("")) && !(txtbuyerclientid.getText().equals(""))) {
-                ps.setString(7, null);
+            if (status.equals("Sold") && (txtbuyerclientid.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Client ID!");
+            }
+            if (status.equals("UnSold") && (!txtbuyerclientid.getText().equals(""))) {
                 ps.setString(8, null);
             }
             ps.setString(9, status);
-            System.out.println(status);
+            //System.out.println(status);
             int i = ps.executeUpdate();
             ps.close();
             if (i == 1) {
-                if (!(txtemployeeid.getText().equals(""))) {
-                    updateCarSold(Integer.parseInt(txtemployeeid.getText()), statusComboBox.getSelectedItem().toString());
-                    updateCommission(Integer.parseInt(txtemployeeid.getText()));
-                }
+                updateCarSold(emp_id, statusComboBox.getSelectedItem().toString());
+                updateCommission(emp_id);
                 updatetable();
                 JOptionPane.showMessageDialog(this, "Record Added!");
                 txtchassisno.setText("");
@@ -611,7 +610,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                 txtyear.setText("");
                 txtcostprice.setText("");
                 txtsaleprice.setText("");
-                txtemployeeid.setText("");
+                txtemployeeid.setText(String.valueOf(emp_id));
                 txtbuyerclientid.setText("");
                 statusComboBox.setSelectedIndex(0);
                 txtchassisno.requestFocus();
@@ -623,7 +622,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                 txtyear.setText("");
                 txtcostprice.setText("");
                 txtsaleprice.setText("");
-                txtemployeeid.setText("");
+                txtemployeeid.setText(String.valueOf(emp_id));
                 txtbuyerclientid.setText("");
                 statusComboBox.setSelectedIndex(0);
                 txtchassisno.requestFocus();
@@ -669,7 +668,6 @@ public class SalesPersonInventory extends javax.swing.JFrame {
             } else {
                 System.out.println("Error");
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(SalesPersonInventory.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -707,7 +705,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                 txtyear.setText("");
                 txtcostprice.setText("");
                 txtsaleprice.setText("");
-                txtemployeeid.setText("");
+                txtemployeeid.setText(String.valueOf(emp_id));
                 txtbuyerclientid.setText("");
                 statusComboBox.setSelectedIndex(0);
                 txtchassisno.requestFocus();
@@ -723,6 +721,14 @@ public class SalesPersonInventory extends javax.swing.JFrame {
 
     private void statusComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusComboBoxActionPerformed
         // TODO add your handling code here:
+        String status = statusComboBox.getSelectedItem().toString();
+        if (status.equals("Sold")) {
+            txtbuyerclientid.setEnabled(true);
+        }
+        if (status.equals("UnSold")) {
+            txtemployeeid.setEnabled(false);
+            txtbuyerclientid.setEnabled(false);
+        }
     }//GEN-LAST:event_statusComboBoxActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -757,23 +763,27 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                 ps.setInt(5, Integer.parseInt(txtsaleprice.getText()));
             }
             String status = statusComboBox.getSelectedItem().toString();
-            if ((txtemployeeid.getText().equals(""))) {
+            if (status.equals("Sold") && !(txtemployeeid.getText().equals(""))) {
+                ps.setInt(6, Integer.parseInt(txtemployeeid.getText()));
+            }
+            if (status.equals("Sold") && (txtemployeeid.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Employee ID!");
             }
-            if ((txtbuyerclientid.getText().equals(""))) {
-                JOptionPane.showMessageDialog(this, "Please enter Client ID!");
+            if (status.equals("UnSold") && (!txtemployeeid.getText().equals(""))) {
+                ps.setString(6, null);
             }
-            if (status.equals("Sold") && !(txtemployeeid.getText().equals("")) && !(txtbuyerclientid.getText().equals(""))) {
-                ps.setInt(6, Integer.parseInt(txtemployeeid.getText()));
+            if (status.equals("Sold") && !(txtbuyerclientid.getText().equals(""))) {
                 ps.setInt(7, Integer.parseInt(txtbuyerclientid.getText()));
             }
-            if (status.equals("UnSold") && !(txtemployeeid.getText().equals("")) && !(txtbuyerclientid.getText().equals(""))) {
-                ps.setString(6, null);
+            if (status.equals("Sold") && (txtbuyerclientid.getText().equals(""))) {
+                JOptionPane.showMessageDialog(this, "Please enter Client ID!");
+            }
+            if (status.equals("UnSold") && (!txtbuyerclientid.getText().equals(""))) {
                 ps.setString(7, null);
             }
             ps.setString(8, status);
-            int chassis_no = Integer.parseInt(txtchassisno.getText());
-            ps.setInt(9, chassis_no);
+            String chassis_no = txtchassisno.getText();
+            ps.setString(9, chassis_no);
             int i = ps.executeUpdate();
             ps.close();
             //System.out.println("record updated");
@@ -786,7 +796,7 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                 txtyear.setText("");
                 txtcostprice.setText("");
                 txtsaleprice.setText("");
-                txtemployeeid.setText("");
+                txtemployeeid.setText(String.valueOf(emp_id));
                 txtbuyerclientid.setText("");
                 statusComboBox.setSelectedIndex(0);
                 txtchassisno.requestFocus();
@@ -798,12 +808,11 @@ public class SalesPersonInventory extends javax.swing.JFrame {
                 txtyear.setText("");
                 txtcostprice.setText("");
                 txtsaleprice.setText("");
-                txtemployeeid.setText("");
+                txtemployeeid.setText(String.valueOf(emp_id));
                 txtbuyerclientid.setText("");
                 statusComboBox.setSelectedIndex(0);
                 txtchassisno.requestFocus();
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(SalesPersonInventory.class.getName()).log(Level.SEVERE, null, ex);
         }

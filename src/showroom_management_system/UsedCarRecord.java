@@ -736,6 +736,9 @@ public class UsedCarRecord extends javax.swing.JFrame {
             if (status.equals("UnSold") && (!txtemployeeid.getText().equals(""))) {
                 ps.setString(7, null);
             }
+            if (status.equals("UnSold") && (txtemployeeid.getText().equals(""))) {
+                ps.setString(7, null);
+            }
             if (status.equals("Sold") && !(txtbuyerclientid.getText().equals(""))) {
                 ps.setInt(8, Integer.parseInt(txtbuyerclientid.getText()));
             }
@@ -743,6 +746,9 @@ public class UsedCarRecord extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Please enter Client ID!");
             }
             if (status.equals("UnSold") && (!txtbuyerclientid.getText().equals(""))) {
+                ps.setString(8, null);
+            }
+            if (status.equals("UnSold") && (txtbuyerclientid.getText().equals(""))) {
                 ps.setString(8, null);
             }
             ps.setString(9, status);
@@ -794,8 +800,8 @@ public class UsedCarRecord extends javax.swing.JFrame {
             ps = null;
             String query = "delete from used_cars where chassis_no = ?";
             ps = conn.prepareStatement(query);
-            int chassis_no = Integer.parseInt(txtchassisno.getText());
-            ps.setInt(1, chassis_no);
+            String chassis_no = txtchassisno.getText();
+            ps.setString(1, chassis_no);
             int i = ps.executeUpdate();
             ps.close();
             //System.out.println("record deleted");
@@ -874,7 +880,6 @@ public class UsedCarRecord extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Please enter Employee ID!");
             }
             if (status.equals("UnSold") && (!txtemployeeid.getText().equals(""))) {
-                System.out.println("y4i4y");
                 ps.setString(6, null);
             }
             if (status.equals("Sold") && !(txtbuyerclientid.getText().equals(""))) {
@@ -920,7 +925,6 @@ public class UsedCarRecord extends javax.swing.JFrame {
                 statusComboBox.setSelectedIndex(0);
                 txtchassisno.requestFocus();
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(UsedCarRecord.class.getName()).log(Level.SEVERE, null, ex);
         }

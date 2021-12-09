@@ -693,8 +693,8 @@ public class BookingsRecord extends javax.swing.JFrame {
             ps = null;
             String query = "delete from bookings where chassis_no = ?";
             ps = conn.prepareStatement(query);
-            int chassis_no = Integer.parseInt(txtchassisno.getText());
-            ps.setInt(1, chassis_no);
+            String chassis_no = txtchassisno.getText();
+            ps.setString(1, chassis_no);
             int i = ps.executeUpdate();
             ps.close();
             //System.out.println("record deleted");

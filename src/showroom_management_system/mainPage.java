@@ -202,8 +202,8 @@ public class mainPage extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         new Login(this).setVisible(true);
-        
-        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -214,7 +214,7 @@ public class mainPage extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
         new cust_service().setVisible(true);
-        
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -226,7 +226,7 @@ public class mainPage extends javax.swing.JFrame {
 
         // TODO add your handling code here:
         try {
-            Desktop.getDesktop().browse(new URL("https://www.toyotasure.com.pk/#/car").toURI());
+            Desktop.getDesktop().browse(new URL("https://toyota-central.com/Tsure/UsedCars").toURI());
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton2ActionPerformed

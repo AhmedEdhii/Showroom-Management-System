@@ -343,7 +343,7 @@ public class ClientRecord extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             ps = null;
-            String query = "insert into clients (name, phone_number, address) values (?,?,?,?)";
+            String query = "insert into clients (name, phone_number, address) values (?,?,?)";
             ps = conn.prepareStatement(query);
             if ((txtname.getText().equals(""))) {
                 JOptionPane.showMessageDialog(this, "Please enter Name!");

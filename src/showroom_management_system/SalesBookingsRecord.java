@@ -60,7 +60,6 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
             int j = rsd.getColumnCount();
             DefaultTableModel dft = (DefaultTableModel) bookingsTable.getModel();
             dft.setRowCount(0);
-
             while (rs.next()) {
                 Vector v2 = new Vector();
                 for (int i = 0; i <= j; i++) {
@@ -513,7 +512,7 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
                 txtdeliverydate.setText("");
                 txttotalcost.setText("");
                 txtclientid.setText("");
-                txtemployeeid.setText("");
+                txtemployeeid.setText(String.valueOf(emp_id));
                 txtchassisno.requestFocus();
             } else {
                 JOptionPane.showMessageDialog(this, "Record not Added!");
@@ -523,7 +522,7 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
                 txtdeliverydate.setText("");
                 txttotalcost.setText("");
                 txtclientid.setText("");
-                txtemployeeid.setText("");
+                txtemployeeid.setText(String.valueOf(emp_id));
                 txtchassisno.requestFocus();
             }
             //System.out.println("Inserted");
@@ -563,17 +562,15 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
                 txtdeliverydate.setText("");
                 txttotalcost.setText("");
                 txtclientid.setText("");
-                txtemployeeid.setText("");
+                txtemployeeid.setText(String.valueOf(emp_id));
                 txtchassisno.requestFocus();
             }
         } catch (SQLException ex) {
             Logger.getLogger(SalesBookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
         int dept_id = -1;
         try {
             ps5 = conn.prepareStatement("select dept_id from employees where employee_id = ?");
@@ -648,13 +645,9 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
             } else {
                 ps.setInt(5, Integer.parseInt(txtclientid.getText()));
             }
-            if ((txtemployeeid.getText().equals(""))) {
-                JOptionPane.showMessageDialog(this, "Please enter Employee ID!");
-            } else {
-                ps.setInt(6, Integer.parseInt(txtemployeeid.getText()));
-            }
-            int chassis_no = Integer.parseInt(txtchassisno.getText());
-            ps.setInt(7, chassis_no);
+            ps.setInt(6, emp_id);
+            String chassis_no = txtchassisno.getText();
+            ps.setString(7, chassis_no);
             int i = ps.executeUpdate();
             ps.close();
             //System.out.println("record updated");
@@ -667,7 +660,7 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
                 txtdeliverydate.setText("");
                 txttotalcost.setText("");
                 txtclientid.setText("");
-                txtemployeeid.setText("");
+                txtemployeeid.setText(String.valueOf(emp_id));
                 txtchassisno.requestFocus();
             } else {
                 JOptionPane.showMessageDialog(this, "Record not Updated!");
@@ -677,10 +670,9 @@ public class SalesBookingsRecord extends javax.swing.JFrame {
                 txtdeliverydate.setText("");
                 txttotalcost.setText("");
                 txtclientid.setText("");
-                txtemployeeid.setText("");
+                txtemployeeid.setText(String.valueOf(emp_id));
                 txtchassisno.requestFocus();
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(SalesBookingsRecord.class.getName()).log(Level.SEVERE, null, ex);
         }
